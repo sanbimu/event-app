@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "main": "dist/server.mjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --ssr src/server.ts",
+    "start": "node dist/server.mjs"
+  },
+  "dependencies": {
+    "@as-integrations/fastify": "^1.3.2",
+    "@fastify/cors": "^8.2.1",
+    "fastify": "^4.15.0",
+    "graphql": "^16.6.0",
+    "mercurius": "^12.2.0",
+    "mongodb": "^4.16.0",
+    "mongoose": "^6.10.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "fluent-json-schema": "^4.1.0",
+    "vite": "^4.2.2",
+    "vite-plugin-node": "^3.0.2",
+    "vite-plugin-plain-text": "^1.4.2",
+    "vite-tsconfig-paths": "^4.2.0"
+  }
+}
