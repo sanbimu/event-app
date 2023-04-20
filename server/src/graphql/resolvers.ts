@@ -1,5 +1,9 @@
-export const resolvers = {
+import type { IResolvers } from 'mercurius';
+
+export const resolvers: IResolvers = {
   Query: {
-    hello: () => 'Hello World!',
+    hello: (_, { name }) => {
+      return `Hello ${name}`;
+    },
   },
 };

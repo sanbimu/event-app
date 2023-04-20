@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "schema": "graphql-codegen --config ./src/graphql/config.ts"
   },
   "dependencies": {
     "@graphql-codegen/add": "^4.0.1",

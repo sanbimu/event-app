@@ -18,9 +18,10 @@
   "devDependencies": {
     "@types/node": "^18.15.11",
     "fluent-json-schema": "^4.1.0",
+    "mercurius-codegen": "^5.0.2",
+    "prettier": "^2.8.7",
     "vite": "^4.2.2",
     "vite-plugin-node": "^3.0.2",
-    "vite-plugin-plain-text": "^1.4.2",
     "vite-tsconfig-paths": "^4.2.0"
   }
 }

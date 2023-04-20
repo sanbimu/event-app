@@ -5,7 +5,7 @@ export const useQuery = urqlQuery<Query>;
 export const useMutation = urqlMutation<Mutation>;
 
 export default {
-  schema: 'http://localhost:6543/graphql',
+  schema: 'http://localhost:7700/graphql',
   generates: {
     './src/graphql/schema.ts': {
       plugins: [
