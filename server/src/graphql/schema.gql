@@ -1,3 +1,5 @@
+scalar ObjectID
+
 type Query {
   hello(name: String!): String!
 }

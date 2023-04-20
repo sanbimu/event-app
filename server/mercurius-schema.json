@@ -1,1 +1,1 @@
-["type Query {\n  hello(name: String!): String!\n}"]
+["scalar ObjectID\n\ntype Query {\n  hello(name: String!): String!\n}"]

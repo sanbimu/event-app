@@ -18,6 +18,12 @@ export const schemaLoader = (app: FastifyInstance) => {
           watchOptions: {
             enabled: process.env.NODE_ENV === 'development',
           },
+          codegenConfig: {
+            scalars: {
+              ObjectID: 'ObjectId',
+            },
+          },
+          preImportCode: 'import { ObjectId } from "mongodb";',
           silent: true,
         }).catch(console.error);
       },

@@ -1,4 +1,9 @@
-import type { GraphQLResolveInfo } from 'graphql';
+import { ObjectId } from 'mongodb';
+import type {
+  GraphQLResolveInfo,
+  GraphQLScalarType,
+  GraphQLScalarTypeConfig,
+} from 'graphql';
 import type { MercuriusContext } from 'mercurius';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -27,6 +32,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  ObjectID: ObjectId;
   _FieldSet: any;
 };
 
@@ -121,6 +127,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  ObjectID: ResolverTypeWrapper<Scalars['ObjectID']>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
@@ -128,10 +135,16 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  ObjectID: Scalars['ObjectID'];
   Query: {};
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
 };
+
+export interface ObjectIDScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes['ObjectID'], any> {
+  name: 'ObjectID';
+}
 
 export type QueryResolvers<
   ContextType = MercuriusContext,
@@ -146,6 +159,7 @@ export type QueryResolvers<
 };
 
 export type Resolvers<ContextType = MercuriusContext> = {
+  ObjectID?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
 };
 
