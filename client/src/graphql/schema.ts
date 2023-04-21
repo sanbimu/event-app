@@ -11,10 +11,10 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  ObjectID: ObjectId;
 };
 
 export type Query = {
-  __typename?: 'Query';
   hello: Scalars['String'];
 };
 
