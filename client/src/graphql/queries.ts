@@ -1,7 +1,12 @@
 import { gql } from 'urql';
 
-export const HelloQuery = gql`
-  query Hello($name: String!) {
-    hello(name: $name)
+export const Me = gql`
+  query Me {
+    me {
+      _id
+      firstName
+      lastName
+      avatar
+    }
   }
 `;
