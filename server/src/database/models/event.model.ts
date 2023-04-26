@@ -1,16 +1,24 @@
-import type { LocationDocument } from './location.model';
 import { Schema, model } from 'mongoose';
 import { EventStatus } from '~/shared/types';
-import { LocationSchema } from './location.model';
+
+interface Location {
+  label: string;
+  address: string;
+}
+
+interface Prices {
+  label: string;
+  price: number;
+}
 
 export interface EventDocument {
-  location: LocationDocument;
+  location: Location;
   fromDate: string;
   toDate: string;
   title: string;
   description: string;
   stock: number;
-  price: number;
+  prices: Prices[];
   picture: string;
   labels: string[];
   status: EventStatus;
@@ -19,7 +27,15 @@ export interface EventDocument {
 
 export const EventSchema = new Schema<EventDocument>(
   {
-    location: LocationSchema,
+    location: {
+      label: {
+        type: String,
+        index: true,
+      },
+      address: {
+        type: String,
+      },
+    },
     fromDate: {
       type: String,
       required: true,
@@ -31,21 +47,23 @@ export const EventSchema = new Schema<EventDocument>(
     title: {
       type: String,
       required: true,
-      text: true,
+      index: true,
     },
     description: {
       type: String,
       required: true,
-      text: true,
+      index: true,
     },
     stock: {
       type: Number,
       required: true,
     },
-    price: {
-      type: Number,
-      required: true,
-    },
+    prices: [
+      {
+        label: String,
+        price: Number,
+      },
+    ],
     picture: {
       type: String,
       default: '',

@@ -56,6 +56,18 @@ export enum EventStatus {
   SOLD_OUT = 'SOLD_OUT',
 }
 
+export type Location = {
+  __typename?: 'Location';
+  label: Scalars['String'];
+  address: Scalars['String'];
+};
+
+export type Prices = {
+  __typename?: 'Prices';
+  label: Scalars['String'];
+  price: Scalars['Float'];
+};
+
 export type Event = {
   __typename?: 'Event';
   _id: Scalars['ObjectID'];
@@ -64,7 +76,8 @@ export type Event = {
   toDate: Scalars['String'];
   title: Scalars['String'];
   description: Scalars['String'];
-  price: Scalars['Float'];
+  stock: Scalars['Int'];
+  prices: Array<Maybe<Prices>>;
   picture: Scalars['String'];
   labels: Array<Maybe<Scalars['String']>>;
   status: EventStatus;
@@ -81,13 +94,6 @@ export type EventConnection = {
   __typename?: 'EventConnection';
   edges: Array<Maybe<EventEdge>>;
   pageInfo: PageInfo;
-};
-
-export type Location = {
-  __typename?: 'Location';
-  _id: Scalars['ObjectID'];
-  label: Scalars['String'];
-  address: Scalars['String'];
 };
 
 export type Ticket = {
@@ -139,10 +145,39 @@ export type QueryeventsArgs = {
   saved?: InputMaybe<Scalars['Boolean']>;
 };
 
+export type AddLocationInput = {
+  label: Scalars['String'];
+  address: Scalars['String'];
+};
+
+export type AddPricesInput = {
+  label: Scalars['String'];
+  price: Scalars['Float'];
+};
+
+export type AddEventInput = {
+  location: AddLocationInput;
+  fromDate: Scalars['String'];
+  toDate: Scalars['String'];
+  title: Scalars['String'];
+  description: Scalars['String'];
+  stock: Scalars['Int'];
+  prices?: InputMaybe<Array<InputMaybe<AddPricesInput>>>;
+  picture?: InputMaybe<Scalars['String']>;
+  labels?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  status?: InputMaybe<EventStatus>;
+  salesCount?: InputMaybe<Scalars['Int']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  addEvent?: Maybe<Event>;
   addSavedEvent?: Maybe<Event>;
   removeSavedEvent?: Maybe<Event>;
+};
+
+export type MutationaddEventArgs = {
+  input: AddEventInput;
 };
 
 export type MutationaddSavedEventArgs = {
@@ -239,36 +274,44 @@ export type ResolversTypes = {
   Order: Order;
   Date: Date;
   EventStatus: EventStatus;
-  Event: ResolverTypeWrapper<Event>;
+  Location: ResolverTypeWrapper<Location>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Prices: ResolverTypeWrapper<Prices>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
+  Event: ResolverTypeWrapper<Event>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   EventEdge: ResolverTypeWrapper<EventEdge>;
   EventConnection: ResolverTypeWrapper<EventConnection>;
-  Location: ResolverTypeWrapper<Location>;
   Ticket: ResolverTypeWrapper<Ticket>;
   User: ResolverTypeWrapper<User>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Query: ResolverTypeWrapper<{}>;
+  AddLocationInput: AddLocationInput;
+  AddPricesInput: AddPricesInput;
+  AddEventInput: AddEventInput;
   Mutation: ResolverTypeWrapper<{}>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   ObjectID: Scalars['ObjectID'];
-  Event: Event;
+  Location: Location;
   String: Scalars['String'];
+  Prices: Prices;
   Float: Scalars['Float'];
+  Event: Event;
   Int: Scalars['Int'];
   EventEdge: EventEdge;
   EventConnection: EventConnection;
-  Location: Location;
   Ticket: Ticket;
   User: User;
   PageInfo: PageInfo;
   Boolean: Scalars['Boolean'];
   Query: {};
+  AddLocationInput: AddLocationInput;
+  AddPricesInput: AddPricesInput;
+  AddEventInput: AddEventInput;
   Mutation: {};
 };
 
@@ -276,6 +319,24 @@ export interface ObjectIDScalarConfig
   extends GraphQLScalarTypeConfig<ResolversTypes['ObjectID'], any> {
   name: 'ObjectID';
 }
+
+export type LocationResolvers<
+  ContextType = MercuriusContext,
+  ParentType extends ResolversParentTypes['Location'] = ResolversParentTypes['Location'],
+> = {
+  label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  address?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PricesResolvers<
+  ContextType = MercuriusContext,
+  ParentType extends ResolversParentTypes['Prices'] = ResolversParentTypes['Prices'],
+> = {
+  label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export type EventResolvers<
   ContextType = MercuriusContext,
@@ -287,7 +348,8 @@ export type EventResolvers<
   toDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  stock?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  prices?: Resolver<Array<Maybe<ResolversTypes['Prices']>>, ParentType, ContextType>;
   picture?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   labels?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
   status?: Resolver<ResolversTypes['EventStatus'], ParentType, ContextType>;
@@ -310,16 +372,6 @@ export type EventConnectionResolvers<
 > = {
   edges?: Resolver<Array<Maybe<ResolversTypes['EventEdge']>>, ParentType, ContextType>;
   pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
-  isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type LocationResolvers<
-  ContextType = MercuriusContext,
-  ParentType extends ResolversParentTypes['Location'] = ResolversParentTypes['Location'],
-> = {
-  _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
-  label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  address?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -383,6 +435,12 @@ export type MutationResolvers<
   ContextType = MercuriusContext,
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
 > = {
+  addEvent?: Resolver<
+    Maybe<ResolversTypes['Event']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationaddEventArgs, 'input'>
+  >;
   addSavedEvent?: Resolver<
     Maybe<ResolversTypes['Event']>,
     ParentType,
@@ -399,10 +457,11 @@ export type MutationResolvers<
 
 export type Resolvers<ContextType = MercuriusContext> = {
   ObjectID?: GraphQLScalarType;
+  Location?: LocationResolvers<ContextType>;
+  Prices?: PricesResolvers<ContextType>;
   Event?: EventResolvers<ContextType>;
   EventEdge?: EventEdgeResolvers<ContextType>;
   EventConnection?: EventConnectionResolvers<ContextType>;
-  Location?: LocationResolvers<ContextType>;
   Ticket?: TicketResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   PageInfo?: PageInfoResolvers<ContextType>;
@@ -432,6 +491,16 @@ export interface Loaders<
     reply: import('fastify').FastifyReply;
   },
 > {
+  Location?: {
+    label?: LoaderResolver<Scalars['String'], Location, {}, TContext>;
+    address?: LoaderResolver<Scalars['String'], Location, {}, TContext>;
+  };
+
+  Prices?: {
+    label?: LoaderResolver<Scalars['String'], Prices, {}, TContext>;
+    price?: LoaderResolver<Scalars['Float'], Prices, {}, TContext>;
+  };
+
   Event?: {
     _id?: LoaderResolver<Scalars['ObjectID'], Event, {}, TContext>;
     location?: LoaderResolver<Location, Event, {}, TContext>;
@@ -439,7 +508,8 @@ export interface Loaders<
     toDate?: LoaderResolver<Scalars['String'], Event, {}, TContext>;
     title?: LoaderResolver<Scalars['String'], Event, {}, TContext>;
     description?: LoaderResolver<Scalars['String'], Event, {}, TContext>;
-    price?: LoaderResolver<Scalars['Float'], Event, {}, TContext>;
+    stock?: LoaderResolver<Scalars['Int'], Event, {}, TContext>;
+    prices?: LoaderResolver<Array<Maybe<Prices>>, Event, {}, TContext>;
     picture?: LoaderResolver<Scalars['String'], Event, {}, TContext>;
     labels?: LoaderResolver<Array<Maybe<Scalars['String']>>, Event, {}, TContext>;
     status?: LoaderResolver<EventStatus, Event, {}, TContext>;
@@ -454,12 +524,6 @@ export interface Loaders<
   EventConnection?: {
     edges?: LoaderResolver<Array<Maybe<EventEdge>>, EventConnection, {}, TContext>;
     pageInfo?: LoaderResolver<PageInfo, EventConnection, {}, TContext>;
-  };
-
-  Location?: {
-    _id?: LoaderResolver<Scalars['ObjectID'], Location, {}, TContext>;
-    label?: LoaderResolver<Scalars['String'], Location, {}, TContext>;
-    address?: LoaderResolver<Scalars['String'], Location, {}, TContext>;
   };
 
   Ticket?: {

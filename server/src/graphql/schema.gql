@@ -20,6 +20,16 @@ enum EventStatus {
   SOLD_OUT
 }
 
+type Location {
+  label: String!
+  address: String!
+}
+
+type Prices {
+  label: String!
+  price: Float!
+}
+
 type Event {
   _id: ObjectID!
   location: Location!
@@ -27,7 +37,8 @@ type Event {
   toDate: String!
   title: String!
   description: String!
-  price: Float!
+  stock: Int!
+  prices: [Prices]!
   picture: String!
   labels: [String]!
   status: EventStatus!
@@ -42,12 +53,6 @@ type EventEdge {
 type EventConnection {
   edges: [EventEdge]!
   pageInfo: PageInfo!
-}
-
-type Location {
-  _id: ObjectID!
-  label: String!
-  address: String!
 }
 
 type Ticket {
