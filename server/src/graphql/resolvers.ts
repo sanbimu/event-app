@@ -2,7 +2,7 @@ import type { IResolvers } from 'mercurius';
 import type { FilterQuery } from 'mongoose';
 import type { EventDocument } from '~/database/models';
 import { Event, User } from '~/database/models';
-import { makeDateFilter } from '~/utils/filters';
+import { generateDateFilter } from '~/utils/filters';
 import { Order } from './schema';
 import { ObjectIDScalar } from './scalars';
 import { formatDocumentsPagination } from './utils';
@@ -30,7 +30,7 @@ export const resolvers: IResolvers = {
         ...(query && {
           $or: [{ title: regex }, { description: regex }, { 'location.label': regex }],
         }),
-        ...(date && { fromDate: makeDateFilter(date) }),
+        ...(date && generateDateFilter(date)),
         ...(label && { label: { $in: [label] } }),
         ...(saved && { _id: { $in: user.savedEvents } }),
       };

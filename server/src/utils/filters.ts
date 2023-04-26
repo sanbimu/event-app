@@ -1,45 +1,42 @@
 import { Date as IDate } from '~/graphql/schema';
 
-export function makeDateFilter(date: IDate) {
+export function generateDateFilter(date: IDate) {
   const currentDate = new Date();
+  const tomorrow = new Date(currentDate);
+  tomorrow.setDate(currentDate.getDate() + 1);
 
-  const toISOString = (date: Date) => {
-    return date.toISOString().slice(0, 10);
+  const getFilter = (fromDate: Date, toDate: Date) => {
+    return {
+      fromDate: { $lte: toDate.toISOString().slice(0, 10) },
+      toDate: { $gte: fromDate.toISOString().slice(0, 10) },
+    };
   };
 
   switch (date) {
     case IDate.TODAY:
-      return {
-        $gte: toISOString(currentDate),
-      };
+      return getFilter(currentDate, tomorrow);
     case IDate.TOMORROW:
-      const tomorrow = new Date(currentDate);
-      tomorrow.setDate(tomorrow.getDate() + 1);
+      const dayAfterTomorrow = new Date(currentDate);
+      dayAfterTomorrow.setDate(currentDate.getDate() + 2);
 
-      return {
-        $gte: toISOString(tomorrow),
-      };
+      return getFilter(tomorrow, dayAfterTomorrow);
     case IDate.THIS_WEEKEND:
-      const weekendStart = new Date(currentDate);
-      weekendStart.setDate(currentDate.getDate() + (6 - currentDate.getDay()));
+      const thisSaturday = new Date();
+      thisSaturday.setDate(currentDate.getDate() + (6 - currentDate.getDay()));
 
-      const weekendEnd = new Date(currentDate);
-      weekendEnd.setDate(currentDate.getDate() + (7 - currentDate.getDay()));
+      const thisSunday = new Date(thisSaturday);
+      thisSunday.setDate(thisSaturday.getDate() + 1);
 
-      return {
-        $gte: toISOString(weekendStart),
-        $lte: toISOString(weekendEnd),
-      };
+      return getFilter(thisSaturday, thisSunday);
     case IDate.NEXT_WEEK:
-      const nextWeekStart = new Date(currentDate);
-      nextWeekStart.setDate(currentDate.getDate() + (13 - currentDate.getDay()));
+      const nextMonday = new Date();
+      nextMonday.setDate(currentDate.getDate() + (7 - currentDate.getDay()) + 1);
 
-      const nextWeekEnd = new Date(currentDate);
-      nextWeekEnd.setDate(currentDate.getDate() + (14 - currentDate.getDay()));
+      const nextSunday = new Date(nextMonday);
+      nextSunday.setDate(nextMonday.getDate() + 6);
 
-      return {
-        $gte: toISOString(nextWeekStart),
-        $lte: toISOString(nextWeekEnd),
-      };
+      return getFilter(nextMonday, nextSunday);
+    default:
+      throw new Error('Invalid IDate value');
   }
 }
