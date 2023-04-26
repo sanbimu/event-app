@@ -1,5 +1,95 @@
 scalar ObjectID
 
+enum Order {
+  ASC
+  DESC
+}
+
+enum Date {
+  TODAY
+  TOMORROW
+  THIS_WEEKEND
+  NEXT_WEEK
+}
+
+enum EventStatus {
+  NEW
+  ONGOING
+  FINISHED
+  CANCELED
+  SOLD_OUT
+}
+
+type Event {
+  _id: ObjectID!
+  location: Location!
+  fromDate: String!
+  toDate: String!
+  title: String!
+  description: String!
+  price: Float!
+  picture: String!
+  labels: [String]!
+  status: EventStatus!
+  salesCount: Int!
+}
+
+type EventEdge {
+  cursor: String!
+  node: Event!
+}
+
+type EventConnection {
+  edges: [EventEdge]!
+  pageInfo: PageInfo!
+}
+
+type Location {
+  _id: ObjectID!
+  label: String!
+  address: String!
+}
+
+type Ticket {
+  _id: ObjectID!
+  event: Event!
+  user: User!
+}
+
+type User {
+  _id: ObjectID!
+  provider: String!
+  providerId: String
+  firstName: String!
+  lastName: String!
+  email: String!
+  avatar: String!
+  savedEvents: [Event]!
+  tickets: [Ticket]!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
 type Query {
-  hello(name: String!): String!
+  me: User
+  event(id: ObjectID!): Event
+  events(
+    order: Order = ASC
+    first: Int = 25
+    after: ObjectID
+    query: String
+    date: Date
+    label: String
+    saved: Boolean
+  ): EventConnection!
+}
+
+type Mutation {
+  addSavedEvent(id: ObjectID!): Event
+  removeSavedEvent(id: ObjectID!): Event
 }
