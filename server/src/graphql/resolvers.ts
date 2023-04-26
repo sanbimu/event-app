@@ -26,7 +26,7 @@ export const resolvers: IResolvers = {
     events: async (_, { order, first, after, date, label, query, saved }, { user }) => {
       const regex = { $regex: query, $options: 'i' };
       const filter: FilterQuery<EventDocument> = {
-        ...(after && { _id: { $gt: after } }),
+        ...(after && { _id: { [order === Order.ASC ? '$gt' : '$lt']: after } }),
         ...(query && {
           $or: [{ title: regex }, { description: regex }, { 'location.label': regex }],
         }),
