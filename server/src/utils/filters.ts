@@ -3,24 +3,32 @@ import { Date as IDate } from '~/graphql/schema';
 export function makeDateFilter(date: IDate) {
   const currentDate = new Date();
 
+  const toISOString = (date: Date) => {
+    return date.toISOString().slice(0, 10);
+  };
+
   switch (date) {
     case IDate.TODAY:
-      return { $gte: currentDate.toISOString() };
+      return {
+        $gte: toISOString(currentDate),
+      };
     case IDate.TOMORROW:
       const tomorrow = new Date(currentDate);
       tomorrow.setDate(tomorrow.getDate() + 1);
 
-      return { $gte: tomorrow.toISOString() };
+      return {
+        $gte: toISOString(tomorrow),
+      };
     case IDate.THIS_WEEKEND:
-      const thisWeekendStart = new Date(currentDate);
-      thisWeekendStart.setDate(currentDate.getDate() + (6 - currentDate.getDay()));
+      const weekendStart = new Date(currentDate);
+      weekendStart.setDate(currentDate.getDate() + (6 - currentDate.getDay()));
 
-      const thisWeekendEnd = new Date(currentDate);
-      thisWeekendEnd.setDate(currentDate.getDate() + (7 - currentDate.getDay()));
+      const weekendEnd = new Date(currentDate);
+      weekendEnd.setDate(currentDate.getDate() + (7 - currentDate.getDay()));
 
       return {
-        $gte: thisWeekendStart.toISOString(),
-        $lte: thisWeekendEnd.toISOString(),
+        $gte: toISOString(weekendStart),
+        $lte: toISOString(weekendEnd),
       };
     case IDate.NEXT_WEEK:
       const nextWeekStart = new Date(currentDate);
@@ -30,8 +38,8 @@ export function makeDateFilter(date: IDate) {
       nextWeekEnd.setDate(currentDate.getDate() + (14 - currentDate.getDay()));
 
       return {
-        $gte: nextWeekStart.toISOString(),
-        $lte: nextWeekEnd.toISOString(),
+        $gte: toISOString(nextWeekStart),
+        $lte: toISOString(nextWeekEnd),
       };
   }
 }

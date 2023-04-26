@@ -24,16 +24,19 @@ export const resolvers: IResolvers = {
     },
 
     events: async (_, { order, first, after, date, label, query, saved }, { user }) => {
+      const regex = { $regex: query, $options: 'i' };
       const filter: FilterQuery<EventDocument> = {
         ...(after && { _id: { $gt: after } }),
-        ...(query && { $text: { $search: query } }),
-        ...(date && { date: makeDateFilter(date) }),
+        ...(query && {
+          $or: [{ title: regex }, { description: regex }, { 'location.label': regex }],
+        }),
+        ...(date && { fromDate: makeDateFilter(date) }),
         ...(label && { label: { $in: [label] } }),
         ...(saved && { _id: { $in: user.savedEvents } }),
       };
 
       const events = await Event.find(filter)
-        .sort({ date: order === Order.ASC ? 1 : -1 })
+        .sort({ _id: order === Order.ASC ? 1 : -1 })
         .limit(first + 1)
         .populate(['location'])
         .lean();
