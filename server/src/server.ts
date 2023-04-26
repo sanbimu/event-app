@@ -6,6 +6,7 @@ import cors from '@fastify/cors';
 import { context } from '~/graphql/context';
 import { resolvers } from '~/graphql/resolvers';
 import { schemaLoader } from '~/graphql/loader';
+import { oauth2ProvidersRouter } from '~/routes';
 import { createDatabaseConnection } from '~/database';
 
 const initServer = async (opts?: FastifyServerOptions) => {
@@ -27,6 +28,7 @@ const initServer = async (opts?: FastifyServerOptions) => {
     path: '/graphql',
   });
 
+  app.register(oauth2ProvidersRouter);
   await createDatabaseConnection();
 
   if (import.meta.env.PROD) {
