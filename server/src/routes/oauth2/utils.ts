@@ -53,14 +53,26 @@ async function getProviderUser(
     if (response.ok) {
       const data = await response.json();
 
-      return {
-        providerId: data.id,
-        provider,
-        email: data.email,
-        firstName: data.given_name,
-        lastName: data.family_name,
-        avatar: data.picture,
-      };
+      switch (provider) {
+        case Provider.GOOGLE:
+          return {
+            providerId: data.id,
+            provider,
+            email: data.email,
+            firstName: data.first_name,
+            lastName: data.family_name,
+            avatar: data.picture,
+          };
+        case Provider.FACEBOOK:
+          return {
+            providerId: data.id,
+            provider,
+            email: data.email,
+            firstName: data.first_name,
+            lastName: data.last_name,
+            avatar: data.picture.data.url,
+          };
+      }
     }
   } catch (e) {
     console.error(e);
