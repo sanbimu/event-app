@@ -1,3 +1,5 @@
+import { CodegenConfig } from '@graphql-codegen/cli';
+
 export default {
   schema: 'http://localhost:7700/graphql',
   generates: {
@@ -21,4 +23,4 @@ export default {
       ObjectID: 'ObjectId',
     },
   },
-};
+} satisfies CodegenConfig;

@@ -7,8 +7,9 @@
     "start": "node dist/server.mjs"
   },
   "dependencies": {
-    "@as-integrations/fastify": "^1.3.2",
     "@fastify/cors": "^8.2.1",
+    "@fastify/jwt": "^6.7.1",
+    "@fastify/oauth2": "^7.0.1",
     "fastify": "^4.15.0",
     "graphql": "^16.6.0",
     "mercurius": "^12.2.0",
