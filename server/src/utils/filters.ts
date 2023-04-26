@@ -25,7 +25,7 @@ export function generateDateFilter(date: IDate) {
       thisSaturday.setDate(currentDate.getDate() + (6 - currentDate.getDay()));
 
       const thisSunday = new Date(thisSaturday);
-      thisSunday.setDate(thisSaturday.getDate() + 1);
+      thisSunday.setDate(thisSaturday.getDate() + 2);
 
       return getFilter(thisSaturday, thisSunday);
     case IDate.NEXT_WEEK:

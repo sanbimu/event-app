@@ -20,7 +20,7 @@ export const resolvers: IResolvers = {
     },
 
     event: (_, { id }) => {
-      return Event.findById(id).populate(['location']).lean();
+      return Event.findById(id).lean();
     },
 
     events: async (_, { order, first, after, date, label, query, saved }, { user }) => {
@@ -38,7 +38,6 @@ export const resolvers: IResolvers = {
       const events = await Event.find(filter)
         .sort({ _id: order === Order.ASC ? 1 : -1 })
         .limit(first + 1)
-        .populate(['location'])
         .lean();
 
       return formatDocumentsPagination(events, first, after);
@@ -47,7 +46,7 @@ export const resolvers: IResolvers = {
 
   Mutation: {
     addSavedEvent: async (_, { id }, { user }) => {
-      const event = await Event.findById(id).populate(['location']).lean();
+      const event = await Event.findById(id).lean();
 
       if (event) {
         await User.findOneAndUpdate(
@@ -60,7 +59,7 @@ export const resolvers: IResolvers = {
     },
 
     removeSavedEvent: async (_, { id }, { user }) => {
-      const event = await Event.findById(id).populate(['location']).lean();
+      const event = await Event.findById(id).lean();
 
       if (event) {
         await User.findOneAndUpdate(
