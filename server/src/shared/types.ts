@@ -10,3 +10,8 @@ export enum Provider {
   GOOGLE = 'google',
   FACEBOOK = 'facebook',
 }
+
+export interface TokenUser {
+  providerId: string;
+  provider: Provider;
+}
