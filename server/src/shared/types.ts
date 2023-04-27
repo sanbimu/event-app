@@ -6,6 +6,26 @@ export enum EventStatus {
   SOLD_OUT = 'SOLD_OUT',
 }
 
+export enum EventLabel {
+  ROCK = 'ROCK',
+  POP = 'POP',
+  METAL = 'METAL',
+  JAZZ_BLUES = 'JAZZ_BLUES',
+  CLASSICAL = 'CLASSICAL',
+  ELECTRONIC = 'ELECTRONIC',
+  HIPHOP_RAP = 'HIPHOP_RAP',
+  FOLK_ACOUSTIC = 'FOLK_ACOUSTIC',
+  CULTURAL = 'CULTURAL',
+  OPERA = 'OPERA',
+  OTHER = 'OTHER',
+}
+
+export enum EventType {
+  CONCERT = 'CONCERT',
+  FESTIVAL = 'FESTIVAL',
+  PARTY = 'PARTY',
+}
+
 export enum Provider {
   GOOGLE = 'google',
   FACEBOOK = 'facebook',

@@ -51,7 +51,7 @@ export const resolvers: IResolvers = {
       if (event) {
         await User.findOneAndUpdate(
           { _id: user._id },
-          { $push: { savedEvents: event._id } },
+          { $addToSet: { savedEvents: event._id } },
         );
       }
 

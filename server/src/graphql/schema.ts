@@ -56,6 +56,26 @@ export enum EventStatus {
   SOLD_OUT = 'SOLD_OUT',
 }
 
+export enum EventLabel {
+  ROCK = 'ROCK',
+  POP = 'POP',
+  METAL = 'METAL',
+  JAZZ_BLUES = 'JAZZ_BLUES',
+  CLASSICAL = 'CLASSICAL',
+  ELECTRONIC = 'ELECTRONIC',
+  HIPHOP_RAP = 'HIPHOP_RAP',
+  FOLK_ACOUSTIC = 'FOLK_ACOUSTIC',
+  CULTURAL = 'CULTURAL',
+  OPERA = 'OPERA',
+  OTHER = 'OTHER',
+}
+
+export enum EventType {
+  CONCERT = 'CONCERT',
+  FESTIVAL = 'FESTIVAL',
+  PARTY = 'PARTY',
+}
+
 export type Location = {
   __typename?: 'Location';
   label: Scalars['String'];
@@ -79,7 +99,8 @@ export type Event = {
   stock: Scalars['Int'];
   prices: Array<Maybe<Prices>>;
   picture: Scalars['String'];
-  labels: Array<Maybe<Scalars['String']>>;
+  labels: Array<Maybe<EventLabel>>;
+  type: EventType;
   status: EventStatus;
   salesCount: Scalars['Int'];
 };
@@ -164,7 +185,8 @@ export type AddEventInput = {
   stock: Scalars['Int'];
   prices?: InputMaybe<Array<InputMaybe<AddPricesInput>>>;
   picture?: InputMaybe<Scalars['String']>;
-  labels?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  labels?: InputMaybe<Array<InputMaybe<EventLabel>>>;
+  type?: InputMaybe<EventType>;
   status?: InputMaybe<EventStatus>;
   salesCount?: InputMaybe<Scalars['Int']>;
 };
@@ -274,6 +296,8 @@ export type ResolversTypes = {
   Order: Order;
   Date: Date;
   EventStatus: EventStatus;
+  EventLabel: EventLabel;
+  EventType: EventType;
   Location: ResolverTypeWrapper<Location>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Prices: ResolverTypeWrapper<Prices>;
@@ -351,7 +375,8 @@ export type EventResolvers<
   stock?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   prices?: Resolver<Array<Maybe<ResolversTypes['Prices']>>, ParentType, ContextType>;
   picture?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  labels?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
+  labels?: Resolver<Array<Maybe<ResolversTypes['EventLabel']>>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['EventType'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['EventStatus'], ParentType, ContextType>;
   salesCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -511,7 +536,8 @@ export interface Loaders<
     stock?: LoaderResolver<Scalars['Int'], Event, {}, TContext>;
     prices?: LoaderResolver<Array<Maybe<Prices>>, Event, {}, TContext>;
     picture?: LoaderResolver<Scalars['String'], Event, {}, TContext>;
-    labels?: LoaderResolver<Array<Maybe<Scalars['String']>>, Event, {}, TContext>;
+    labels?: LoaderResolver<Array<Maybe<EventLabel>>, Event, {}, TContext>;
+    type?: LoaderResolver<EventType, Event, {}, TContext>;
     status?: LoaderResolver<EventStatus, Event, {}, TContext>;
     salesCount?: LoaderResolver<Scalars['Int'], Event, {}, TContext>;
   };

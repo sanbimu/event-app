@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { EventStatus } from '~/shared/types';
+import { EventLabel, EventStatus, EventType } from '~/shared/types';
 
 interface Location {
   label: string;
@@ -20,7 +20,8 @@ export interface EventDocument {
   stock: number;
   prices: Prices[];
   picture: string;
-  labels: string[];
+  labels: EventLabel[];
+  type: EventType;
   status: EventStatus;
   salesCount: number;
 }
@@ -71,9 +72,15 @@ export const EventSchema = new Schema<EventDocument>(
     labels: [
       {
         type: String,
+        enum: Object.values(EventLabel),
         default: [],
       },
     ],
+    type: {
+      type: String,
+      enum: Object.values(EventType),
+      default: EventType.CONCERT,
+    },
     status: {
       type: String,
       enum: Object.values(EventStatus),

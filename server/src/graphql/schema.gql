@@ -20,6 +20,26 @@ enum EventStatus {
   SOLD_OUT
 }
 
+enum EventLabel {
+  ROCK
+  POP
+  METAL
+  JAZZ_BLUES
+  CLASSICAL
+  ELECTRONIC
+  HIPHOP_RAP
+  FOLK_ACOUSTIC
+  CULTURAL
+  OPERA
+  OTHER
+}
+
+enum EventType {
+  CONCERT
+  FESTIVAL
+  PARTY
+}
+
 type Location {
   label: String!
   address: String!
@@ -40,7 +60,8 @@ type Event {
   stock: Int!
   prices: [Prices]!
   picture: String!
-  labels: [String]!
+  labels: [EventLabel]!
+  type: EventType!
   status: EventStatus!
   salesCount: Int!
 }
