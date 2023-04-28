@@ -1,21 +1,11 @@
-import type { EventDocument } from './event.model';
+import type { User as IUser } from '~/graphql/schema';
 import { Schema, model } from 'mongoose';
 import { Provider } from '~/shared/types';
 import { EventSchema } from './event.model';
 import { TicketSchema } from './ticket.model';
 
-export interface UserDocument {
-  provider: Provider;
-  providerId: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  avatar: string;
-  savedEvents: EventDocument[];
-  tickets: string[];
-}
 
-export const UserSchema = new Schema<UserDocument>(
+export const UserSchema = new Schema<IUser>(
   {
     provider: {
       type: String,
@@ -52,4 +42,4 @@ export const UserSchema = new Schema<UserDocument>(
   },
 );
 
-export const User = model<UserDocument>('User', UserSchema);
+export const User = model<IUser>('User', UserSchema);

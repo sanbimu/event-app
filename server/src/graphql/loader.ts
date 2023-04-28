@@ -19,6 +19,7 @@ export const schemaLoader = (app: FastifyInstance) => {
             enabled: process.env.NODE_ENV === 'development',
           },
           codegenConfig: {
+            skipTypename: true,
             scalars: {
               ObjectID: 'ObjectId',
             },

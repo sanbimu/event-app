@@ -1,32 +1,12 @@
 import { Schema, model } from 'mongoose';
-import { EventLabel, EventStatus, EventType } from '~/shared/types';
+import {
+  EventLabel,
+  EventStatus,
+  EventType,
+  type Event as IEvent,
+} from '~/graphql/schema';
 
-interface Location {
-  label: string;
-  address: string;
-}
-
-interface Prices {
-  label: string;
-  price: number;
-}
-
-export interface EventDocument {
-  location: Location;
-  fromDate: string;
-  toDate: string;
-  title: string;
-  description: string;
-  stock: number;
-  prices: Prices[];
-  picture: string;
-  labels: EventLabel[];
-  type: EventType;
-  status: EventStatus;
-  salesCount: number;
-}
-
-export const EventSchema = new Schema<EventDocument>(
+export const EventSchema = new Schema<IEvent>(
   {
     location: {
       label: {
@@ -97,4 +77,4 @@ export const EventSchema = new Schema<EventDocument>(
   },
 );
 
-export const Event = model('Event', EventSchema);
+export const Event = model<IEvent>('Event', EventSchema);

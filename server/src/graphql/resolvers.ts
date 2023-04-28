@@ -1,11 +1,10 @@
 import type { IResolvers } from 'mercurius';
 import type { FilterQuery } from 'mongoose';
-import type { EventDocument } from '~/database/models';
 import { Event, User } from '~/database/models';
 import { generateDateFilter } from '~/utils/filters';
-import { Order } from './schema';
 import { ObjectIDScalar } from './scalars';
 import { formatDocumentsPagination } from './utils';
+import { Order, type Event as IEvent } from './schema';
 
 export const resolvers: IResolvers = {
   ObjectID: ObjectIDScalar,
@@ -25,7 +24,7 @@ export const resolvers: IResolvers = {
 
     events: async (_, { order, first, after, date, label, query, saved }, { user }) => {
       const regex = { $regex: query, $options: 'i' };
-      const filter: FilterQuery<EventDocument> = {
+      const filter: FilterQuery<IEvent> = {
         ...(after && { _id: { [order === Order.ASC ? '$gt' : '$lt']: after } }),
         ...(query && {
           $or: [{ title: regex }, { description: regex }, { 'location.label': regex }],
