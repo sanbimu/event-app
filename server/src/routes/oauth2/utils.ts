@@ -59,7 +59,7 @@ async function getProviderUser(
             providerId: data.id,
             provider,
             email: data.email,
-            firstName: data.first_name,
+            firstName: data.given_name,
             lastName: data.family_name,
             avatar: data.picture,
           };
