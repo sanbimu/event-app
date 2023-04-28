@@ -35,8 +35,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
       setUser({
         _id: data.data.me._id.toString(),
         avatar: data.data.me.avatar,
-        firstName: data.data.me.firstName,
-        lastName: data.data.me.lastName,
+        firstName: data.data.me.info.contact.firstName,
+        lastName: data.data.me.info.contact.lastName,
       });
     } else if (data?.error) {
       signOut();

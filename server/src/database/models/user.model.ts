@@ -4,6 +4,10 @@ import { Provider } from '~/shared/types';
 import { EventSchema } from './event.model';
 import { TicketSchema } from './ticket.model';
 
+const stringDefault = {
+  type: String,
+  default: '',
+};
 
 export const UserSchema = new Schema<IUser>(
   {
@@ -17,13 +21,29 @@ export const UserSchema = new Schema<IUser>(
       default: null,
       index: true,
     },
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
+    info: {
+      contact: {
+        firstName: {
+          type: String,
+          required: true,
+        },
+        lastName: {
+          type: String,
+          required: true,
+        },
+        phoneNumber: stringDefault,
+      },
+      home: {
+        address: stringDefault,
+        postalCode: stringDefault,
+        city: stringDefault,
+      },
+      billing: {
+        name: stringDefault,
+        address: stringDefault,
+        postalCode: stringDefault,
+        city: stringDefault,
+      },
     },
     email: {
       type: String,

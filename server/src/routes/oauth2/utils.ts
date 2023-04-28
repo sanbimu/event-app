@@ -18,8 +18,12 @@ export async function handleOAuth2Callback(
         { providerId: user.providerId, provider: provider },
         {
           email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
+          info: {
+            contact: {
+              firstName: user.firstName,
+              lastName: user.lastName,
+            },
+          },
           avatar: user.avatar,
         },
       );

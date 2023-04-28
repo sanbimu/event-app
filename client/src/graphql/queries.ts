@@ -4,8 +4,12 @@ export const Me = gql`
   query Me {
     me {
       _id
-      firstName
-      lastName
+      info {
+        contact {
+          firstName
+          lastName
+        }
+      }
       avatar
     }
   }

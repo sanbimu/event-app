@@ -82,12 +82,36 @@ type Ticket {
   user: User!
 }
 
+type ContactInfo {
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+}
+
+type HomeInfo {
+  address: String!
+  postalCode: String!
+  city: String!
+}
+
+type BillingInfo {
+  name: String!
+  address: String!
+  postalCode: String!
+  city: String!
+}
+
+type Info {
+  contact: ContactInfo!
+  home: HomeInfo!
+  billing: BillingInfo!
+}
+
 type User {
   _id: ObjectID!
   provider: String!
   providerId: String
-  firstName: String!
-  lastName: String!
+  info: Info!
   email: String!
   avatar: String!
   savedEvents: [Event]!

@@ -1,11 +1,12 @@
+import type { DeepPartial } from 'mercurius-codegen';
 import type { FilterQuery } from 'mongoose';
-import type { UserDocument } from '~/database/models';
+import type { User as IUser } from '~/graphql/schema';
 import { User } from '~/database/models';
 
 export namespace UserController {
   export async function findOneOrCreate(
-    filter: FilterQuery<UserDocument>,
-    doc: Partial<UserDocument>,
+    filter: FilterQuery<IUser>,
+    doc: DeepPartial<IUser>,
   ) {
     const user = await User.findOne(filter);
 
