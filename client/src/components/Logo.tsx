@@ -9,7 +9,7 @@ const Logo: React.FC = () => {
       </p>
       <Triangle
         className="left-[3.25rem]
-    z-40 border-l-[35px] border-t-[55px] border-r-[35px]"
+    z-40 border-l-[35px] border-t-[55px] border-r-[35px] border-t-beige-muted"
       />
     </div>
   );

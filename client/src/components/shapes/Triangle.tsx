@@ -9,7 +9,7 @@ const Triangle: React.FC<TriangleProps> = ({ className }) => {
     <div
       className={`${className} absolute h-0 w-0 
    border-l-transparent
-  border-t-beige-muted border-r-transparent`}
+   border-r-transparent`}
     ></div>
   );
 };

@@ -4,4 +4,9 @@
 
 body {
   overscroll-behavior: none;
+  background-color: #f3ece8;
+}
+
+#search {
+  outline: none;
 }
