@@ -140,6 +140,6 @@ type Query {
 }
 
 type Mutation {
-  addSavedEvent(id: ObjectID!): Event
-  removeSavedEvent(id: ObjectID!): Event
+  addSavedEvent(id: ObjectID!): User
+  removeSavedEvent(id: ObjectID!): User
 }

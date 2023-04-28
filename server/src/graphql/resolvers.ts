@@ -5,6 +5,7 @@ import { generateDateFilter } from '~/utils/filters';
 import { ObjectIDScalar } from './scalars';
 import { formatDocumentsPagination } from './utils';
 import { Order, type Event as IEvent } from './schema';
+import { GraphQLError } from 'graphql';
 
 export const resolvers: IResolvers = {
   ObjectID: ObjectIDScalar,
@@ -14,8 +15,8 @@ export const resolvers: IResolvers = {
         providerId: user.providerId,
         provider: user.provider,
       })
-        .populate(['savedEvents', 'tickets'])
-        .lean();
+        .lean()
+        .populate(['savedEvents', 'tickets']);
     },
 
     event: (_, { id }) => {
@@ -47,27 +48,34 @@ export const resolvers: IResolvers = {
     addSavedEvent: async (_, { id }, { user }) => {
       const event = await Event.findById(id).lean();
 
-      if (event) {
-        await User.findOneAndUpdate(
-          { _id: user._id },
-          { $addToSet: { savedEvents: event._id } },
-        );
+      if (!event) {
+        throw new GraphQLError('EVENT_NOT_FOUND');
       }
 
-      return event;
+      return await User.findOneAndUpdate(
+        { _id: user._id },
+        { $addToSet: { savedEvents: event._id } },
+        { new: true },
+      )
+        .lean()
+        .populate(['savedEvents', 'tickets']);
+    },
     },
 
     removeSavedEvent: async (_, { id }, { user }) => {
       const event = await Event.findById(id).lean();
 
-      if (event) {
-        await User.findOneAndUpdate(
-          { _id: user._id },
-          { $pull: { savedEvents: event._id } },
-        );
+      if (!event) {
+        throw new GraphQLError('EVENT_NOT_FOUND');
       }
 
-      return event;
+      return await User.findOneAndUpdate(
+        { _id: user._id },
+        { $pull: { savedEvents: event._id } },
+        { new: true },
+      )
+        .lean()
+        .populate(['savedEvents', 'tickets']);
     },
   },
 };
