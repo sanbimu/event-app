@@ -3,7 +3,7 @@ import type { FilterQuery } from 'mongoose';
 import { Event, User } from '~/database/models';
 import { generateDateFilter } from '~/utils/filters';
 import { ObjectIDScalar } from './scalars';
-import { formatDocumentsPagination } from './utils';
+import { formatDocumentsPagination, mergeDeep } from './utils';
 import { Order, type Event as IEvent } from './schema';
 import { GraphQLError } from 'graphql';
 
@@ -60,6 +60,14 @@ export const resolvers: IResolvers = {
         .lean()
         .populate(['savedEvents', 'tickets']);
     },
+
+    modifyUserInfo: async (_, { input }, { user }) => {
+      const data = await User.findById(user._id).lean();
+      return User.findOneAndUpdate(
+        { _id: user._id },
+        { $set: { info: mergeDeep(data.info, input) } },
+        { new: true },
+      ).lean();
     },
 
     removeSavedEvent: async (_, { id }, { user }) => {

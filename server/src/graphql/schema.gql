@@ -83,22 +83,22 @@ type Ticket {
 }
 
 type ContactInfo {
-  firstName: String!
-  lastName: String!
-  phoneNumber: String!
+  firstName: String
+  lastName: String
+  phoneNumber: String
 }
 
 type HomeInfo {
-  address: String!
-  postalCode: String!
-  city: String!
+  address: String
+  postalCode: String
+  city: String
 }
 
 type BillingInfo {
-  name: String!
-  address: String!
-  postalCode: String!
-  city: String!
+  name: String
+  address: String
+  postalCode: String
+  city: String
 }
 
 type Info {
@@ -125,6 +125,32 @@ type PageInfo {
   endCursor: String
 }
 
+
+input ContactInfoInput {
+  firstName: String
+  lastName: String
+  phoneNumber: String
+}
+
+input HomeInfoInput {
+  address: String
+  postalCode: String
+  city: String
+}
+
+input BillingInfoInput {
+  name: String
+  address: String
+  postalCode: String
+  city: String
+}
+
+input ModifyUserInfoInput {
+  contact: ContactInfoInput
+  home: HomeInfoInput
+  billing: BillingInfoInput
+}
+
 type Query {
   me: User
   event(id: ObjectID!): Event
@@ -141,5 +167,6 @@ type Query {
 
 type Mutation {
   addSavedEvent(id: ObjectID!): User
+  modifyUserInfo(input: ModifyUserInfoInput!): User
   removeSavedEvent(id: ObjectID!): User
 }

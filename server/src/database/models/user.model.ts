@@ -6,7 +6,7 @@ import { TicketSchema } from './ticket.model';
 
 const stringDefault = {
   type: String,
-  default: '',
+  default: null,
 };
 
 export const UserSchema = new Schema<IUser>(
@@ -23,14 +23,8 @@ export const UserSchema = new Schema<IUser>(
     },
     info: {
       contact: {
-        firstName: {
-          type: String,
-          required: true,
-        },
-        lastName: {
-          type: String,
-          required: true,
-        },
+        firstName: stringDefault,
+        lastName: stringDefault,
         phoneNumber: stringDefault,
       },
       home: {
