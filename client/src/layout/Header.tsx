@@ -20,7 +20,7 @@ const Header: React.FC = () => {
 
       {/*    DESKTOP     */}
 
-      <div className=" hidden h-screen min-w-[240px] flex-col border-r border-black lg:flex">
+      <div className=" fixed hidden h-screen min-w-[240px] flex-col border-r border-black lg:flex">
         <div className="flex h-[12vh] items-center justify-center border-b border-black">
           <Logo />
         </div>
@@ -42,14 +42,12 @@ const Header: React.FC = () => {
             text="cart"
           />
         </div>
-        <div className="flex h-[28vh] flex-col justify-center pl-6 leading-relaxed">
-          <p className="pb-1 font-franklin text-xxs text-dark-grey">© 2023 VIBE INC.</p>
-          <p className="pb-1 pt-[0.10rem] font-franklin text-xxs text-dark-grey">
-            Cookie Policy
-          </p>
-          <p className="pb-1 font-franklin text-xxs text-dark-grey">Terms & Conditions</p>
-          <p className="pb-1 font-franklin text-xxs text-dark-grey">FAQ</p>
-          <p className="pb-1 font-franklin text-xxs text-dark-grey">Contact Support</p>
+        <div className="flex h-[28vh] flex-col justify-center pl-6 font-franklin text-xxs leading-relaxed text-dark-grey">
+          <p className="pb-1">© 2023 VIBE INC.</p>
+          <p className="pb-1 pt-[0.10rem]">Cookie Policy</p>
+          <p className="pb-1">Terms & Conditions</p>
+          <p className="pb-1">FAQ</p>
+          <p className="pb-1">Contact Support</p>
           <div className="flex flex-row gap-2 pt-1">
             <img src="/facebook.svg" alt="facebook" className="h-[20px]"></img>
             <img src="/instagram.svg" alt="instagram" className="h-[20px]"></img>

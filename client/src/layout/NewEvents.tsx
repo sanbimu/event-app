@@ -5,7 +5,7 @@ import Square from '../components/shapes/Square';
 
 const NewEvents: React.FC = () => {
   return (
-    <div className="relative flex min-h-[240px] border-b border-black p-3">
+    <div className="relative flex min-h-[280px] border-b border-black p-3 lg:min-h-[353px]">
       <NewEvent>
         <div className="flex w-[35%] border-r border-black md:w-[50%]">
           <img src="test.jpeg" className="object-cover p-1"></img>
@@ -21,12 +21,12 @@ const NewEvents: React.FC = () => {
           <p className="pt-4 font-franklin text-sm font-extralight uppercase lg:pt-6 lg:text-[15px]">
             Date
           </p>
-          <p className="pt-4 pb-6 font-franklin text-sm font-extralight uppercase md:pb-4 lg:pb-20 lg:pt-6 lg:text-[15px]">
+          <p className="pt-4 pb-14 font-franklin text-sm font-extralight uppercase md:pb-12 lg:pb-20 lg:pt-6 lg:text-[15px]">
             Location
           </p>
 
           <Button
-            className="w-[155px] py-3 font-franklin font-medium lg:w-[190px] lg:py-4 "
+            className="w-[155px] py-3 font-franklin font-medium shadow-custom lg:w-[190px] lg:py-4"
             text="buy tickets"
           />
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 interface CircleProps {
   className: string;
-  size: number;
+  size?: number;
 }
 
 const Circle: React.FC<CircleProps> = ({ className, size }) => {
