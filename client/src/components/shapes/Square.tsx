@@ -2,7 +2,7 @@ import React from 'react';
 
 interface SquareProps {
   className: string;
-  size: number;
+  size?: number;
 }
 
 const Square: React.FC<SquareProps> = ({ className, size }) => {

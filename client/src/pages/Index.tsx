@@ -8,7 +8,7 @@ export function Index() {
   return (
     <div className="flex h-screen flex-col lg:flex-row">
       <Header />
-      <div className="hidden flex-col lg:flex">
+      <div className="flex-col lg:flex">
         <Banner />
         <NewEvents />
         <SearchFilter />

@@ -5,7 +5,7 @@ import { filterButtons } from '../shared/constants';
 
 const SearchFilter: React.FC = () => {
   return (
-    <div className="flex flex-col lg:w-auto lg:items-center">
+    <div className="flex flex-col md:items-center lg:w-auto">
       <div className="pt-4">
         <Searchbar />
       </div>
