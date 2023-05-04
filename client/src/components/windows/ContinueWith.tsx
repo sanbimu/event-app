@@ -7,12 +7,10 @@ import { FacebookSVG, GoogleSVG } from '../../icons';
 const ContinueWith = () => {
   const { closeWindow } = useWindowContext();
   const { isAuthorized, user } = useAuthContext();
-  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
-    if (isAuthorized && clicked) {
+    if (isAuthorized) {
       closeWindow();
-      setClicked(false);
     }
   }, [user]);
 
@@ -23,14 +21,14 @@ const ContinueWith = () => {
         <Logo />
       </div>
       <div className="mt-6 flex flex-col items-center justify-center gap-6">
-        <WindowButton provider="google" onMouseUp={() => setClicked(true)}>
+        <WindowButton provider="google">
           <div className="flex w-[70vw] flex-row items-center gap-4 border border-black py-3 pl-4 font-franklin text-sm font-extralight uppercase text-dark-grey hover:text-dark-pink md:w-[320px] md:pl-6 md:text-base">
             <img src={GoogleSVG} alt="google" className="h-[30px]"></img>
             Continue with Google
           </div>
         </WindowButton>
-        <WindowButton provider="facebook" onMouseUp={() => setClicked(true)}>
-          <div className="flex w-[70vw] flex-row items-center justify-center gap-4 border border-black py-3 px-3 font-franklin text-sm font-extralight uppercase text-dark-grey hover:text-dark-pink md:w-[320px] md:text-base">
+        <WindowButton provider="facebook">
+          <div className="flex w-[70vw] flex-row items-center justify-center gap-4 border border-black px-3 py-3 font-franklin text-sm font-extralight uppercase text-dark-grey hover:text-dark-pink md:w-[320px] md:text-base">
             <img src={FacebookSVG} alt="facebook" className="h-[30px]"></img>
             Continue with Facebook
           </div>

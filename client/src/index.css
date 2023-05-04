@@ -35,7 +35,7 @@ body {
 
   @screen 2xl {
     .masonry-grid {
-      --columns: 3;
+      --columns: 4;
     }
   }
 
