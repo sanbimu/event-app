@@ -1,8 +1,12 @@
 import React from 'react';
 import Logo from '../components/Logo';
 import Button from '../components/Button';
+import { FB_pink_SVG, InstagramSVG } from '../icons';
+import { useWindowContext } from '../hooks';
+import ContinueWith from '../components/windows/ContinueWith';
 
 const Header: React.FC = () => {
+  const { openWindow } = useWindowContext();
   return (
     <>
       {/*    MOBILE     */}
@@ -28,6 +32,7 @@ const Header: React.FC = () => {
           <Button
             className="w-[150px] p-[0.60rem] font-franklin text-sm shadow-custom"
             text="sign in / sign up"
+            onClick={() => openWindow({ content: <ContinueWith /> })}
           />
           <Button
             className="w-[150px] p-[0.60rem] font-franklin text-sm shadow-custom"
@@ -49,8 +54,8 @@ const Header: React.FC = () => {
           <p className="pb-1">FAQ</p>
           <p className="pb-1">Contact Support</p>
           <div className="flex flex-row gap-2 pt-1">
-            <img src="/facebook.svg" alt="facebook" className="h-[20px]"></img>
-            <img src="/instagram.svg" alt="instagram" className="h-[20px]"></img>
+            <img src={FB_pink_SVG} alt="facebook" className="h-[20px]"></img>
+            <img src={InstagramSVG} alt="instagram" className="h-[20px]"></img>
           </div>
         </div>
       </div>

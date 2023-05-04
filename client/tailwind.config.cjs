@@ -24,6 +24,7 @@ module.exports = {
         'orange-muted': '#D99C59',
         brown: '#6A563F',
         'brown-muted': '#8B7C69',
+        facebook: '#405A93',
       },
       fontFamily: {
         franklin: ['libre-franklin', 'sans-serif'],
