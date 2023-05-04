@@ -14,3 +14,70 @@ export const Me = gql`
     }
   }
 `;
+
+export const Events = gql`
+  query Events(
+    $order: Order
+    $first: Int
+    $after: ObjectID
+    $query: String
+    $date: Date
+    $label: String
+    $saved: Boolean
+  ) {
+    events(
+      order: $order
+      first: $first
+      after: $after
+      query: $query
+      date: $date
+      label: $label
+      saved: $saved
+    ) {
+      edges {
+        node {
+          _id
+          title
+          fromDate
+          toDate
+          picture
+          location {
+            label
+          }
+        }
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+`;
+
+export const Event = gql`
+  query Event($id: ObjectID!) {
+    event(id: $id) {
+      _id
+      location {
+        label
+        address
+      }
+      fromDate
+      toDate
+      title
+      description
+      stock
+      prices {
+        label
+        price
+      }
+      picture
+      labels
+      type
+      status
+      salesCount
+    }
+  }
+`;

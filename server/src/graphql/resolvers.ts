@@ -23,7 +23,11 @@ export const resolvers: IResolvers = {
       return Event.findById(id).lean();
     },
 
-    events: async (_, { order, first, after, date, label, query, saved }, { user }) => {
+    events: async (
+      _,
+      { order, first, after, query, date, label, type, saved },
+      { user },
+    ) => {
       const regex = { $regex: query, $options: 'i' };
       const filter: FilterQuery<IEvent> = {
         ...(after && { _id: { [order === Order.ASC ? '$gt' : '$lt']: after } }),
@@ -32,6 +36,7 @@ export const resolvers: IResolvers = {
         }),
         ...(date && generateDateFilter(date)),
         ...(label && { label: { $in: [label] } }),
+        ...(type && { type: type }),
         ...(saved && { _id: { $in: user.savedEvents } }),
       };
 
