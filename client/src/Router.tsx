@@ -3,11 +3,16 @@ import { Index } from './pages/Index';
 import { Token } from './pages/Token';
 import { Settings } from './pages/Settings';
 import { Search } from './pages/Search';
-import SignInUp from './components/windows/SignInUp';
+import Window from './layout/Window';
+import { useWindowContext } from './hooks';
 
 export function Router() {
+  const { showWindow } = useWindowContext();
+
   return (
     <BrowserRouter>
+      {showWindow && <Window />}
+
       <Routes>
         <Route path="/" index element={<Index />} />
         <Route path="/token" element={<Token />} />
