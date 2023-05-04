@@ -15,7 +15,7 @@ const NavMobile: React.FC = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 z-[90] flex h-screen w-screen justify-end overflow-hidden bg-black bg-opacity-30">
+    <div className="fixed top-0 left-0 right-0 bottom-0 z-[90] flex h-screen w-screen justify-end overflow-hidden bg-black bg-opacity-30 lg:hidden">
       <div className="relative flex h-[90%] w-[80%] flex-col bg-background md:w-[45%]">
         <div className="flex h-[12%] flex-row items-center justify-center border-b border-l border-black">
           <Button
