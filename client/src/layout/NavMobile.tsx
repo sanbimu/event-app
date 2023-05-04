@@ -1,36 +1,51 @@
 import React from 'react';
 import Button from '../components/Button';
 import Logo from '../components/Logo';
+import { useNavContext, useWindowContext } from '../hooks';
 import { CloseSVG, FacebookSVG, InstagramSVG } from '../icons';
+import ContinueWith from '../components/windows/ContinueWith';
 
 const NavMobile: React.FC = () => {
+  const { openWindow } = useWindowContext();
+
+  const { setShowNav } = useNavContext();
+
+  const handleNav = () => {
+    setShowNav(false);
+  };
+
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 z-[100] flex h-screen w-screen justify-end overflow-hidden bg-black bg-opacity-30">
-      <div className="relative flex h-[600px] w-[80%] flex-col bg-background">
-        <div className="flex h-[80px] flex-row items-center justify-center border-b border-l border-black">
-          <Button className="absolute left-3 top-3 flex h-[30px] w-[30px] items-center justify-center">
-            {/* <p className="font-franklin text-xl font-extralight">X</p> */}
-            <img src={CloseSVG} alt="X" className="h-[15px]"></img>
+    <div className="fixed top-0 left-0 right-0 bottom-0 z-[90] flex h-screen w-screen justify-end overflow-hidden bg-black bg-opacity-30">
+      <div className="relative flex h-[90%] w-[80%] flex-col bg-background md:w-[45%]">
+        <div className="flex h-[12%] flex-row items-center justify-center border-b border-l border-black">
+          <Button
+            className="absolute left-3 top-3 flex h-[30px] w-[30px] items-center justify-center"
+            onClick={handleNav}
+          >
+            <img src={CloseSVG} alt="X" className="h-[25px]"></img>
           </Button>
           <Logo />
         </div>
 
-        <div className="flex h-[360px] flex-col items-center gap-6 border-b border-l border-black pt-12">
-          <Button className="w-[150px] p-[0.60rem] shadow-custom">
+        <div className="flex h-[63%] flex-col items-end gap-8 border-b border-l border-black pt-16 pr-12">
+          <Button
+            className="w-[170px] p-[0.60rem] shadow-custom"
+            onClick={() => openWindow({ content: <ContinueWith /> })}
+          >
             <p className="font-franklin text-sm">SIGN IN / SIGN UP</p>
           </Button>
-          <Button className="w-[150px] p-[0.60rem] shadow-custom">
+          <Button className="w-[170px] p-[0.60rem] shadow-custom">
             <p className="font-franklin text-sm">SEARCH</p>
           </Button>
-          <Button className="w-[150px] p-[0.60rem] shadow-custom">
+          <Button className="w-[170px] p-[0.60rem] shadow-custom">
             <p className="font-franklin text-sm">LANGUAGE</p>
           </Button>
-          <Button className="w-[150px] p-[0.60rem] shadow-custom">
+          <Button className="w-[170px] p-[0.60rem] shadow-custom">
             <p className="font-franklin text-sm">CART</p>
           </Button>
         </div>
 
-        <div className="flex h-[160px] flex-col items-end justify-center border-b border-l border-black pr-6 leading-relaxed">
+        <div className="flex h-[25%] flex-col items-end justify-center border-b border-l border-black pr-6 leading-[1.30rem]">
           <p className="font-franklin text-xxs text-dark-grey">© 2023 VIBE INC.</p>
           <p className="pt-[0.10rem] font-franklin text-xxs text-dark-grey">
             Cookie Policy

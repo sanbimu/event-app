@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { AuthContext } from '../providers';
+import { AuthContext, NavContext } from '../providers';
 import { WindowContext } from '../providers';
 
 export function useAuthContext() {
@@ -8,4 +8,8 @@ export function useAuthContext() {
 
 export function useWindowContext() {
   return useContext(WindowContext);
+}
+
+export function useNavContext() {
+  return useContext(NavContext);
 }

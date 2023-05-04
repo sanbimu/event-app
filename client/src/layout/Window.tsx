@@ -16,7 +16,7 @@ const Window: React.FC = () => {
       >
         <div>
           <button onClick={closeWindow} className="border border-black">
-            <img src={CloseSVG} alt="close button" className="h-6 w-6 px-1 py-1" />
+            <img src={CloseSVG} alt="close button" className="h-[25px]" />
           </button>
         </div>
         {content}

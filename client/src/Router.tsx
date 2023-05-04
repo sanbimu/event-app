@@ -4,14 +4,17 @@ import { Token } from './pages/Token';
 import { Settings } from './pages/Settings';
 import { Search } from './pages/Search';
 import Window from './layout/Window';
-import { useWindowContext } from './hooks';
+import NavMobile from './layout/NavMobile';
+import { useNavContext, useWindowContext } from './hooks';
 
 export function Router() {
   const { showWindow } = useWindowContext();
+  const { showNav } = useNavContext();
 
   return (
     <BrowserRouter>
       {showWindow && <Window />}
+      {showNav && <NavMobile />}
 
       <Routes>
         <Route path="/" index element={<Index />} />
