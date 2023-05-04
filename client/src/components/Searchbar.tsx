@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 
-const Searchbar: React.FC = () => {
+const Searchbar: React.FC<InputHTMLAttributes<HTMLInputElement>> = ({ ...props }) => {
   return (
     <>
       <div className="flex px-8 lg:hidden">
@@ -9,6 +9,7 @@ const Searchbar: React.FC = () => {
           id="search"
           className="mt-[8px] h-[32px] border-b border-black bg-transparent pt-4 font-franklin text-lg"
           size={25}
+          {...props}
         ></input>
       </div>
 

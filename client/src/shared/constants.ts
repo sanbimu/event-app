@@ -1,4 +1,10 @@
-export const filterButtons = [
+export interface SearchFilter {
+  label: string;
+  value: string;
+  type: 'date' | 'price' | 'type' | 'label';
+}
+
+export const filterButtons: SearchFilter[] = [
   {
     label: 'TODAY',
     value: 'TODAY',
