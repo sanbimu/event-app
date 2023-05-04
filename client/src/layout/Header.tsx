@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../components/Logo';
 import Button from '../components/Button';
-import { FB_pink_SVG, InstagramSVG } from '../icons';
+import { FacebookSVG, InstagramSVG } from '../icons';
 import { useWindowContext } from '../hooks';
 import ContinueWith from '../components/windows/ContinueWith';
 
@@ -54,7 +54,7 @@ const Header: React.FC = () => {
           <p className="pb-1">FAQ</p>
           <p className="pb-1">Contact Support</p>
           <div className="flex flex-row gap-2 pt-1">
-            <img src={FB_pink_SVG} alt="facebook" className="h-[20px]"></img>
+            <img src={FacebookSVG} alt="facebook" className="h-[20px]"></img>
             <img src={InstagramSVG} alt="instagram" className="h-[20px]"></img>
           </div>
         </div>
