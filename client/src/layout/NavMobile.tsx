@@ -1,25 +1,45 @@
-import React from 'react';
+import { useRef } from 'react';
 import Button from '../components/Button';
 import Logo from '../components/Logo';
-import { useNavContext, useWindowContext } from '../hooks';
+import {
+  useAuthContext,
+  useNavContext,
+  useWindowContext,
+  useClickOutside,
+} from '../hooks';
 import { CloseSVG, FacebookSVG, InstagramSVG } from '../icons';
 import ContinueWith from '../components/windows/ContinueWith';
 import { useNavigate } from 'react-router-dom';
 
 const NavMobile: React.FC = () => {
   const navigate = useNavigate();
-
   const { openWindow } = useWindowContext();
-
+  const { isAuthorized, user, signOut } = useAuthContext();
   const { setShowNav } = useNavContext();
+
+  const navRef = useRef(null);
+  useClickOutside(navRef, () => setShowNav(false));
 
   const handleNav = () => {
     setShowNav(false);
   };
 
+  const handleSearch = () => {
+    navigate('/search');
+    setShowNav(false);
+  };
+
+  const handleSettings = () => {
+    navigate('/settings');
+    setShowNav(false);
+  };
+
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 z-[90] flex h-screen w-screen justify-end overflow-hidden bg-black bg-opacity-30 lg:hidden">
-      <div className="relative flex h-[90%] w-[80%] flex-col bg-background md:w-[45%]">
+      <div
+        className="relative flex h-[90%] w-[80%] flex-col bg-background md:w-[45%]"
+        ref={navRef}
+      >
         <div className="flex h-[12%] flex-row items-center justify-center border-b border-l border-black">
           <Button
             className="absolute left-3 top-3 flex h-[30px] w-[30px] items-center justify-center"
@@ -30,25 +50,53 @@ const NavMobile: React.FC = () => {
           <Logo />
         </div>
 
-        <div className="flex h-[63%] flex-col items-end gap-8 border-b border-l border-black pt-16 pr-12">
+        <div className="flex h-[63%] flex-col items-end border-b border-l border-black pt-16 pr-12">
+          {isAuthorized ? (
+            <div className="flex flex-col gap-1">
+              <Button className="mb-4 w-[170px] p-[0.60rem] font-franklin text-sm shadow-custom">
+                <div className="flex flex-row items-center pl-3">
+                  <img src={user.avatar} alt="ID" className="h-[25px] rounded-full"></img>
+                  <p className="toolong pl-2">{user.firstName}</p>
+                </div>
+              </Button>
+
+              <div className="flex flex-col items-start gap-2  pl-8 font-franklin text-sm text-dark-grey">
+                <button className=" hover:text-dark-pink">- SAVED EVENTS</button>
+                <button className=" hover:text-dark-pink" onClick={handleSettings}>
+                  - SETTINGS
+                </button>
+                <button className=" hover:text-dark-pink" onClick={signOut}>
+                  - LOG OUT
+                </button>
+              </div>
+            </div>
+          ) : (
+            <Button
+              className="w-[170px] p-[0.60rem] shadow-custom"
+              onClick={() => openWindow({ content: <ContinueWith /> })}
+            >
+              <p className="font-franklin text-sm">SIGN IN / SIGN UP</p>
+            </Button>
+          )}
           <Button
-            className="w-[170px] p-[0.60rem] shadow-custom"
-            onClick={() => openWindow({ content: <ContinueWith /> })}
-          >
-            <p className="font-franklin text-sm">SIGN IN / SIGN UP</p>
-          </Button>
+            className="mt-6 w-[170px] p-[0.60rem] font-franklin text-sm shadow-custom"
+            onClick={handleSearch}
+            text="search"
+          />
+
           <Button
-            className="w-[170px] p-[0.60rem] shadow-custom"
-            onClick={() => navigate('/search')}
-          >
-            <p className="font-franklin text-sm">SEARCH</p>
-          </Button>
-          <Button className="w-[170px] p-[0.60rem] shadow-custom">
-            <p className="font-franklin text-sm">LANGUAGE</p>
-          </Button>
-          <Button className="w-[170px] p-[0.60rem] shadow-custom">
-            <p className="font-franklin text-sm">CART</p>
-          </Button>
+            className="mt-6 w-[170px] p-[0.60rem] font-franklin text-sm shadow-custom"
+            text="language"
+          />
+          {/* <div className="flex flex-col items-start gap-2 pb-0 pl-6 font-franklin text-sm text-dark-grey">
+            <button className=" hover:text-dark-pink">- SAVED EVENTS</button>
+            <button className=" hover:text-dark-pink">- SETTINGS</button>
+          </div> */}
+
+          <Button
+            className="mt-6 w-[170px] p-[0.60rem] font-franklin text-sm shadow-custom"
+            text="cart"
+          />
         </div>
 
         <div className="flex h-[25%] flex-col items-end justify-center border-b border-l border-black pr-6 leading-[1.30rem]">

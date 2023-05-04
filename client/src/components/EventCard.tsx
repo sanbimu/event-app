@@ -37,7 +37,7 @@ const EventCard: React.FC<Props> = ({
           <div className="absolute bottom-0 left-0 right-0 top-0 z-30 h-[18px] translate-x-[0.45rem] translate-y-[0.40rem] bg-dark-pink-transparent"></div>
         </div>
         <div>{date}</div>
-        <div className="overflow-hidden text-ellipsis whitespace-nowrap">{location}</div>
+        <div className="toolong">{location}</div>
       </div>
     </div>
   );

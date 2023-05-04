@@ -17,6 +17,10 @@ body {
     column-count: var(--columns);
   }
 
+  .toolong {
+    @apply overflow-hidden text-ellipsis whitespace-nowrap;
+  }
+
   @screen md {
     .masonry-grid {
       --columns: 2;
