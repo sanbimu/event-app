@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '../components/Button';
 import Logo from '../components/Logo';
+import { CloseSVG, FacebookSVG, InstagramSVG } from '../icons';
 
 const NavMobile: React.FC = () => {
   return (
@@ -9,7 +10,7 @@ const NavMobile: React.FC = () => {
         <div className="flex h-[80px] flex-row items-center justify-center border-b border-l border-black">
           <Button className="absolute left-3 top-3 flex h-[30px] w-[30px] items-center justify-center">
             {/* <p className="font-franklin text-xl font-extralight">X</p> */}
-            <img src="/close.svg" alt="X" className="h-[15px]"></img>
+            <img src={CloseSVG} alt="X" className="h-[15px]"></img>
           </Button>
           <Logo />
         </div>
@@ -38,8 +39,8 @@ const NavMobile: React.FC = () => {
           <p className="font-franklin text-xxs text-dark-grey">FAQ</p>
           <p className="font-franklin text-xxs text-dark-grey">Contact Support</p>
           <div className="flex flex-row gap-2 pt-1">
-            <img src="/facebook.svg" alt="facebook" className="h-[20px]"></img>
-            <img src="/instagram.svg" alt="instagram" className="h-[20px]"></img>
+            <img src={FacebookSVG} alt="facebook" className="h-[20px]"></img>
+            <img src={InstagramSVG} alt="instagram" className="h-[20px]"></img>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../components/Button';
 import NewEvent from '../components/NewEvent';
 import Square from '../components/shapes/Square';
+import { NextSVG } from '../icons';
 
 const NewEvents: React.FC = () => {
   return (
@@ -31,7 +32,7 @@ const NewEvents: React.FC = () => {
           />
 
           <img
-            src="/next.svg"
+            src={NextSVG}
             alt="next"
             className="absolute top-[90px] right-0 h-[22px] md:right-4 lg:top-[140px] lg:h-[28px]"
           ></img>
