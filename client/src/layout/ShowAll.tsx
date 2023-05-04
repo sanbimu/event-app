@@ -1,17 +1,32 @@
 import React from 'react';
 import Button from '../components/Button';
-import EventCardMobile from '../components/EventCardMobile';
+import EventCard from '../components/EventCard';
+import { events } from '../shared/constants';
 
 const ShowAll: React.FC = () => {
   return (
     <>
-      <div className="flex flex-col lg:hidden">
-        <div className="flex min-h-[205px] w-full items-center justify-center border-b border-black">
-          <EventCardMobile position="left" />
+      <div className="flex flex-col">
+        <div className="border-overlap-tl masonry-grid">
+          {events.map((event, index) => {
+            const position = index % 2 === 0 ? 1 : 2;
+            const height = Math.floor(Math.random() * (200 - 150) + 150);
+
+            return (
+              <div className="border-overlap-br flex break-inside-avoid items-center justify-center border border-black p-4">
+                <EventCard
+                  height={height}
+                  position={position}
+                  picture={event.picture}
+                  title={event.title}
+                  date={event.date}
+                  location={event.location}
+                />
+              </div>
+            );
+          })}
         </div>
-        <div className="flex min-h-[205px] w-full items-center justify-center border-b border-black">
-          <EventCardMobile position="right" />
-        </div>
+
         <div className="flex min-h-[70px] items-center justify-center">
           <Button className="w-[200px] py-2" text="show more" />
         </div>
