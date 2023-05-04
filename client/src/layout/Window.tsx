@@ -10,12 +10,12 @@ const Window: React.FC = () => {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 top-0 z-[100] flex h-screen w-screen items-center justify-center overflow-hidden bg-dark-grey bg-opacity-50">
-      <div
-        className="flex flex-col border border-black bg-background p-2"
-        ref={windowRef}
-      >
+      <div className="relative border border-black bg-background" ref={windowRef}>
         <div>
-          <button onClick={closeWindow} className="border border-black">
+          <button
+            onClick={closeWindow}
+            className="absolute top-2 left-2 border border-black bg-background"
+          >
             <img src={CloseSVG} alt="close button" className="h-[25px]" />
           </button>
         </div>

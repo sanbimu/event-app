@@ -10,6 +10,7 @@ import {
 import { CloseSVG, FacebookSVG, InstagramSVG } from '../icons';
 import ContinueWith from '../components/windows/ContinueWith';
 import { useNavigate } from 'react-router-dom';
+import ShowOne from '../components/windows/ShowOne';
 
 const NavMobile: React.FC = () => {
   const navigate = useNavigate();
@@ -31,6 +32,11 @@ const NavMobile: React.FC = () => {
 
   const handleSettings = () => {
     navigate('/settings');
+    setShowNav(false);
+  };
+
+  const handleSaved = () => {
+    openWindow({ content: <ShowOne /> });
     setShowNav(false);
   };
 
@@ -61,7 +67,9 @@ const NavMobile: React.FC = () => {
               </Button>
 
               <div className="flex flex-col items-start gap-2  pl-8 font-franklin text-sm text-dark-grey">
-                <button className=" hover:text-dark-pink">- SAVED EVENTS</button>
+                <button className=" hover:text-dark-pink" onClick={handleSaved}>
+                  - SAVED EVENTS
+                </button>
                 <button className=" hover:text-dark-pink" onClick={handleSettings}>
                   - SETTINGS
                 </button>
