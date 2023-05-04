@@ -15,17 +15,23 @@ body {
   .masonry-grid {
     column-gap: 0;
     column-count: var(--columns);
+  }
 
-    @screen md {
+  @screen md {
+    .masonry-grid {
       --columns: 2;
     }
+  }
 
-    @screen xl {
+  @screen xl {
+    .masonry-grid {
       --columns: 3;
     }
+  }
 
-    @screen 2xl {
-      --columns: 4;
+  @screen 2xl {
+    .masonry-grid {
+      --columns: 3;
     }
   }
 
