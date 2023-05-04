@@ -27,7 +27,7 @@ export function Settings() {
                 className="h-[32px] border-b border-black bg-transparent pt-4 font-franklin text-lg"
               ></input>
             </div>
-            <div className="flex">
+            <div className="mt-2 flex">
               <p className="pr-2 pt-4 font-franklin text-sm font-light">LAST NAME</p>
               <input
                 id="search"
@@ -88,14 +88,14 @@ export function Settings() {
           </div>
 
           <div className="flex flex-col gap-4 md:flex-row">
-            <div className=" mt-2 flex">
+            <div className="flex md:mt-2">
               <p className="pr-2 pt-4 font-franklin text-sm font-light">STREET</p>
               <input
                 id="search"
                 className="h-[32px] border-b border-black bg-transparent pt-4 font-franklin text-lg"
               ></input>
             </div>
-            <div className="flex">
+            <div className="flex md:mt-2">
               <p className="pr-2 pt-4 font-franklin text-sm font-light">POSTAL CODE</p>
               <input
                 id="search"
