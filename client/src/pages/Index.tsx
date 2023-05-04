@@ -8,7 +8,10 @@ export function Index() {
   return (
     <div className="flex h-screen flex-col lg:flex-row">
       <Header />
-      <div className="w-full flex-col overflow-x-hidden lg:ml-[240px] lg:flex">
+      <div
+        id="scrollable"
+        className="w-full flex-col overflow-x-hidden lg:ml-[240px] lg:flex"
+      >
         <Banner />
         <NewEvents />
         <SearchFilter />
