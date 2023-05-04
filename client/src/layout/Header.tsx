@@ -4,8 +4,10 @@ import Button from '../components/Button';
 import { FacebookSVG, InstagramSVG } from '../icons';
 import { useNavContext, useWindowContext } from '../hooks';
 import ContinueWith from '../components/windows/ContinueWith';
+import { useNavigate } from 'react-router-dom';
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
   const { openWindow } = useWindowContext();
 
   const { setShowNav } = useNavContext();
@@ -47,6 +49,7 @@ const Header: React.FC = () => {
           <Button
             className="w-[150px] p-[0.60rem] font-franklin text-sm shadow-custom"
             text="search"
+            onClick={() => navigate('/search')}
           />
           <Button
             className="w-[150px] p-[0.60rem] font-franklin text-sm shadow-custom"

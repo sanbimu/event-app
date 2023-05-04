@@ -1,5 +1,6 @@
 import Header from '../layout/Header';
 import SearchFilter from '../layout/SearchFilter';
+import ShowAll from '../layout/ShowAll';
 
 export function Search() {
   return (
@@ -7,6 +8,7 @@ export function Search() {
       <Header />
       <div className="w-screen flex-col lg:ml-[240px] lg:flex">
         <SearchFilter />
+        <ShowAll />
       </div>
     </div>
   );

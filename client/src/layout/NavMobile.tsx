@@ -4,8 +4,11 @@ import Logo from '../components/Logo';
 import { useNavContext, useWindowContext } from '../hooks';
 import { CloseSVG, FacebookSVG, InstagramSVG } from '../icons';
 import ContinueWith from '../components/windows/ContinueWith';
+import { useNavigate } from 'react-router-dom';
 
 const NavMobile: React.FC = () => {
+  const navigate = useNavigate();
+
   const { openWindow } = useWindowContext();
 
   const { setShowNav } = useNavContext();
@@ -34,7 +37,10 @@ const NavMobile: React.FC = () => {
           >
             <p className="font-franklin text-sm">SIGN IN / SIGN UP</p>
           </Button>
-          <Button className="w-[170px] p-[0.60rem] shadow-custom">
+          <Button
+            className="w-[170px] p-[0.60rem] shadow-custom"
+            onClick={() => navigate('/search')}
+          >
             <p className="font-franklin text-sm">SEARCH</p>
           </Button>
           <Button className="w-[170px] p-[0.60rem] shadow-custom">
