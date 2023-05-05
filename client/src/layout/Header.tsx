@@ -5,6 +5,7 @@ import { FacebookSVG, InstagramSVG } from '../icons';
 import { useAuthContext, useNavContext, useWindowContext } from '../hooks';
 import ContinueWith from '../components/windows/ContinueWith';
 import { useNavigate } from 'react-router-dom';
+import ShowOne from '../components/windows/ShowOne';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -14,6 +15,11 @@ const Header: React.FC = () => {
 
   const handleNav = () => {
     setShowNav(true);
+  };
+
+  const handleSaved = () => {
+    openWindow({ content: <ShowOne /> });
+    setShowNav(false);
   };
 
   return (
@@ -40,7 +46,7 @@ const Header: React.FC = () => {
         <div className="flex h-[12vh] items-center justify-center border-b border-black">
           <Logo />
         </div>
-        <div className="flex h-[60vh] flex-col overflow-y-scroll border-b border-black pb-8 pl-8 pt-8">
+        <div className="scrollbar-hide flex h-[60vh] flex-col overflow-y-scroll border-b border-black pb-8 pl-8 pt-8">
           {isAuthorized ? (
             <>
               <Button className="mb-6 w-[150px] p-[0.60rem] font-franklin text-sm shadow-custom">
@@ -51,7 +57,9 @@ const Header: React.FC = () => {
               </Button>
 
               <div className="flex flex-col items-start gap-3 pl-6 font-franklin text-sm text-dark-grey">
-                <button className=" hover:text-dark-pink">- SAVED EVENTS</button>
+                <button className=" hover:text-dark-pink" onClick={handleSaved}>
+                  - SAVED EVENTS
+                </button>
                 <button
                   className=" hover:text-dark-pink"
                   onClick={() => navigate('/settings')}
@@ -79,7 +87,7 @@ const Header: React.FC = () => {
             className="mt-6 w-[150px] p-[0.60rem] font-franklin text-sm shadow-custom"
             text="language"
           />
-          {/* <div className="flex flex-col items-start gap-2 pb-0 pl-6 font-franklin text-sm text-dark-grey">
+          {/* <div className="mt-5 flex flex-col items-start gap-3 pb-0 pl-6 font-franklin text-sm text-dark-grey">
             <button className=" hover:text-dark-pink">- SAVED EVENTS</button>
             <button className=" hover:text-dark-pink">- SETTINGS</button>
           </div> */}

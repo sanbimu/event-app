@@ -1,3 +1,4 @@
+import { useWindowContext } from '../hooks';
 import Banner from '../layout/Banner';
 import Header from '../layout/Header';
 import NewEvents from '../layout/NewEvents';
