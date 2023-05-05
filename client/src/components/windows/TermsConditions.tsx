@@ -12,64 +12,75 @@ const TermsConditions = () => {
 
       <div className="justify-self-center text-justify font-franklin text-sm font-light text-dark-grey">
         <p className="text-center font-franklin text-sm text-dark-grey lg:py-6">
-          Welcome to tickettribe. This Privacy Policy explains how we use cookies and
-          similar technologies on our website to collect and store certain information
-          about your use of our website. By accessing or using our website, you consent to
-          the use of cookies and other tracking technologies as described in this Policy.
+          Welcome to tickettribe! These Terms and Conditions ("Terms") govern your use of
+          our website and mobile applications (collectively, the "Site"), including the
+          purchase of event tickets and related services (collectively, the "Services").
+          By using our Site or Services, you agree to these Terms. If you do not agree to
+          these Terms, please do not use our Site or Services.
         </p>
         <br />
-        <p className="font-medium">1. What are Cookies?</p>
-        Cookies are small text files that are stored on your device when you visit a
-        website. They are commonly used to improve website functionality, personalize
-        content and ads, and analyze website traffic.
+        <p className="font-medium">1. Ticket Purchase and Use</p>
+        a. You must be 18 years or older to purchase tickets through tickettribe. By
+        purchasing a ticket through our Site, you certify that you are at least 18 years
+        old.
+        <br />
+        b. All ticket sales are final. No refunds, exchanges, or cancellations will be
+        accepted, except in the event of a canceled or rescheduled event. In the event of
+        a canceled or rescheduled event, we will provide instructions on how to obtain a
+        refund or exchange.
+        <br />
+        c. Your ticket is only valid for the specific event for which it was purchased.
+        You may not transfer, sell, or otherwise distribute your ticket to any other event
+        or person without our prior written consent.
+        <br />
+        d. You must present a valid photo ID along with your ticket to gain entry to the
+        event.
         <br />
         <br />
-        <p className="font-medium">2. How We Use Cookies</p>
-        We use cookies and similar technologies for various purposes, including:
+        <p className="font-medium">2. Site Use</p>
+        a. You may use our Site only for lawful purposes and in accordance with these
+        Terms. You may not use our Site in any way that violates any applicable federal,
+        state, local, or international law or regulation.
         <br />
-        <b>Essential Cookies:</b> These cookies are necessary for the operation of our
-        website and enable you to access and navigate our website and use its features.
-        Without these cookies, our website may not function properly.
-        <br />
-        <b>Analytical Cookies:</b> These cookies help us understand how visitors use our
-        website by collecting information about the number of visitors, the pages visited,
-        and the source of the traffic. This information is used to analyze website
-        performance and improve our website.
-        <br />
-        <b>Functional Cookies:</b> These cookies allow our website to remember choices you
-        make, such as your username, language preference, or region, and provide enhanced
-        features and personalized content.
-        <br />
-        <b>Advertising Cookies:</b> These cookies are used to deliver relevant
-        advertisements to you based on your interests and online activities. They are also
-        used to limit the number of times you see an ad and measure the effectiveness of
-        our advertising campaigns.
-        <br />
-        <b>Third-Party Cookies: </b>
-        We may also allow third-party service providers to place cookies on our website to
-        provide us with analytics, advertising, and other services. These third-party
-        cookies are subject to the privacy policies of the respective service providers.
+        b. We reserve the right to terminate or suspend your access to our Site, without
+        notice and without liability, for any reason, including but not limited to
+        violation of these Terms or suspected fraudulent or illegal activity.
         <br />
         <br />
-        <p className="font-medium">3. Cookie Settings and Opt-Out</p>
-        You can control and manage cookies by adjusting your browser settings or using
-        opt-out mechanisms provided by some third-party analytics and advertising
-        providers. However, please note that disabling cookies may affect the
-        functionality of our website and your ability to access certain features.
+        <p className="font-medium">3. Intellectual Property</p>
+        All content and materials on our Site, including but not limited to text,
+        graphics, logos, images, and software, are the property of tickettribe or its
+        licensors and are protected by United States and international copyright,
+        trademark, and other intellectual property laws. You may not reproduce, modify,
+        distribute, or display any content or materials from our Site without our prior
+        written consent.
         <br />
         <br />
-        <p className="font-medium">4. Your Consent</p>
-        By continuing to use our website, you consent to the use of cookies and similar
-        technologies as described in this Policy.
+        <p className="font-medium">4. Limitation of Liability</p>
+        a. In no event shall tickettribe or its affiliates, officers, directors,
+        employees, or agents be liable for any indirect, incidental, special, or
+        consequential damages arising out of or in connection with your use of our Site or
+        Services.
+        <br />
+        b. Our liability to you for any direct damages arising out of or in connection
+        with your use of our Site or Services shall be limited to the total amount you
+        paid to us for the applicable ticket or service.
         <br />
         <br />
-        <p className="font-medium">5. Updates to this Policy</p>
-        We may update this Policy from time to time. Any changes will be posted on our
-        website with a revised effective date. We encourage you to review this Policy
-        periodically to stay informed about our use of cookies.
+        <p className="font-medium">5. Indemnification</p>
+        You agree to indemnify and hold harmless tickettribe and its affiliates, officers,
+        directors, employees, and agents from and against any and all claims, damages,
+        losses, liabilities, costs, and expenses (including but not limited to attorneys'
+        fees) arising out of or in connection with your use of our Site or Services, your
+        violation of these Terms, or your violation of any applicable law or regulation.
         <br />
         <br />
-        This Cookie Privacy Policy was last updated on 05/05/2023.
+        <p className="font-medium">6. Changes to Terms</p>
+        We reserve the right to modify these Terms at any time, in our sole discretion.
+        Any changes will be effective immediately upon posting on our Site. Your continued
+        use of our Site or Services after any changes to these Terms constitutes your
+        acceptance of the new Terms.
+        <br />
         <br />
       </div>
     </div>

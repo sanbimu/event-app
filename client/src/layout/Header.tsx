@@ -6,6 +6,7 @@ import { useAuthContext, useNavContext, useWindowContext } from '../hooks';
 import ContinueWith from '../components/windows/ContinueWith';
 import { useNavigate } from 'react-router-dom';
 import PrivacyPolicy from '../components/windows/PrivacyPolicy';
+import TermsConditions from '../components/windows/TermsConditions';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -19,6 +20,10 @@ const Header: React.FC = () => {
 
   const handlePrivacy = () => {
     openWindow({ content: <PrivacyPolicy /> });
+  };
+
+  const handleTerms = () => {
+    openWindow({ content: <TermsConditions /> });
   };
 
   return (
@@ -106,7 +111,12 @@ const Header: React.FC = () => {
           >
             Cookie Policy
           </button>
-          <p className="pb-1">Terms & Conditions</p>
+          <button
+            className="pb-1 pt-[0.10rem] text-left hover:text-dark-pink"
+            onClick={handleTerms}
+          >
+            Terms & Conditions
+          </button>
           <p className="pb-1">FAQ</p>
           <p className="pb-1">Contact Support</p>
           <div className="flex flex-row gap-2 pt-1">

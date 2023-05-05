@@ -11,6 +11,7 @@ import { CloseSVG, FacebookSVG, InstagramSVG } from '../icons';
 import ContinueWith from '../components/windows/ContinueWith';
 import { useNavigate } from 'react-router-dom';
 import PrivacyPolicy from '../components/windows/PrivacyPolicy';
+import TermsConditions from '../components/windows/TermsConditions';
 
 const NavMobile: React.FC = () => {
   const navigate = useNavigate();
@@ -42,6 +43,10 @@ const NavMobile: React.FC = () => {
 
   const handlePrivacy = () => {
     openWindow({ content: <PrivacyPolicy /> });
+  };
+
+  const handleTerms = () => {
+    openWindow({ content: <TermsConditions /> });
   };
 
   return (
@@ -119,7 +124,12 @@ const NavMobile: React.FC = () => {
           >
             Cookie Policy
           </button>
-          <p className="font-franklin text-xxs text-dark-grey">Terms & Conditions</p>
+          <button
+            className="pb-1 pt-[0.10rem] text-left hover:text-dark-pink"
+            onClick={handleTerms}
+          >
+            Terms & Conditions
+          </button>
           <p className="font-franklin text-xxs text-dark-grey">FAQ</p>
           <p className="font-franklin text-xxs text-dark-grey">Contact Support</p>
           <div className="flex flex-row gap-2 pt-1">
