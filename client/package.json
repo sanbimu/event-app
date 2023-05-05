@@ -14,10 +14,13 @@
     "@graphql-codegen/typescript": "^3.0.2",
     "animate.css": "^4.1.1",
     "graphql": "^16.6.0",
+    "i18next": "^22.4.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^12.2.2",
     "react-router-dom": "^6.9.0",
-    "urql": "^3.0.4"
+    "urql": "^3.0.4",
+    "vite-plugin-fast-react-svg": "^0.4.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^3.2.2",
