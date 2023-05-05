@@ -10,7 +10,7 @@ import {
 import { CloseSVG, FacebookSVG, InstagramSVG } from '../icons';
 import ContinueWith from '../components/windows/ContinueWith';
 import { useNavigate } from 'react-router-dom';
-import ShowOne from '../components/windows/ShowOne';
+import PrivacyPolicy from '../components/windows/PrivacyPolicy';
 
 const NavMobile: React.FC = () => {
   const navigate = useNavigate();
@@ -38,6 +38,10 @@ const NavMobile: React.FC = () => {
   const handleEvents = () => {
     navigate('/myevents');
     setShowNav(false);
+  };
+
+  const handlePrivacy = () => {
+    openWindow({ content: <PrivacyPolicy /> });
   };
 
   return (
@@ -107,11 +111,14 @@ const NavMobile: React.FC = () => {
           />
         </div>
 
-        <div className="flex h-[25%] flex-col items-end justify-center border-b border-l border-black pr-6 leading-[1.30rem]">
-          <p className="font-franklin text-xxs text-dark-grey">© 2023 VIBE INC.</p>
-          <p className="pt-[0.10rem] font-franklin text-xxs text-dark-grey">
+        <div className="flex h-[25%] flex-col items-end justify-center border-b border-l border-black pr-6 font-franklin text-xxs leading-[1.30rem]">
+          <p className=" text-dark-grey">© 2023 VIBE INC.</p>
+          <button
+            className="pb-1 pt-[0.10rem] text-left hover:text-dark-pink"
+            onClick={handlePrivacy}
+          >
             Cookie Policy
-          </p>
+          </button>
           <p className="font-franklin text-xxs text-dark-grey">Terms & Conditions</p>
           <p className="font-franklin text-xxs text-dark-grey">FAQ</p>
           <p className="font-franklin text-xxs text-dark-grey">Contact Support</p>

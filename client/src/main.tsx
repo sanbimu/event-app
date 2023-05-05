@@ -1,15 +1,22 @@
 import ReactDOM from 'react-dom/client';
 import { Router } from './Router';
-import { AuthProvider, GraphQLProvider, NavProvider, WindowProvider } from './providers';
+import {
+  AuthProvider,
+  CookieProvider,
+  GraphQLProvider,
+  NavProvider,
+  WindowProvider,
+} from './providers';
 import './index.css';
-import './i18n';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <GraphQLProvider>
     <AuthProvider>
       <WindowProvider>
         <NavProvider>
-          <Router />
+          <CookieProvider>
+            <Router />
+          </CookieProvider>
         </NavProvider>
       </WindowProvider>
     </AuthProvider>

@@ -5,6 +5,7 @@ import { FacebookSVG, InstagramSVG } from '../icons';
 import { useAuthContext, useNavContext, useWindowContext } from '../hooks';
 import ContinueWith from '../components/windows/ContinueWith';
 import { useNavigate } from 'react-router-dom';
+import PrivacyPolicy from '../components/windows/PrivacyPolicy';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -14,6 +15,10 @@ const Header: React.FC = () => {
 
   const handleNav = () => {
     setShowNav(true);
+  };
+
+  const handlePrivacy = () => {
+    openWindow({ content: <PrivacyPolicy /> });
   };
 
   return (
@@ -95,7 +100,12 @@ const Header: React.FC = () => {
         </div>
         <div className="flex h-[28vh] flex-col justify-center pl-6 font-franklin text-xxs leading-relaxed text-dark-grey">
           <p className="pb-1">© 2023 VIBE INC.</p>
-          <p className="pb-1 pt-[0.10rem]">Cookie Policy</p>
+          <button
+            className="pb-1 pt-[0.10rem] text-left hover:text-dark-pink"
+            onClick={handlePrivacy}
+          >
+            Cookie Policy
+          </button>
           <p className="pb-1">Terms & Conditions</p>
           <p className="pb-1">FAQ</p>
           <p className="pb-1">Contact Support</p>

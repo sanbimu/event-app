@@ -6,14 +6,17 @@ import { Search } from './pages/Search';
 import { MyEvents } from './pages/MyEvents';
 import Window from './layout/Window';
 import NavMobile from './layout/NavMobile';
-import { useNavContext, useWindowContext } from './hooks';
+import { useNavContext, useWindowContext, useCookieContext } from './hooks';
+import CookieModal from './components/windows/Cookies';
 
 export function Router() {
   const { showWindow } = useWindowContext();
   const { showNav } = useNavContext();
+  const { showCookies } = useCookieContext();
 
   return (
     <BrowserRouter>
+      {showCookies && <CookieModal />}
       {showWindow && <Window />}
       {showNav && <NavMobile />}
 
