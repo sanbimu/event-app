@@ -35,8 +35,8 @@ const NavMobile: React.FC = () => {
     setShowNav(false);
   };
 
-  const handleSaved = () => {
-    openWindow({ content: <ShowOne /> });
+  const handleEvents = () => {
+    navigate('/myevents');
     setShowNav(false);
   };
 
@@ -67,8 +67,8 @@ const NavMobile: React.FC = () => {
               </Button>
 
               <div className="flex flex-col items-start gap-2  pl-8 font-franklin text-sm text-dark-grey">
-                <button className=" hover:text-dark-pink" onClick={handleSaved}>
-                  - SAVED EVENTS
+                <button className=" hover:text-dark-pink" onClick={handleEvents}>
+                  - MY EVENTS
                 </button>
                 <button className=" hover:text-dark-pink" onClick={handleSettings}>
                   - SETTINGS

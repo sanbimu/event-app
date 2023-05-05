@@ -51,7 +51,12 @@ const Header: React.FC = () => {
               </Button>
 
               <div className="flex flex-col items-start gap-3 pl-6 font-franklin text-sm text-dark-grey">
-                <button className=" hover:text-dark-pink">- SAVED EVENTS</button>
+                <button
+                  className=" hover:text-dark-pink"
+                  onClick={() => navigate('/myevents')}
+                >
+                  - MY EVENTS
+                </button>
                 <button
                   className=" hover:text-dark-pink"
                   onClick={() => navigate('/settings')}

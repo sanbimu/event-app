@@ -3,6 +3,7 @@ import { Index } from './pages/Index';
 import { Token } from './pages/Token';
 import { Settings } from './pages/Settings';
 import { Search } from './pages/Search';
+import { MyEvents } from './pages/MyEvents';
 import Window from './layout/Window';
 import NavMobile from './layout/NavMobile';
 import { useNavContext, useWindowContext } from './hooks';
@@ -21,6 +22,7 @@ export function Router() {
         <Route path="/token" element={<Token />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/myevents" element={<MyEvents />} />
       </Routes>
     </BrowserRouter>
   );

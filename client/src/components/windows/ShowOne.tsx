@@ -107,7 +107,7 @@ const ShowOne = () => {
       {/* DESKTOP */}
 
       <div className="hidden h-[85vh] w-[75vw] flex-row md:flex">
-        <div className="flex w-[50%] flex-col border-r border-black">
+        <div className="scrollbar-hide flex w-[50%] flex-col overflow-y-scroll border-r border-black">
           {/* INFORMATION */}
 
           <div className="flex h-auto flex-col items-center border-b border-black">
