@@ -7,6 +7,7 @@ import ContinueWith from '../components/windows/ContinueWith';
 import { useNavigate } from 'react-router-dom';
 import PrivacyPolicy from '../components/windows/PrivacyPolicy';
 import TermsConditions from '../components/windows/TermsConditions';
+import FAQ from '../components/windows/FAQ';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -24,6 +25,10 @@ const Header: React.FC = () => {
 
   const handleTerms = () => {
     openWindow({ content: <TermsConditions /> });
+  };
+
+  const handleFAQ = () => {
+    openWindow({ content: <FAQ /> });
   };
 
   return (
@@ -117,7 +122,12 @@ const Header: React.FC = () => {
           >
             Terms & Conditions
           </button>
-          <p className="pb-1">FAQ</p>
+          <button
+            className="pb-1 pt-[0.10rem] text-left hover:text-dark-pink"
+            onClick={handleFAQ}
+          >
+            FAQ
+          </button>
           <p className="pb-1">Contact Support</p>
           <div className="flex flex-row gap-2 pt-1">
             <img src={FacebookSVG} alt="facebook" className="h-[20px]"></img>
