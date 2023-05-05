@@ -5,7 +5,6 @@ import { FacebookSVG, InstagramSVG } from '../icons';
 import { useAuthContext, useNavContext, useWindowContext } from '../hooks';
 import ContinueWith from '../components/windows/ContinueWith';
 import { useNavigate } from 'react-router-dom';
-import ShowOne from '../components/windows/ShowOne';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -15,11 +14,6 @@ const Header: React.FC = () => {
 
   const handleNav = () => {
     setShowNav(true);
-  };
-
-  const handleSaved = () => {
-    openWindow({ content: <ShowOne /> });
-    setShowNav(false);
   };
 
   return (
@@ -57,9 +51,7 @@ const Header: React.FC = () => {
               </Button>
 
               <div className="flex flex-col items-start gap-3 pl-6 font-franklin text-sm text-dark-grey">
-                <button className=" hover:text-dark-pink" onClick={handleSaved}>
-                  - SAVED EVENTS
-                </button>
+                <button className=" hover:text-dark-pink">- SAVED EVENTS</button>
                 <button
                   className=" hover:text-dark-pink"
                   onClick={() => navigate('/settings')}

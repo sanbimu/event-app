@@ -3,8 +3,15 @@ import Button from '../components/Button';
 import NewEvent from '../components/NewEvent';
 import Square from '../components/shapes/Square';
 import { NextSVG } from '../icons';
+import ShowOne from '../components/windows/ShowOne';
+import { useWindowContext } from '../hooks';
 
 const NewEvents: React.FC = () => {
+  const { openWindow } = useWindowContext();
+
+  const handleShowOne = () => {
+    openWindow({ content: <ShowOne /> });
+  };
   return (
     <div className="relative flex min-h-[280px] border-b border-black p-3 lg:min-h-[353px]">
       <NewEvent>
@@ -29,6 +36,7 @@ const NewEvents: React.FC = () => {
           <Button
             className="w-[155px] py-3 font-franklin font-medium shadow-custom lg:w-[190px] lg:py-4"
             text="buy tickets"
+            onClick={handleShowOne}
           />
 
           <img
