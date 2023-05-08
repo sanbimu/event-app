@@ -14,3 +14,28 @@ export const Me = gql`
     }
   }
 `;
+
+export const Settings = gql`
+  query Settings {
+    me {
+      info {
+        contact {
+          firstName
+          lastName
+          phoneNumber
+        }
+        home {
+          address
+          postalCode
+          city
+        }
+        billing {
+          name
+          address
+          postalCode
+          city
+        }
+      }
+    }
+  }
+`;

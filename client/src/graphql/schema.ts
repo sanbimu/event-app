@@ -14,6 +14,32 @@ export type Scalars = {
   ObjectID: ObjectId;
 };
 
+export type BillingInfo = {
+  address?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+};
+
+export type BillingInfoInput = {
+  address?: InputMaybe<Scalars['String']>;
+  city?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
+};
+
+export type ContactInfo = {
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  phoneNumber?: Maybe<Scalars['String']>;
+};
+
+export type ContactInfoInput = {
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+  phoneNumber?: InputMaybe<Scalars['String']>;
+};
+
 export enum Date {
   NextWeek = 'NEXT_WEEK',
   ThisWeekend = 'THIS_WEEKEND',
@@ -25,14 +51,16 @@ export type Event = {
   _id: Scalars['ObjectID'];
   description: Scalars['String'];
   fromDate: Scalars['String'];
-  labels: Array<Maybe<Scalars['String']>>;
+  labels: Array<Maybe<EventLabel>>;
   location: Location;
   picture: Scalars['String'];
-  price: Scalars['Float'];
+  prices: Array<Maybe<Prices>>;
   salesCount: Scalars['Int'];
   status: EventStatus;
+  stock: Scalars['Int'];
   title: Scalars['String'];
   toDate: Scalars['String'];
+  type: EventType;
 };
 
 export type EventConnection = {
@@ -45,6 +73,20 @@ export type EventEdge = {
   node: Event;
 };
 
+export enum EventLabel {
+  Classical = 'CLASSICAL',
+  Cultural = 'CULTURAL',
+  Electronic = 'ELECTRONIC',
+  FolkAcoustic = 'FOLK_ACOUSTIC',
+  HiphopRap = 'HIPHOP_RAP',
+  JazzBlues = 'JAZZ_BLUES',
+  Metal = 'METAL',
+  Opera = 'OPERA',
+  Other = 'OTHER',
+  Pop = 'POP',
+  Rock = 'ROCK'
+}
+
 export enum EventStatus {
   Canceled = 'CANCELED',
   Finished = 'FINISHED',
@@ -53,20 +95,55 @@ export enum EventStatus {
   SoldOut = 'SOLD_OUT'
 }
 
+export enum EventType {
+  Concert = 'CONCERT',
+  Festival = 'FESTIVAL',
+  Party = 'PARTY'
+}
+
+export type HomeInfo = {
+  address?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+};
+
+export type HomeInfoInput = {
+  address?: InputMaybe<Scalars['String']>;
+  city?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
+};
+
+export type Info = {
+  billing: BillingInfo;
+  contact: ContactInfo;
+  home: HomeInfo;
+};
+
 export type Location = {
-  _id: Scalars['ObjectID'];
   address: Scalars['String'];
   label: Scalars['String'];
 };
 
+export type ModifyUserInfoInput = {
+  billing?: InputMaybe<BillingInfoInput>;
+  contact?: InputMaybe<ContactInfoInput>;
+  home?: InputMaybe<HomeInfoInput>;
+};
+
 export type Mutation = {
-  addSavedEvent?: Maybe<Event>;
-  removeSavedEvent?: Maybe<Event>;
+  addSavedEvent?: Maybe<User>;
+  modifyUserInfo?: Maybe<User>;
+  removeSavedEvent?: Maybe<User>;
 };
 
 
 export type MutationAddSavedEventArgs = {
   id: Scalars['ObjectID'];
+};
+
+
+export type MutationModifyUserInfoArgs = {
+  input: ModifyUserInfoInput;
 };
 
 
@@ -84,6 +161,11 @@ export type PageInfo = {
   hasNextPage: Scalars['Boolean'];
   hasPreviousPage: Scalars['Boolean'];
   startCursor?: Maybe<Scalars['String']>;
+};
+
+export type Prices = {
+  label: Scalars['String'];
+  price: Scalars['Float'];
 };
 
 export type Query = {
@@ -118,8 +200,7 @@ export type User = {
   _id: Scalars['ObjectID'];
   avatar: Scalars['String'];
   email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
+  info: Info;
   provider: Scalars['String'];
   providerId?: Maybe<Scalars['String']>;
   savedEvents: Array<Maybe<Event>>;

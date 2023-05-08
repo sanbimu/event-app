@@ -44,7 +44,7 @@ const ShowOne = () => {
         {/* PICTURE */}
 
         <div className="flex h-auto flex-col items-center border-b border-black">
-          <img src="/test.jpeg" alt="image event" className="object-cover p-3"></img>
+          <img src="" alt="image event" className="object-cover p-3"></img>
         </div>
 
         {/* DESCRIPTION */}
@@ -185,7 +185,7 @@ const ShowOne = () => {
           {/* PICTURE */}
 
           <div className="flex h-auto flex-col items-center">
-            <img src="/test.jpeg" alt="image event" className="object-cover p-6"></img>
+            <img src="" alt="image event" className="object-cover p-6"></img>
           </div>
 
           {/* DESCRIPTION */}

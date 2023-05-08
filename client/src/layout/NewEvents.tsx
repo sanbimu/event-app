@@ -16,7 +16,7 @@ const NewEvents: React.FC = () => {
     <div className="relative flex min-h-[280px] border-b border-black p-3 lg:min-h-[353px]">
       <NewEvent>
         <div className="flex w-[35%] border-r border-black md:w-[50%]">
-          <img src="test.jpeg" className="object-cover p-1"></img>
+          <img src="" className="object-cover p-1"></img>
         </div>
 
         <div className="relative inline-block w-[65%] pt-6 pl-3 md:w-[50%] md:pt-8 md:pl-8">
