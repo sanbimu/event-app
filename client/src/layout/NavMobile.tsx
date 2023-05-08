@@ -57,7 +57,7 @@ const NavMobile: React.FC = () => {
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 z-[90] flex h-screen w-screen justify-end overflow-hidden bg-black bg-opacity-30 lg:hidden">
       <div
-        className="relative flex h-[90%] w-[80%] flex-col bg-background md:w-[45%]"
+        className="relative flex h-[100vh] w-[80%] flex-col bg-background md:w-[45%]"
         ref={navRef}
       >
         <div className="flex h-[12%] flex-row items-center justify-center border-b border-l border-black">
@@ -70,17 +70,17 @@ const NavMobile: React.FC = () => {
           <Logo />
         </div>
 
-        <div className="flex h-[63%] flex-col items-end border-b border-l border-black pt-16 pr-12">
+        <div className="flex h-[60%] flex-col items-end border-b border-l border-black pt-10 pr-12">
           {isAuthorized ? (
             <div className="flex flex-col gap-1">
-              <Button className="mb-4 w-[170px] p-[0.60rem] font-franklin text-sm shadow-custom">
+              <Button className="text-md mb-4 w-[190px] p-[0.60rem] font-franklin shadow-custom">
                 <div className="flex flex-row items-center pl-3">
                   <img src={user.avatar} alt="ID" className="h-[25px] rounded-full"></img>
                   <p className="toolong pl-2">{user.firstName}</p>
                 </div>
               </Button>
 
-              <div className="flex flex-col items-start gap-2  pl-8 font-franklin text-sm text-dark-grey">
+              <div className="text-md flex flex-col items-start  gap-2 pl-8 font-franklin text-dark-grey">
                 <button className=" hover:text-dark-pink" onClick={handleEvents}>
                   - MY EVENTS
                 </button>
@@ -94,20 +94,20 @@ const NavMobile: React.FC = () => {
             </div>
           ) : (
             <Button
-              className="w-[170px] p-[0.60rem] shadow-custom"
+              className="w-[190px] p-[0.60rem] shadow-custom"
               onClick={() => openWindow({ content: <ContinueWith /> })}
             >
-              <p className="font-franklin text-sm">SIGN IN / SIGN UP</p>
+              <p className="text-md font-franklin">SIGN IN / SIGN UP</p>
             </Button>
           )}
           <Button
-            className="mt-6 w-[170px] p-[0.60rem] font-franklin text-sm shadow-custom"
+            className="text-md mt-6 w-[190px] p-[0.60rem] font-franklin shadow-custom"
             onClick={handleSearch}
             text="search"
           />
 
           <Button
-            className="mt-6 w-[170px] p-[0.60rem] font-franklin text-sm shadow-custom"
+            className="text-md mt-6 w-[190px] p-[0.60rem] font-franklin shadow-custom"
             text="language"
           />
           {/* <div className="flex flex-col items-start gap-2 pb-0 pl-6 font-franklin text-sm text-dark-grey">
@@ -116,33 +116,33 @@ const NavMobile: React.FC = () => {
           </div> */}
 
           <Button
-            className="mt-6 w-[170px] p-[0.60rem] font-franklin text-sm shadow-custom"
+            className="text-md mt-6 w-[190px] p-[0.60rem] font-franklin shadow-custom"
             text="cart"
           />
         </div>
 
-        <div className="flex h-[25%] flex-col items-end justify-center border-b border-l border-black pr-6 font-franklin text-xxs leading-[1.30rem]">
+        <div className="flex h-[28%] flex-col items-end justify-center border-b border-l border-black pr-6 font-franklin text-[15px] leading-[1.70rem]">
           <p className=" text-dark-grey">© 2023 VIBE INC.</p>
           <button
-            className="pb-1 pt-[0.10rem] text-left hover:text-dark-pink"
+            className=" pt-[0.15rem] text-left hover:text-dark-pink"
             onClick={handlePrivacy}
           >
             Cookie Policy
           </button>
           <button
-            className="pb-1 pt-[0.10rem] text-left hover:text-dark-pink"
+            className="pt-[0.15rem] text-left hover:text-dark-pink"
             onClick={handleTerms}
           >
             Terms & Conditions
           </button>
           <button
-            className="pb-1 pt-[0.10rem] text-left hover:text-dark-pink"
+            className="pt-[0.15rem] text-left hover:text-dark-pink"
             onClick={handleFAQ}
           >
             FAQ
           </button>
-          <p className="font-franklin text-xxs text-dark-grey">Contact Support</p>
-          <div className="flex flex-row gap-2 pt-1">
+          <p className="font-franklin text-[15px] text-dark-grey">Contact Support</p>
+          <div className="flex flex-row gap-2 pt-2">
             <img src={FacebookSVG} alt="facebook" className="h-[20px]"></img>
             <img src={InstagramSVG} alt="instagram" className="h-[20px]"></img>
           </div>

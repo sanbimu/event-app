@@ -12,11 +12,11 @@ import CookieModal from './components/windows/Cookies';
 export function Router() {
   const { showWindow } = useWindowContext();
   const { showNav } = useNavContext();
-  const { showCookies } = useCookieContext();
+  const { cookies } = useCookieContext();
 
   return (
     <BrowserRouter>
-      {showCookies && <CookieModal />}
+      {cookies.show && <CookieModal />}
       {showWindow && <Window />}
       {showNav && <NavMobile />}
 

@@ -1,20 +1,20 @@
-import { PropsWithChildren, useState, createContext } from 'react';
+import { PropsWithChildren, createContext } from 'react';
 import { useLocalStorage } from '../hooks';
 
 export const CookieContext = createContext({
-  showCookies: true,
+  cookies: { show: true },
   closeCookies: () => {},
 });
 
 export function CookieProvider({ children }: PropsWithChildren) {
-  const [showCookies, setShowCookies] = useLocalStorage('cookies', true);
+  const [cookies, setShowCookies] = useLocalStorage('cookies', { show: true });
 
   const closeCookies = () => {
-    setShowCookies(false);
+    setShowCookies({ show: false });
   };
 
   return (
-    <CookieContext.Provider value={{ showCookies, closeCookies }}>
+    <CookieContext.Provider value={{ cookies, closeCookies }}>
       {children}
     </CookieContext.Provider>
   );
