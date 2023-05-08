@@ -4,6 +4,7 @@ import EventCard from '../components/EventCard';
 import { events } from '../shared/constants';
 import ShowOne from '../components/windows/ShowOne';
 import { useWindowContext } from '../hooks';
+import { Query, useQuery } from '../graphql';
 
 const ShowAll: React.FC = () => {
   const { openWindow } = useWindowContext();
@@ -11,6 +12,10 @@ const ShowAll: React.FC = () => {
   const handleShowOne = () => {
     openWindow({ content: <ShowOne /> });
   };
+
+  const [data] = useQuery({
+    query: Query.Events,
+  });
 
   return (
     <>
