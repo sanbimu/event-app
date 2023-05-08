@@ -1,5 +1,11 @@
 import { useContext } from 'react';
-import { AuthContext, NavContext, WindowContext, CookieContext } from '../providers';
+import {
+  AuthContext,
+  NavContext,
+  WindowContext,
+  CookieContext,
+  SearchFiltersContext,
+} from '../providers';
 
 export function useAuthContext() {
   return useContext(AuthContext);
@@ -15,4 +21,8 @@ export function useNavContext() {
 
 export function useCookieContext() {
   return useContext(CookieContext);
+}
+
+export function useSearchFiltersContext() {
+  return useContext(SearchFiltersContext);
 }

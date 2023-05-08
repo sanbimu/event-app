@@ -6,19 +6,22 @@ import {
   GraphQLProvider,
   NavProvider,
   WindowProvider,
+  SearchFiltersProvider,
 } from './providers';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <GraphQLProvider>
     <AuthProvider>
-      <WindowProvider>
-        <NavProvider>
-          <CookieProvider>
-            <Router />
-          </CookieProvider>
-        </NavProvider>
-      </WindowProvider>
+      <SearchFiltersProvider>
+        <WindowProvider>
+          <NavProvider>
+            <CookieProvider>
+              <Router />
+            </CookieProvider>
+          </NavProvider>
+        </WindowProvider>
+      </SearchFiltersProvider>
     </AuthProvider>
   </GraphQLProvider>,
 );
