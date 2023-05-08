@@ -14,12 +14,8 @@ const SearchFilter: React.FC = () => {
     });
   };
 
-  useEffect(() => {
-    console.log(searchFilters);
-  }, [searchFilters]);
-
   return (
-    <div className="flex flex-col gap-6 border-b border-black px-4 pb-8 pt-4 lg:w-auto lg:items-center lg:px-12">
+    <div className="flex flex-col gap-6 border-b border-black px-4 pb-8 pt-4 md:items-center lg:w-auto lg:px-12">
       <Searchbar onChange={(e) => setSearchQuery(e.target.value)} />
 
       <div className="flex w-full flex-row flex-wrap gap-3 font-franklin text-[15px] font-light lg:w-auto">

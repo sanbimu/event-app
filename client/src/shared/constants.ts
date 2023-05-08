@@ -61,6 +61,11 @@ export const filterButtons: SearchFilter[] = [
     type: 'label',
   },
   {
+    label: 'ROCK',
+    value: 'ROCK',
+    type: 'label',
+  },
+  {
     label: 'CULTURAL',
     value: 'CULTURAL',
     type: 'label',

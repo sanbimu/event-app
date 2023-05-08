@@ -35,7 +35,7 @@ export const resolvers: IResolvers = {
           $or: [{ title: regex }, { description: regex }, { 'location.label': regex }],
         }),
         ...(date && generateDateFilter(date)),
-        ...(label && { label: { $in: [label] } }),
+        ...(label && { labels: { $in: [label] } }),
         ...(type && { type: type }),
         ...(saved && { _id: { $in: user.savedEvents } }),
       };

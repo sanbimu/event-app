@@ -22,7 +22,7 @@ const EventCard: React.FC<Props> = ({
 
   return (
     <div
-      className="relative flex w-[300px] flex-row sm:max-md:h-[172px] md:w-[230px]"
+      className="relative flex w-[300px] flex-row max-md:h-[172px] md:w-[230px]"
       style={{ height: height + 'px' }}
     >
       <img
@@ -33,7 +33,7 @@ const EventCard: React.FC<Props> = ({
         className={`${content} absolute flex h-[140px] w-[140px] flex-col justify-between border border-black bg-background px-2 py-4 font-franklin text-sm`}
       >
         <div className="relative">
-          <p className="relative z-40 font-medium">{title}</p>
+          <p className="toolong relative z-40 font-medium">{title}</p>
           <div className="absolute bottom-0 left-0 right-0 top-0 z-30 h-[18px] translate-x-[0.45rem] translate-y-[0.40rem] bg-dark-pink-transparent"></div>
         </div>
         <div>{date}</div>

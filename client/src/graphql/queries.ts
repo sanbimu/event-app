@@ -49,6 +49,7 @@ export const Events = gql`
     $date: Date
     $label: String
     $saved: Boolean
+    $type: String
   ) {
     events(
       order: $order
@@ -58,6 +59,7 @@ export const Events = gql`
       date: $date
       label: $label
       saved: $saved
+      type: $type
     ) {
       edges {
         node {
