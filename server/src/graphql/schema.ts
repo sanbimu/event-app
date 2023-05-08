@@ -77,19 +77,16 @@ export enum EventType {
 }
 
 export type Location = {
-  __typename?: 'Location';
   label: Scalars['String'];
   address: Scalars['String'];
 };
 
 export type Prices = {
-  __typename?: 'Prices';
   label: Scalars['String'];
   price: Scalars['Float'];
 };
 
 export type Event = {
-  __typename?: 'Event';
   _id: Scalars['ObjectID'];
   location: Location;
   fromDate: Scalars['String'];
@@ -106,31 +103,51 @@ export type Event = {
 };
 
 export type EventEdge = {
-  __typename?: 'EventEdge';
   cursor: Scalars['String'];
   node: Event;
 };
 
 export type EventConnection = {
-  __typename?: 'EventConnection';
   edges: Array<Maybe<EventEdge>>;
   pageInfo: PageInfo;
 };
 
 export type Ticket = {
-  __typename?: 'Ticket';
   _id: Scalars['ObjectID'];
   event: Event;
   user: User;
 };
 
+export type ContactInfo = {
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  phoneNumber?: Maybe<Scalars['String']>;
+};
+
+export type HomeInfo = {
+  address?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+};
+
+export type BillingInfo = {
+  name?: Maybe<Scalars['String']>;
+  address?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+};
+
+export type Info = {
+  contact: ContactInfo;
+  home: HomeInfo;
+  billing: BillingInfo;
+};
+
 export type User = {
-  __typename?: 'User';
   _id: Scalars['ObjectID'];
   provider: Scalars['String'];
   providerId?: Maybe<Scalars['String']>;
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
+  info: Info;
   email: Scalars['String'];
   avatar: Scalars['String'];
   savedEvents: Array<Maybe<Event>>;
@@ -138,15 +155,38 @@ export type User = {
 };
 
 export type PageInfo = {
-  __typename?: 'PageInfo';
   hasNextPage: Scalars['Boolean'];
   hasPreviousPage: Scalars['Boolean'];
   startCursor?: Maybe<Scalars['String']>;
   endCursor?: Maybe<Scalars['String']>;
 };
 
+export type ContactInfoInput = {
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+  phoneNumber?: InputMaybe<Scalars['String']>;
+};
+
+export type HomeInfoInput = {
+  address?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
+  city?: InputMaybe<Scalars['String']>;
+};
+
+export type BillingInfoInput = {
+  name?: InputMaybe<Scalars['String']>;
+  address?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
+  city?: InputMaybe<Scalars['String']>;
+};
+
+export type ModifyUserInfoInput = {
+  contact?: InputMaybe<ContactInfoInput>;
+  home?: InputMaybe<HomeInfoInput>;
+  billing?: InputMaybe<BillingInfoInput>;
+};
+
 export type Query = {
-  __typename?: 'Query';
   me?: Maybe<User>;
   event?: Maybe<Event>;
   events: EventConnection;
@@ -163,47 +203,22 @@ export type QueryeventsArgs = {
   query?: InputMaybe<Scalars['String']>;
   date?: InputMaybe<Date>;
   label?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
   saved?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type AddLocationInput = {
-  label: Scalars['String'];
-  address: Scalars['String'];
-};
-
-export type AddPricesInput = {
-  label: Scalars['String'];
-  price: Scalars['Float'];
-};
-
-export type AddEventInput = {
-  location: AddLocationInput;
-  fromDate: Scalars['String'];
-  toDate: Scalars['String'];
-  title: Scalars['String'];
-  description: Scalars['String'];
-  stock: Scalars['Int'];
-  prices?: InputMaybe<Array<InputMaybe<AddPricesInput>>>;
-  picture?: InputMaybe<Scalars['String']>;
-  labels?: InputMaybe<Array<InputMaybe<EventLabel>>>;
-  type?: InputMaybe<EventType>;
-  status?: InputMaybe<EventStatus>;
-  salesCount?: InputMaybe<Scalars['Int']>;
-};
-
 export type Mutation = {
-  __typename?: 'Mutation';
-  addEvent?: Maybe<Event>;
-  addSavedEvent?: Maybe<Event>;
-  removeSavedEvent?: Maybe<Event>;
-};
-
-export type MutationaddEventArgs = {
-  input: AddEventInput;
+  addSavedEvent?: Maybe<User>;
+  modifyUserInfo?: Maybe<User>;
+  removeSavedEvent?: Maybe<User>;
 };
 
 export type MutationaddSavedEventArgs = {
   id: Scalars['ObjectID'];
+};
+
+export type MutationmodifyUserInfoArgs = {
+  input: ModifyUserInfoInput;
 };
 
 export type MutationremoveSavedEventArgs = {
@@ -307,13 +322,18 @@ export type ResolversTypes = {
   EventEdge: ResolverTypeWrapper<EventEdge>;
   EventConnection: ResolverTypeWrapper<EventConnection>;
   Ticket: ResolverTypeWrapper<Ticket>;
+  ContactInfo: ResolverTypeWrapper<ContactInfo>;
+  HomeInfo: ResolverTypeWrapper<HomeInfo>;
+  BillingInfo: ResolverTypeWrapper<BillingInfo>;
+  Info: ResolverTypeWrapper<Info>;
   User: ResolverTypeWrapper<User>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  ContactInfoInput: ContactInfoInput;
+  HomeInfoInput: HomeInfoInput;
+  BillingInfoInput: BillingInfoInput;
+  ModifyUserInfoInput: ModifyUserInfoInput;
   Query: ResolverTypeWrapper<{}>;
-  AddLocationInput: AddLocationInput;
-  AddPricesInput: AddPricesInput;
-  AddEventInput: AddEventInput;
   Mutation: ResolverTypeWrapper<{}>;
 };
 
@@ -329,13 +349,18 @@ export type ResolversParentTypes = {
   EventEdge: EventEdge;
   EventConnection: EventConnection;
   Ticket: Ticket;
+  ContactInfo: ContactInfo;
+  HomeInfo: HomeInfo;
+  BillingInfo: BillingInfo;
+  Info: Info;
   User: User;
   PageInfo: PageInfo;
   Boolean: Scalars['Boolean'];
+  ContactInfoInput: ContactInfoInput;
+  HomeInfoInput: HomeInfoInput;
+  BillingInfoInput: BillingInfoInput;
+  ModifyUserInfoInput: ModifyUserInfoInput;
   Query: {};
-  AddLocationInput: AddLocationInput;
-  AddPricesInput: AddPricesInput;
-  AddEventInput: AddEventInput;
   Mutation: {};
 };
 
@@ -410,6 +435,47 @@ export type TicketResolvers<
   isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ContactInfoResolvers<
+  ContextType = MercuriusContext,
+  ParentType extends ResolversParentTypes['ContactInfo'] = ResolversParentTypes['ContactInfo'],
+> = {
+  firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type HomeInfoResolvers<
+  ContextType = MercuriusContext,
+  ParentType extends ResolversParentTypes['HomeInfo'] = ResolversParentTypes['HomeInfo'],
+> = {
+  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  postalCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BillingInfoResolvers<
+  ContextType = MercuriusContext,
+  ParentType extends ResolversParentTypes['BillingInfo'] = ResolversParentTypes['BillingInfo'],
+> = {
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  postalCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type InfoResolvers<
+  ContextType = MercuriusContext,
+  ParentType extends ResolversParentTypes['Info'] = ResolversParentTypes['Info'],
+> = {
+  contact?: Resolver<ResolversTypes['ContactInfo'], ParentType, ContextType>;
+  home?: Resolver<ResolversTypes['HomeInfo'], ParentType, ContextType>;
+  billing?: Resolver<ResolversTypes['BillingInfo'], ParentType, ContextType>;
+  isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type UserResolvers<
   ContextType = MercuriusContext,
   ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User'],
@@ -417,8 +483,7 @@ export type UserResolvers<
   _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   provider?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   providerId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  info?: Resolver<ResolversTypes['Info'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   avatar?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   savedEvents?: Resolver<Array<Maybe<ResolversTypes['Event']>>, ParentType, ContextType>;
@@ -460,20 +525,20 @@ export type MutationResolvers<
   ContextType = MercuriusContext,
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
 > = {
-  addEvent?: Resolver<
-    Maybe<ResolversTypes['Event']>,
-    ParentType,
-    ContextType,
-    RequireFields<MutationaddEventArgs, 'input'>
-  >;
   addSavedEvent?: Resolver<
-    Maybe<ResolversTypes['Event']>,
+    Maybe<ResolversTypes['User']>,
     ParentType,
     ContextType,
     RequireFields<MutationaddSavedEventArgs, 'id'>
   >;
+  modifyUserInfo?: Resolver<
+    Maybe<ResolversTypes['User']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationmodifyUserInfoArgs, 'input'>
+  >;
   removeSavedEvent?: Resolver<
-    Maybe<ResolversTypes['Event']>,
+    Maybe<ResolversTypes['User']>,
     ParentType,
     ContextType,
     RequireFields<MutationremoveSavedEventArgs, 'id'>
@@ -488,6 +553,10 @@ export type Resolvers<ContextType = MercuriusContext> = {
   EventEdge?: EventEdgeResolvers<ContextType>;
   EventConnection?: EventConnectionResolvers<ContextType>;
   Ticket?: TicketResolvers<ContextType>;
+  ContactInfo?: ContactInfoResolvers<ContextType>;
+  HomeInfo?: HomeInfoResolvers<ContextType>;
+  BillingInfo?: BillingInfoResolvers<ContextType>;
+  Info?: InfoResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   PageInfo?: PageInfoResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
@@ -558,12 +627,36 @@ export interface Loaders<
     user?: LoaderResolver<User, Ticket, {}, TContext>;
   };
 
+  ContactInfo?: {
+    firstName?: LoaderResolver<Maybe<Scalars['String']>, ContactInfo, {}, TContext>;
+    lastName?: LoaderResolver<Maybe<Scalars['String']>, ContactInfo, {}, TContext>;
+    phoneNumber?: LoaderResolver<Maybe<Scalars['String']>, ContactInfo, {}, TContext>;
+  };
+
+  HomeInfo?: {
+    address?: LoaderResolver<Maybe<Scalars['String']>, HomeInfo, {}, TContext>;
+    postalCode?: LoaderResolver<Maybe<Scalars['String']>, HomeInfo, {}, TContext>;
+    city?: LoaderResolver<Maybe<Scalars['String']>, HomeInfo, {}, TContext>;
+  };
+
+  BillingInfo?: {
+    name?: LoaderResolver<Maybe<Scalars['String']>, BillingInfo, {}, TContext>;
+    address?: LoaderResolver<Maybe<Scalars['String']>, BillingInfo, {}, TContext>;
+    postalCode?: LoaderResolver<Maybe<Scalars['String']>, BillingInfo, {}, TContext>;
+    city?: LoaderResolver<Maybe<Scalars['String']>, BillingInfo, {}, TContext>;
+  };
+
+  Info?: {
+    contact?: LoaderResolver<ContactInfo, Info, {}, TContext>;
+    home?: LoaderResolver<HomeInfo, Info, {}, TContext>;
+    billing?: LoaderResolver<BillingInfo, Info, {}, TContext>;
+  };
+
   User?: {
     _id?: LoaderResolver<Scalars['ObjectID'], User, {}, TContext>;
     provider?: LoaderResolver<Scalars['String'], User, {}, TContext>;
     providerId?: LoaderResolver<Maybe<Scalars['String']>, User, {}, TContext>;
-    firstName?: LoaderResolver<Scalars['String'], User, {}, TContext>;
-    lastName?: LoaderResolver<Scalars['String'], User, {}, TContext>;
+    info?: LoaderResolver<Info, User, {}, TContext>;
     email?: LoaderResolver<Scalars['String'], User, {}, TContext>;
     avatar?: LoaderResolver<Scalars['String'], User, {}, TContext>;
     savedEvents?: LoaderResolver<Array<Maybe<Event>>, User, {}, TContext>;

@@ -125,7 +125,6 @@ type PageInfo {
   endCursor: String
 }
 
-
 input ContactInfoInput {
   firstName: String
   lastName: String
@@ -161,6 +160,7 @@ type Query {
     query: String
     date: Date
     label: String
+    type: String
     saved: Boolean
   ): EventConnection!
 }

@@ -15,31 +15,6 @@ export const Me = gql`
   }
 `;
 
-export const Settings = gql`
-  query Settings {
-    me {
-      info {
-        contact {
-          firstName
-          lastName
-          phoneNumber
-        }
-        home {
-          address
-          postalCode
-          city
-        }
-        billing {
-          name
-          address
-          postalCode
-          city
-        }
-      }
-    }
-  }
-`;
-
 export const Events = gql`
   query Events(
     $order: Order
@@ -48,7 +23,6 @@ export const Events = gql`
     $query: String
     $date: Date
     $label: String
-    $type: String
     $saved: Boolean
   ) {
     events(
@@ -58,7 +32,6 @@ export const Events = gql`
       query: $query
       date: $date
       label: $label
-      type: $type
       saved: $saved
     ) {
       edges {
@@ -67,13 +40,44 @@ export const Events = gql`
           title
           fromDate
           toDate
+          picture
           location {
             label
           }
-          picture
-          status
         }
       }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+`;
+
+export const Event = gql`
+  query Event($id: ObjectID!) {
+    event(id: $id) {
+      _id
+      location {
+        label
+        address
+      }
+      fromDate
+      toDate
+      title
+      description
+      stock
+      prices {
+        label
+        price
+      }
+      picture
+      labels
+      type
+      status
+      salesCount
     }
   }
 `;
