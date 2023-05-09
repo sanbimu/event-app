@@ -17,7 +17,7 @@ const NewEvents: React.FC = () => {
     query: Query.Events,
     variables: {
       status: 'NEW',
-      first: 2,
+      first: 1,
     },
   });
 
@@ -26,18 +26,16 @@ const NewEvents: React.FC = () => {
       {data.data?.events.edges.map((e) => {
         const event = e!.node;
         return (
-          <div className="flex flex-row border border-black shadow-custom lg:min-w-[calc(100vw_-_260px)]">
+          <div className="flex flex-row border border-black shadow-custom lg:min-w-[calc(100vw_-_280px)]">
             <div className="flex w-[35%] border-r border-black md:w-[50%]">
               <img src={event.picture} className="w-full object-cover p-1"></img>
             </div>
 
             <div className="relative inline-block w-[65%] pt-6 pl-3 md:w-[50%] md:pt-8 md:pl-8">
-              <div className="relative inline-block h-[20px]">
-                <p className="toolong relative z-40 font-franklin md:text-xl md:font-light lg:text-2xl">
-                  {event.title}
-                </p>
-                <div className="absolute top-0 bottom-0 left-0 right-0 z-30 translate-x-[0.45rem] translate-y-[0.40rem] bg-dark-pink-transparent"></div>
-              </div>
+              <p className="toolong mr-6 font-franklin shadow-[inset_0_-0.93em_0_rgb(228,188,181)] md:text-xl md:font-light lg:text-2xl">
+                {event.title}
+              </p>
+
               <p className="pt-4 font-franklin text-sm font-extralight uppercase lg:pt-6 lg:text-[15px]">
                 {event.fromDate}
               </p>

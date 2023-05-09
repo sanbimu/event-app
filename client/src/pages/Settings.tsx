@@ -108,11 +108,11 @@ export function Settings() {
                 ></input>
               </div>
               <div className="flex">
-                <p className="pr-2 pt-4 font-franklin text-sm font-light">POSTAL CODE</p>
+                <p className="pr-2 pt-6 font-franklin text-sm font-light">POSTAL CODE</p>
                 <input
                   id="search"
                   name="home_postalcode"
-                  className=" h-[32px] border-b border-black bg-transparent pt-4 font-franklin text-lg"
+                  className="h-[40px] border-b border-black bg-transparent pt-6 font-franklin text-lg"
                   size={8}
                   defaultValue={data.data.me.info.home.postalCode || ''}
                 ></input>
