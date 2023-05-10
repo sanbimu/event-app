@@ -11,33 +11,29 @@ const ShowOne = () => {
         {/* INFORMATION */}
 
         <div className="flex h-auto flex-col items-center border-b border-black">
-          <div className="relative inline-block pt-12">
-            <div className="relative inline-block h-[20px]">
-              <p className="toolong relative z-40 font-franklin text-2xl font-light">
-                Name
-              </p>
-              <div className="absolute top-0 bottom-0 left-0 right-0 z-30 translate-x-[0.45rem] translate-y-[0.40rem] bg-dark-pink-transparent"></div>
-            </div>
-            <div className="flex flex-row pt-5">
-              <img src={DateSVG} alt="date" className="h-[20px] pl-1"></img>
-              <p className="pl-5 font-franklin text-[16px] font-extralight uppercase ">
-                Date
-              </p>
-            </div>
+          <p className="toolong shadow-text pt-10 font-franklin text-2xl font-light">
+            Name
+          </p>
 
-            <div className="flex flex-row pt-4">
-              <img src={LocationSVG} alt="date" className="h-[27px]"></img>
-              <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
-                Location
-              </p>
-            </div>
+          <div className="flex flex-row pt-5">
+            <img src={DateSVG} alt="date" className="h-[20px] pl-1"></img>
+            <p className="pl-5 font-franklin text-[16px] font-extralight uppercase ">
+              Date
+            </p>
+          </div>
 
-            <div className="flex flex-row pt-4 pb-8 ">
-              <img src={SaveSVG} alt="date" className="h-[27px]"></img>
-              <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
-                Save for later
-              </p>
-            </div>
+          <div className="flex flex-row pt-4">
+            <img src={LocationSVG} alt="date" className="h-[27px]"></img>
+            <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
+              Location
+            </p>
+          </div>
+
+          <div className="flex flex-row pt-4 pb-8 ">
+            <img src={SaveSVG} alt="date" className="h-[27px]"></img>
+            <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
+              Save for later
+            </p>
           </div>
         </div>
 
@@ -111,33 +107,28 @@ const ShowOne = () => {
           {/* INFORMATION */}
 
           <div className="flex h-auto flex-col items-center border-b border-black">
-            <div className="relative inline-block pt-12">
-              <div className="relative inline-block h-[20px]">
-                <p className="toolong relative z-40 font-franklin text-2xl font-light">
-                  Name
-                </p>
-                <div className="absolute top-0 bottom-0 left-0 right-0 z-30 translate-x-[0.45rem] translate-y-[0.40rem] bg-dark-pink-transparent"></div>
-              </div>
-              <div className="flex flex-row pt-5">
-                <img src={DateSVG} alt="date" className="h-[20px] pl-1"></img>
-                <p className="pl-5 font-franklin text-[16px] font-extralight uppercase ">
-                  Date
-                </p>
-              </div>
+            <p className="toolong shadow-text pt-12 font-franklin text-2xl font-light">
+              Name
+            </p>
+            <div className="flex flex-row pt-5">
+              <img src={DateSVG} alt="date" className="h-[20px] pl-1"></img>
+              <p className="pl-5 font-franklin text-[16px] font-extralight uppercase ">
+                Date
+              </p>
+            </div>
 
-              <div className="flex flex-row pt-4">
-                <img src={LocationSVG} alt="date" className="h-[27px]"></img>
-                <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
-                  Location
-                </p>
-              </div>
+            <div className="flex flex-row pt-4">
+              <img src={LocationSVG} alt="date" className="h-[27px]"></img>
+              <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
+                Location
+              </p>
+            </div>
 
-              <div className="flex flex-row pt-4 pb-8 ">
-                <img src={SaveSVG} alt="date" className="h-[27px]"></img>
-                <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
-                  Save for later
-                </p>
-              </div>
+            <div className="flex flex-row pt-4 pb-8 ">
+              <img src={SaveSVG} alt="date" className="h-[27px]"></img>
+              <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
+                Save for later
+              </p>
             </div>
           </div>
 

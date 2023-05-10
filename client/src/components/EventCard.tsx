@@ -32,9 +32,7 @@ const EventCard: React.FC<Props> = ({
       <div
         className={`${content} absolute flex h-[140px] w-[140px] flex-col justify-between border border-black bg-background px-2 py-4 font-franklin text-sm`}
       >
-        <p className="toolong mr-2 font-medium shadow-[inset_0_-0.93em_0_rgb(228,188,181)]">
-          {title}
-        </p>
+        <p className="toolong shadow-text mr-2 font-medium">{title}</p>
         <div>{date}</div>
         <div className="toolong">{location}</div>
       </div>

@@ -8,7 +8,6 @@ module.exports = {
       },
       boxShadow: {
         custom: '4px 4px 0px rgb(213, 193, 174)',
-        text: 'inset 0px -0.93rem 0px rgb(228, 188, 181)',
       },
       colors: {
         background: '#F3ECE8',

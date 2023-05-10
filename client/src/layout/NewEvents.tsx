@@ -32,7 +32,7 @@ const NewEvents: React.FC = () => {
             </div>
 
             <div className="relative inline-block w-[65%] pt-6 pl-3 md:w-[50%] md:pt-8 md:pl-8">
-              <p className="toolong mr-6 font-franklin shadow-[inset_0_-0.93em_0_rgb(228,188,181)] md:text-xl md:font-light lg:text-2xl">
+              <p className="toolong shadow-text mr-6 font-franklin md:text-xl md:font-light lg:text-2xl">
                 {event.title}
               </p>
 
