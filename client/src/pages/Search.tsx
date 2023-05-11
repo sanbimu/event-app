@@ -1,5 +1,5 @@
 import Header from '../layout/Header';
-import SearchFilter from '../layout/SearchFilter';
+import SearchFilters from '../layout/SearchFilters';
 import ShowAll from '../layout/ShowAll';
 
 export function Search() {
@@ -7,7 +7,7 @@ export function Search() {
     <div className="flex h-screen flex-col lg:flex-row">
       <Header />
       <div className="w-screen flex-col lg:ml-[240px] lg:flex">
-        <SearchFilter />
+        <SearchFilters />
         <ShowAll />
       </div>
     </div>

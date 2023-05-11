@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Searchbar from '../components/Searchbar';
 import Button from '../components/Button';
 import { useSearchFiltersContext } from '../hooks';
 import { SearchFilter, filterButtons } from '../shared/constants';
 
-const SearchFilter: React.FC = () => {
+const SearchFilters: React.FC = () => {
   const { searchFilters, setSearchFilters, setSearchQuery } = useSearchFiltersContext();
 
   const handleFilterClick = (filter: SearchFilter) => {
@@ -35,4 +35,4 @@ const SearchFilter: React.FC = () => {
   );
 };
 
-export default SearchFilter;
+export default SearchFilters;

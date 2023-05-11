@@ -1,8 +1,7 @@
-import { useWindowContext } from '../hooks';
 import Banner from '../layout/Banner';
 import Header from '../layout/Header';
 import NewEvents from '../layout/NewEvents';
-import SearchFilter from '../layout/SearchFilter';
+import SearchFilters from '../layout/SearchFilters';
 import ShowAll from '../layout/ShowAll';
 
 export function Index() {
@@ -15,7 +14,7 @@ export function Index() {
       >
         <Banner />
         <NewEvents />
-        <SearchFilter />
+        <SearchFilters />
         <ShowAll />
       </div>
     </div>

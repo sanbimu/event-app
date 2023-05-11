@@ -5,7 +5,7 @@ enum Order {
   DESC
 }
 
-enum Date {
+enum EventDate {
   TODAY
   TOMORROW
   THIS_WEEKEND
@@ -158,7 +158,7 @@ type Query {
     first: Int = 25
     after: ObjectID
     query: String
-    date: Date
+    date: EventDate
     label: String
     type: String
     saved: Boolean
