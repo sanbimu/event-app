@@ -5,8 +5,7 @@ import { useClickOutside, useWindowContext } from '../hooks';
 const Window: React.FC = () => {
   const { closeWindow, content } = useWindowContext();
 
-  const windowRef = useRef(null);
-  useClickOutside(windowRef, () => closeWindow());
+  const windowRef = useClickOutside(() => closeWindow());
 
   return (
     <div className="fixed bottom-0 left-0 right-0 top-0 z-[100] flex h-screen w-screen items-center justify-center overflow-hidden bg-dark-grey bg-opacity-50">

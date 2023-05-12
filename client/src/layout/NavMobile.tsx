@@ -20,8 +20,7 @@ const NavMobile: React.FC = () => {
   const { isAuthorized, user, signOut } = useAuthContext();
   const { setShowNav } = useNavContext();
 
-  const navRef = useRef(null);
-  useClickOutside(navRef, () => setShowNav(false));
+  const navRef = useClickOutside(() => setShowNav(false));
 
   const handleNav = () => {
     setShowNav(false);
