@@ -45,7 +45,7 @@ export const resolvers: IResolvers = {
         .limit(first + 1)
         .lean();
 
-      return formatDocumentsPagination(events, first, after);
+      return formatDocumentsPagination(events, order, first, after);
     },
   },
 

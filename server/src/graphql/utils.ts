@@ -1,25 +1,34 @@
 import type { ObjectId } from 'mongodb';
 import type { LeanDocument } from 'mongoose';
+import { Order } from './schema';
 
 export function formatDocumentsPagination<T extends LeanDocument<any>>(
-  values: T[],
+  docs: T[],
+  order: Order,
   first: number,
   after: ObjectId,
 ) {
-  const hasNextPage = values.length > first;
-  const hasPreviousPage = !!after;
-  const edges = hasNextPage ? values.slice(0, -1) : values;
+  const hasNextPage = docs.length > first || order === Order.DESC;
+  const hasPreviousPage = !!after && (docs.length !== first || order === Order.ASC);
+
+  if (docs.length > first) {
+    docs.pop();
+  }
+
+  if (order === Order.DESC) {
+    docs.reverse();
+  }
 
   return {
-    edges: edges.map((event) => ({
+    edges: docs.map((event) => ({
       cursor: event._id.toString(),
       node: event,
     })),
     pageInfo: {
       hasNextPage,
       hasPreviousPage,
-      startCursor: edges.at(0)?._id.toString() || null,
-      endCursor: edges.at(-1)?._id.toString() || null,
+      startCursor: docs.at(0)?._id.toString() || null,
+      endCursor: docs.at(-1)?._id.toString() || null,
     },
   };
 }
