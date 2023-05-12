@@ -35,10 +35,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
       setUser({
         _id: data.data.me._id.toString(),
         avatar: data.data.me.avatar,
-        firstName: data.data.me.info.contact.firstName,
-        lastName: data.data.me.info.contact.lastName,
+        firstName: data.data.me.info.contact.firstName!,
+        lastName: data.data.me.info.contact.lastName!,
       });
-    } else if (data?.error) {
+    } else if (data?.error && data.error.message === 'UNAUTHORIZED') {
       signOut();
     }
   }, [data]);
@@ -56,7 +56,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, [token]);
 
   return (
-    <AuthContext.Provider value={{ isAuthorized: !!user._id, user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ isAuthorized: !!user._id || !!token, user, signIn, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

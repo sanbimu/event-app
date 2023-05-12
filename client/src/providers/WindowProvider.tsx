@@ -1,7 +1,7 @@
-import { createContext, PropsWithChildren, useState } from 'react';
+import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 
 interface WindowContextProps {
-  openWindow: ({ content }: { content: React.ReactNode }) => void;
+  openWindow: (content: React.ReactNode) => void;
   closeWindow: () => void;
   showWindow: boolean;
   content: React.ReactNode | null;
@@ -18,14 +18,17 @@ export function WindowProvider({ children }: PropsWithChildren) {
   const [showWindow, setShowWindow] = useState(false);
   const [windowContent, setWindowContent] = useState<React.ReactNode>(null);
 
-  const openWindow = ({ content }: { content: React.ReactNode }) => {
-    setShowWindow(true);
+  const openWindow = (content: React.ReactNode) => {
     setWindowContent(content);
   };
 
   const closeWindow = () => {
-    setShowWindow(false);
+    setWindowContent(null);
   };
+
+  useEffect(() => {
+    setShowWindow(!!windowContent);
+  }, [windowContent]);
 
   return (
     <WindowContext.Provider

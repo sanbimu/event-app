@@ -20,15 +20,15 @@ const Header: React.FC = () => {
   };
 
   const handlePrivacy = () => {
-    openWindow({ content: <PrivacyPolicy /> });
+    openWindow(<PrivacyPolicy />);
   };
 
   const handleTerms = () => {
-    openWindow({ content: <TermsConditions /> });
+    openWindow(<TermsConditions />);
   };
 
   const handleFAQ = () => {
-    openWindow({ content: <FAQ /> });
+    openWindow(<FAQ />);
   };
 
   return (
@@ -68,7 +68,7 @@ const Header: React.FC = () => {
               <div className="flex flex-col items-start gap-3 pl-6 font-franklin text-sm text-dark-grey">
                 <button
                   className=" hover:text-dark-pink"
-                  onClick={() => navigate('/myevents')}
+                  onClick={() => navigate('/my-events')}
                 >
                   - MY EVENTS
                 </button>
@@ -87,7 +87,7 @@ const Header: React.FC = () => {
             <Button
               className="w-[150px] p-[0.60rem] font-franklin text-sm shadow-custom"
               text="sign in / sign up"
-              onClick={() => openWindow({ content: <ContinueWith /> })}
+              onClick={() => openWindow(<ContinueWith />)}
             />
           )}
           <Button

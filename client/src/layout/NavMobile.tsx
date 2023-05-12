@@ -38,24 +38,24 @@ const NavMobile: React.FC = () => {
   };
 
   const handleEvents = () => {
-    navigate('/myevents');
+    navigate('/my-events');
     setShowNav(false);
   };
 
   const handlePrivacy = () => {
-    openWindow({ content: <PrivacyPolicy /> });
+    openWindow(<PrivacyPolicy />);
   };
 
   const handleTerms = () => {
-    openWindow({ content: <TermsConditions /> });
+    openWindow(<TermsConditions />);
   };
 
   const handleFAQ = () => {
-    openWindow({ content: <FAQ /> });
+    openWindow(<FAQ />);
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 z-[90] flex h-screen w-screen justify-end overflow-hidden bg-black bg-opacity-30 lg:hidden">
+    <div className="fixed bottom-0 left-0 right-0 top-0 z-[90] flex h-screen w-screen justify-end overflow-hidden bg-black bg-opacity-30 lg:hidden">
       <div
         className="relative flex h-[100vh] w-[80%] flex-col bg-background md:w-[45%]"
         ref={navRef}
@@ -70,7 +70,7 @@ const NavMobile: React.FC = () => {
           <Logo />
         </div>
 
-        <div className="flex h-[60%] flex-col items-end border-b border-l border-black pt-10 pr-12">
+        <div className="flex h-[60%] flex-col items-end border-b border-l border-black pr-12 pt-10">
           {isAuthorized ? (
             <div className="flex flex-col gap-1">
               <Button className="text-md mb-4 w-[190px] p-[0.60rem] font-franklin shadow-custom">
@@ -95,7 +95,7 @@ const NavMobile: React.FC = () => {
           ) : (
             <Button
               className="w-[190px] p-[0.60rem] shadow-custom"
-              onClick={() => openWindow({ content: <ContinueWith /> })}
+              onClick={() => openWindow(<ContinueWith />)}
             >
               <p className="text-md font-franklin">SIGN IN / SIGN UP</p>
             </Button>
