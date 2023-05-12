@@ -2,7 +2,6 @@ import { FormEvent } from 'react';
 import Button from '../components/Button';
 import { Mutation, Query, useMutation, useQuery } from '../graphql';
 import BannerMedium from '../layout/BannerMedium';
-import Header from '../layout/Header';
 
 export function Settings() {
   const [data] = useQuery({
@@ -41,10 +40,8 @@ export function Settings() {
   };
 
   return (
-    <div className="flex h-screen flex-col lg:flex-row">
-      <Header />
-      <div className="w-screen flex-col lg:ml-[240px] lg:flex">
-        <BannerMedium title="settings" fontMobile="text-7xl" />
+    <>
+      <BannerMedium title="settings" fontMobile="text-7xl" />
 
         <form onSubmit={sendForm}>
           <div className="flex flex-col gap-4 pl-8 pt-10 md:pl-12 md:pt-14 lg:pl-10 lg:pt-10">
@@ -193,6 +190,6 @@ export function Settings() {
           </div>
         </form>
       </div>
-    </div>
+    </>
   );
 }

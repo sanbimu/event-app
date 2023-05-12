@@ -1,17 +1,14 @@
 import { useHorizontalScroll } from '../hooks';
 import BannerMedium from '../layout/BannerMedium';
 import BannerSmall from '../layout/BannerSmall';
-import Header from '../layout/Header';
 import MyEvent from '../layout/MyEvent';
 import { NextSVG } from '../icons';
 
 export function MyEvents() {
   const scrollRef = useHorizontalScroll<HTMLDivElement>();
   return (
-    <div className="flex h-screen flex-col lg:flex-row">
-      <Header />
-      <div className="flex w-screen flex-col lg:pl-[240px]">
-        <BannerMedium title="my events" fontMobile="text-[64px]" />
+    <>
+      <BannerMedium title="my events" fontMobile="text-[64px]" />
 
         <div
           id="myevents"
@@ -40,6 +37,6 @@ export function MyEvents() {
           <img src={NextSVG} alt="next" className="absolute right-0 block h-[22px]"></img>
         </div>
       </div>
-    </div>
+    </>
   );
 }

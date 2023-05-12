@@ -1,12 +1,18 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { Index } from './pages/Index';
 import { Token } from './pages/Token';
 import { Settings } from './pages/Settings';
 import { Search } from './pages/Search';
 import { MyEvents } from './pages/MyEvents';
+import Header from './layout/Header';
 import Window from './layout/Window';
 import NavMobile from './layout/NavMobile';
-import { useNavContext, useWindowContext, useCookieContext } from './hooks';
+import {
+  useNavContext,
+  useWindowContext,
+  useCookieContext,
+  useAuthContext,
+} from './hooks';
 import CookieModal from './components/windows/Cookies';
 
 export function Router() {
@@ -21,12 +27,40 @@ export function Router() {
       {showNav && <NavMobile />}
 
       <Routes>
-        <Route path="/" index element={<Index />} />
+        <Route element={<WithHeader />}>
+          <Route path="/" index element={<Index />} />
+          <Route path="/search" element={<Search />} />
+          <Route element={<Protected />}>
+            <Route path="/my-events" element={<MyEvents />} />
+            <Route path="/settings" element={<Settings />} />
+          </Route>
+        </Route>
         <Route path="/token" element={<Token />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/myevents" element={<MyEvents />} />
       </Routes>
     </BrowserRouter>
+  );
+}
+
+function Protected() {
+  const { isAuthorized } = useAuthContext();
+
+  if (!isAuthorized) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <Outlet />;
+}
+
+function WithHeader() {
+  return (
+    <div className="flex h-screen flex-col lg:flex-row">
+      <Header />
+      <div
+        id="scrollable"
+        className="w-full flex-col overflow-x-hidden lg:ml-[240px] lg:flex"
+      >
+        <Outlet />
+      </div>
+    </div>
   );
 }
