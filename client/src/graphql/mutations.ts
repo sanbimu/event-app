@@ -7,3 +7,11 @@ export const ModifyUserInfo = gql`
     }
   }
 `;
+
+export const AddSavedEvent = gql`
+  mutation AddSavedEvent($id: ObjectID!) {
+    addSavedEvent(id: $id) {
+      _id
+    }
+  }
+`;

@@ -1,63 +1,75 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import Square from '../components/shapes/Square';
 import { NextSVG } from '../icons';
 import ShowOne from '../components/windows/ShowOne';
 import { useWindowContext } from '../hooks';
 import { Query, useQuery } from '../graphql';
+import { truthyObject } from '../utils/object';
+import { formatDates } from '../utils/format';
 
 const NewEvents: React.FC = () => {
   const { openWindow } = useWindowContext();
 
-  const handleShowOne = () => {
-    openWindow({ content: <ShowOne /> });
-  };
+  const [cursor, setCursor] = useState('');
 
   const [data, execute] = useQuery({
     query: Query.Events,
-    variables: {
+    variables: truthyObject({
       status: 'NEW',
       first: 1,
-    },
+      after: cursor,
+    }),
+    pause: true,
   });
 
+  useEffect(() => {
+    execute();
+  }, []);
+
+  useEffect(() => {
+    setCursor(data.data?.events.edges[0]?.node._id.toString() || '');
+  }, [data]);
+
   return (
-    <div className="relative flex min-h-[280px] gap-4 overflow-x-auto border-b border-black p-3 lg:min-h-[353px]">
+    <div className="scrollbar-hide relative flex min-h-[280px] gap-4 overflow-x-auto border-b border-black p-3 lg:min-h-[353px]">
       {data.data?.events.edges.map((e) => {
         const event = e!.node;
+
         return (
-          <div className="flex flex-row border border-black shadow-custom lg:min-w-[calc(100vw_-_280px)]">
+          <div className="flex w-full flex-row border border-black shadow-custom">
             <div className="flex w-[35%] border-r border-black md:w-[50%]">
               <img src={event.picture} className="w-full object-cover p-1"></img>
             </div>
 
-            <div className="relative inline-block w-[65%] pt-6 pl-3 md:w-[50%] md:pt-8 md:pl-8">
+            <div className="relative inline-block w-[65%] pl-3 pt-6 md:w-[50%] md:pl-8 md:pt-8">
               <p className="toolong shadow-text mr-6 font-franklin md:text-xl md:font-light lg:text-2xl">
                 {event.title}
               </p>
 
               <p className="pt-4 font-franklin text-sm font-extralight uppercase lg:pt-6 lg:text-[15px]">
-                {event.fromDate}
+                {formatDates(event.fromDate, event.toDate)}
               </p>
-              <p className="pt-4 pb-14 font-franklin text-sm font-extralight uppercase md:pb-12 lg:pb-20 lg:pt-6 lg:text-[15px]">
+              <p className="pb-14 pt-4 font-franklin text-sm font-extralight uppercase md:pb-12 lg:pb-20 lg:pt-6 lg:text-[15px]">
                 {event.location.label}
               </p>
 
               <Button
                 className="w-[155px] py-3 font-franklin font-medium shadow-custom lg:w-[190px] lg:py-4"
                 text="buy tickets"
-                onClick={handleShowOne}
+                onClick={() => openWindow(<ShowOne id={event._id} />)}
               />
 
               <img
                 src={NextSVG}
                 alt="next"
-                className="absolute top-[90px] right-0 h-[22px] md:right-4 lg:top-[140px] lg:h-[28px]"
+                className="absolute right-0 top-[90px] h-[22px] cursor-pointer md:right-4 lg:top-[140px] lg:h-[28px]"
+                onClick={execute}
               ></img>
 
               <div>
                 <Square className="bottom-[40px] right-[22px] z-30 h-[24px] w-[24px] rotate-[20deg] bg-dark-pink-transparent md:right-[64px] lg:h-[40px] lg:w-[40px]"></Square>
-                <p className="absolute right-4 bottom-10 z-40 -rotate-[25deg] font-franklin text-lg font-semibold md:right-[60px] lg:right-[65px] lg:bottom-12 lg:text-xl ">
+                <p className="absolute bottom-10 right-4 z-40 -rotate-[25deg] font-franklin text-lg font-semibold md:right-[60px] lg:bottom-12 lg:right-[65px] lg:text-xl ">
                   new
                 </p>
               </div>

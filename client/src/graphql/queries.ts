@@ -46,7 +46,7 @@ export const Events = gql`
     $first: Int
     $after: ObjectID
     $query: String
-    $date: Date
+    $date: EventDate
     $label: String
     $saved: Boolean
     $type: String

@@ -5,12 +5,14 @@ import ShowOne from '../components/windows/ShowOne';
 import { useSearchFiltersContext, useWindowContext } from '../hooks';
 import { Query, useQuery } from '../graphql';
 import { truthyObject } from '../utils/object';
+import { ObjectId } from 'mongodb';
+import { formatDates } from '../utils/format';
 
 const ShowAll: React.FC = () => {
   const { openWindow } = useWindowContext();
 
-  const handleShowOne = () => {
-    openWindow({ content: <ShowOne /> });
+  const handleShowOne = (id: ObjectId) => {
+    openWindow(<ShowOne id={id} />);
   };
 
   const { searchFilters, searchQuery } = useSearchFiltersContext();
@@ -23,7 +25,7 @@ const ShowAll: React.FC = () => {
       query: searchQuery,
       ...searchFilters,
       after: cursor,
-      first: 3,
+      first: 15,
     }),
     requestPolicy: 'network-only',
   });
@@ -48,7 +50,7 @@ const ShowAll: React.FC = () => {
           return (
             <div
               className="border-overlap-br flex cursor-pointer break-inside-avoid items-center justify-center border border-black p-4"
-              onClick={handleShowOne}
+              onClick={() => handleShowOne(event._id)}
               key={event._id.toString()}
             >
               <EventCard
@@ -56,7 +58,7 @@ const ShowAll: React.FC = () => {
                 position={position}
                 picture={event.picture}
                 title={event.title}
-                date={event.fromDate}
+                date={formatDates(event.fromDate, event.toDate)}
                 location={event.location.label}
               />
             </div>
@@ -64,8 +66,19 @@ const ShowAll: React.FC = () => {
         })}
       </div>
 
-      <div className="flex min-h-[70px] items-center justify-center">
-        <Button className="w-[200px] py-2" text="show more" onClick={handleShowMore} />
+      <div className="flex min-h-[70px] items-center justify-center gap-6">
+        <Button
+          className="w-[150px] py-2"
+          text="previous"
+          onClick={handleShowMore}
+          disabled={!data.data?.events.pageInfo.hasPreviousPage}
+        />
+        <Button
+          className="w-[150px] py-2"
+          text="next"
+          onClick={handleShowMore}
+          disabled={!data.data?.events.pageInfo.hasNextPage}
+        />
       </div>
     </div>
   );

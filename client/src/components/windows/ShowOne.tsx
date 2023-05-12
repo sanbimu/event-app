@@ -1,8 +1,41 @@
-import { useWindowContext } from '../../hooks';
+import { ObjectId } from 'mongodb';
 import { DateSVG, LocationSVG, SaveSVG } from '../../icons';
 import Button from '../Button';
+import { Mutation, Query, useMutation, useQuery } from '../../graphql';
+import { useMemo } from 'react';
+import { formatCurrency, formatDates } from '../../utils/format';
+interface ShowOneProps {
+  id: ObjectId;
+}
 
-const ShowOne = () => {
+const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
+  const [data, execute] = useQuery({
+    query: Query.Event,
+    variables: { id },
+  });
+
+  const [, executeAddSavedEvent] = useMutation(Mutation.AddSavedEvent);
+
+  const event = useMemo(() => {
+    const e = data.data?.event;
+
+    if (!e) {
+      return;
+    }
+
+    return {
+      ...e,
+      date: formatDates(e.fromDate, e.toDate),
+      prices: e.prices.map((price) => {
+        return { label: price?.label, price: formatCurrency(price?.price || 0) };
+      }),
+    };
+  }, [data.data]);
+
+  if (!event) {
+    return null;
+  }
+
   return (
     <>
       {/* MOBILE */}
@@ -10,194 +43,193 @@ const ShowOne = () => {
       <div className="scrollbar-hide flex h-[85vh] w-[85vw] flex-col overflow-y-scroll md:hidden">
         {/* INFORMATION */}
 
-        <div className="flex h-auto flex-col items-center border-b border-black">
-          <p className="toolong shadow-text pt-10 font-franklin text-2xl font-light">
-            Name
+        <div className="flex h-auto flex-col border-b border-black p-4">
+          <p className="toolong shadow-text max-w-full pt-10 font-franklin text-2xl font-light">
+            {event.title}
           </p>
 
-          <div className="flex flex-row pt-5">
+          <div className="flex flex-row items-center pt-6">
             <img src={DateSVG} alt="date" className="h-[20px] pl-1"></img>
             <p className="pl-5 font-franklin text-[16px] font-extralight uppercase ">
-              Date
+              {event.date}
             </p>
           </div>
 
-          <div className="flex flex-row pt-4">
-            <img src={LocationSVG} alt="date" className="h-[27px]"></img>
-            <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
-              Location
-            </p>
+          <div className="flex flex-row items-center pt-4">
+            <img src={LocationSVG} alt="where" className="h-[27px]"></img>
+            <div className="flex flex-col">
+              <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
+                {event.location.label}
+              </p>
+              <p className="pl-4 pt-1 font-franklin text-[14px] font-extralight">
+                {event.location.address}
+              </p>
+            </div>
           </div>
 
-          <div className="flex flex-row pt-4 pb-8 ">
-            <img src={SaveSVG} alt="date" className="h-[27px]"></img>
+          <button
+            className="flex flex-row items-center pt-4 pb-8"
+            onClick={() => executeAddSavedEvent({ id: event._id })}
+          >
+            <img src={SaveSVG} alt="save" className="h-[27px]"></img>
             <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
               Save for later
             </p>
-          </div>
+          </button>
         </div>
 
         {/* PICTURE */}
 
         <div className="flex h-auto flex-col items-center border-b border-black">
-          <img src="" alt="image event" className="object-cover p-3"></img>
+          <img
+            src={event.picture}
+            alt="image event"
+            className="aspect-square object-cover p-3"
+          ></img>
         </div>
 
         {/* DESCRIPTION */}
 
-        <div className="flex min-h-[35%] flex-col items-center overflow-auto border-b border-black p-4">
-          <p className="font-franklin text-[15px] font-extralight">
-            Dear citizens,
-            <br />
-            Our 2022 edition was an unbelievable success. Improving last year’s incredible
-            celebrations will be difficult, but we like a challenge! There’s not much we
-            can share with you just yet, but we’re working hard to deliver another
-            unforgettable experience. So expect more artists, new stage designs and even
-            greater sustainability efforts.
-            <br />
-            Paradise City 2023 will be another precious moment to kickstart your summer. A
-            beautiful lush green location in a castle garden surrounded by water,
-            enchanting music from the world's best electronic artists, and above all, a
-            community of like-minded dancers. That's our recipe for creating lasting
-            memories. Good times are coming, and everyone's invited.
-          </p>
+        <div className="mt-2 flex min-h-[35%] flex-col items-center justify-center overflow-auto border-b border-black p-4">
+          <p className="font-franklin text-[15px] font-extralight">{event.description}</p>
         </div>
 
         {/* PRICES */}
 
         <div className="flex h-auto flex-col gap-4 border-b border-black py-6 pl-8">
           <p className="pb-2 font-fromage text-2xl font-medium">Prices</p>
-          <div className="flex flex-row gap-6">
-            <p className="font-franklin text-[15px] font-light">FRIDAY :</p>
-            <p>€ 65.00</p>
-          </div>
-          <div className="flex flex-row gap-6">
-            <p className="font-franklin text-[15px] font-light">FRIDAY :</p>
-            <p>€ 65.00</p>
-          </div>
-          <div className="flex flex-row gap-6">
-            <p className="font-franklin text-[15px] font-light">FRIDAY :</p>
-            <p>€ 65.00</p>
-          </div>
-          <Button text="buy tickets" className="mt-4 w-[180px] p-4 shadow-custom" />
+          {event.prices.map((price) => {
+            return (
+              <div className="flex flex-row justify-between gap-6 pr-12">
+                <p className="toolong whitespace-nowrap font-franklin text-[15px] font-light">
+                  {price?.label}
+                </p>
+                <p>{price?.price}</p>
+              </div>
+            );
+          })}
+
+          <Button
+            text="buy tickets"
+            className="mt-4 w-[180px] p-4 shadow-custom"
+            disabled={
+              data.data?.event?.prices.some((price) => {
+                return price?.price === 0;
+              }) || false
+            }
+          />
         </div>
 
         {/* TAGS */}
 
         <div className="flex h-auto flex-row flex-wrap gap-4 p-4">
-          <Button
-            className="h-[38px] px-3 font-franklin text-[15px] font-light"
-            text="FESTIVAL"
-          />
-          <Button
-            className="h-[38px] px-3 font-franklin text-[15px] font-light"
-            text="FESTIVAL"
-          />
-          <Button
-            className="h-[38px] px-3 font-franklin text-[15px] font-light"
-            text="FESTIVAL"
-          />
+          {event.labels.map((label) => {
+            return (
+              <Button
+                className="h-[38px] px-3 font-franklin text-[15px] font-light"
+                text={label || ''}
+              />
+            );
+          })}
         </div>
       </div>
 
       {/* DESKTOP */}
 
-      <div className="hidden h-[85vh] w-[75vw] flex-row md:flex">
+      <div className="hidden w-[75vw] flex-row md:flex md:h-[55vh] lg:h-[85vh]">
         <div className="scrollbar-hide flex w-[50%] flex-col overflow-y-scroll border-r border-black">
           {/* INFORMATION */}
 
-          <div className="flex h-auto flex-col items-center border-b border-black">
-            <p className="toolong shadow-text pt-12 font-franklin text-2xl font-light">
-              Name
+          <div className="flex h-auto flex-col border-b border-black px-10">
+            <p className="toolong shadow-text max-w-full pt-12 font-franklin text-2xl font-light">
+              {event.title}
             </p>
-            <div className="flex flex-row pt-5">
+            <div className="flex flex-row items-center pt-5">
               <img src={DateSVG} alt="date" className="h-[20px] pl-1"></img>
               <p className="pl-5 font-franklin text-[16px] font-extralight uppercase ">
-                Date
+                {event.date}
               </p>
             </div>
 
-            <div className="flex flex-row pt-4">
-              <img src={LocationSVG} alt="date" className="h-[27px]"></img>
-              <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
-                Location
-              </p>
+            <div className="flex flex-row items-center pt-4">
+              <img src={LocationSVG} alt="where" className="h-[27px]"></img>
+              <div className="flex flex-col">
+                <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
+                  {event.location.label}
+                </p>
+                <p className="pl-4 pt-1 font-franklin text-[14px] font-extralight">
+                  {event.location.address}
+                </p>
+              </div>
             </div>
 
-            <div className="flex flex-row pt-4 pb-8 ">
-              <img src={SaveSVG} alt="date" className="h-[27px]"></img>
+            <button
+              className="flex flex-row items-center pt-4 pb-8"
+              onClick={() => executeAddSavedEvent({ id: event._id })}
+            >
+              <img src={SaveSVG} alt="save" className="h-[27px]"></img>
               <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
                 Save for later
               </p>
-            </div>
+            </button>
           </div>
 
           {/* PRICES */}
 
-          <div className="flex h-auto flex-col gap-4 border-b border-black py-6 pl-12">
+          <div className="flex h-auto flex-1 flex-col gap-4 border-b border-black py-6 pl-12">
             <p className="pb-2 font-fromage text-2xl font-medium">Prices</p>
-            <div className="flex flex-row gap-6">
-              <p className="font-franklin text-[15px] font-light">FRIDAY :</p>
-              <p>€ 65.00</p>
-            </div>
-            <div className="flex flex-row gap-6">
-              <p className="font-franklin text-[15px] font-light">FRIDAY :</p>
-              <p>€ 65.00</p>
-            </div>
-            <div className="flex flex-row gap-6">
-              <p className="font-franklin text-[15px] font-light">FRIDAY :</p>
-              <p>€ 65.00</p>
-            </div>
+            {event.prices.map((price) => {
+              return (
+                <div className="flex flex-row justify-between gap-6 pr-12">
+                  <p className="toolong whitespace-nowrap font-franklin text-[15px] font-light">
+                    {price?.label}
+                  </p>
+                  <p>{price?.price}</p>
+                </div>
+              );
+            })}
+
             <Button
               text="buy tickets"
-              className="mt-4 mb-4 w-[180px] p-4 shadow-custom"
+              className="mt-4 w-[180px] p-4 shadow-custom "
+              disabled={
+                data.data?.event?.prices.some((price) => {
+                  return price?.price === 0;
+                }) || false
+              }
             />
           </div>
 
           {/* TAGS */}
 
           <div className="flex h-auto flex-row flex-wrap gap-4 p-4 pt-6">
-            <Button
-              className="h-[38px] px-3 font-franklin text-[15px] font-light"
-              text="FESTIVAL"
-            />
-            <Button
-              className="h-[38px] px-3 font-franklin text-[15px] font-light"
-              text="FESTIVAL"
-            />
-            <Button
-              className="h-[38px] px-3 font-franklin text-[15px] font-light"
-              text="FESTIVAL"
-            />
+            {event.labels.map((label) => {
+              return (
+                <Button
+                  className="h-[38px] px-3 font-franklin text-[15px] font-light"
+                  text={label || ''}
+                />
+              );
+            })}
           </div>
         </div>
 
         <div className="flex w-[50%] flex-col">
           {/* PICTURE */}
 
-          <div className="flex h-auto flex-col items-center">
-            <img src="" alt="image event" className="object-cover p-6"></img>
+          <div className="flex flex-col items-center overflow-hidden ">
+            <img
+              src={event.picture}
+              alt="image event"
+              className="aspect-square object-cover p-6"
+            ></img>
           </div>
 
           {/* DESCRIPTION */}
 
           <div className="scrollbar-hide flex min-h-[35%] flex-col items-center overflow-auto px-6 pt-4 pb-6">
             <p className="font-franklin text-[15px] font-extralight">
-              Dear citizens,
-              <br />
-              <br />
-              Our 2022 edition was an unbelievable success. Improving last year’s
-              incredible celebrations will be difficult, but we like a challenge! There’s
-              not much we can share with you just yet, but we’re working hard to deliver
-              another unforgettable experience. So expect more artists, new stage designs
-              and even greater sustainability efforts.
-              <br />
-              <br />
-              Paradise City 2023 will be another precious moment to kickstart your summer.
-              A beautiful lush green location in a castle garden surrounded by water,
-              enchanting music from the world's best electronic artists, and above all, a
-              community of like-minded dancers. That's our recipe for creating lasting
-              memories. Good times are coming, and everyone's invited.
+              {event.description}
             </p>
           </div>
         </div>
