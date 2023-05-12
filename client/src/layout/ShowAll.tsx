@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { ObjectId } from 'mongodb';
+import seedrandom from 'seedrandom';
 import Button from '../components/Button';
 import EventCard from '../components/EventCard';
 import ShowOne from '../components/windows/ShowOne';
 import { useSearchFiltersContext, useWindowContext } from '../hooks';
 import { Query, useQuery } from '../graphql';
 import { truthyObject } from '../utils/object';
-import { ObjectId } from 'mongodb';
 import { formatDates } from '../utils/format';
 
 const ShowAll: React.FC = () => {
@@ -17,27 +18,36 @@ const ShowAll: React.FC = () => {
 
   const { searchFilters, searchQuery } = useSearchFiltersContext();
 
-  const [cursor, setCursor] = useState('');
+  const [cursor, setCursor] = useState({ after: '', order: 'ASC' });
 
   const [data, execute] = useQuery({
     query: Query.Events,
     variables: truthyObject({
       query: searchQuery,
       ...searchFilters,
-      after: cursor,
+      ...cursor,
       first: 15,
     }),
     requestPolicy: 'network-only',
+    pause: true,
   });
 
-  useEffect(execute, [searchQuery, cursor]);
+  useEffect(() => {
+    setCursor({ after: '', order: 'ASC' });
+  }, [searchFilters, searchQuery]);
+
+  useEffect(execute, [searchFilters, searchQuery, cursor]);
 
   const events = useMemo(() => {
     return data.data?.events.edges;
   }, [data.fetching]);
 
-  const handleShowMore = () => {
-    setCursor(data.data?.events.pageInfo.endCursor || '');
+  const handlePrevious = () => {
+    setCursor({ after: data.data?.events.pageInfo.startCursor || '', order: 'DESC' });
+  };
+
+  const handleNext = () => {
+    setCursor({ after: data.data?.events.pageInfo.endCursor || '', order: 'ASC' });
   };
 
   return (
@@ -46,7 +56,8 @@ const ShowAll: React.FC = () => {
         {events?.map((e, index) => {
           const event = e!.node;
           const position = index % 2 === 0 ? 1 : 2;
-          const height = Math.floor(Math.random() * (200 - 150) + 150);
+          const height = Math.floor(seedrandom(index.toString())() * (200 - 150) + 150);
+
           return (
             <div
               className="border-overlap-br flex cursor-pointer break-inside-avoid items-center justify-center border border-black p-4"
@@ -66,20 +77,22 @@ const ShowAll: React.FC = () => {
         })}
       </div>
 
-      <div className="flex min-h-[70px] items-center justify-center gap-6">
-        <Button
-          className="w-[150px] py-2"
-          text="previous"
-          onClick={handleShowMore}
-          disabled={!data.data?.events.pageInfo.hasPreviousPage}
-        />
-        <Button
-          className="w-[150px] py-2"
-          text="next"
-          onClick={handleShowMore}
-          disabled={!data.data?.events.pageInfo.hasNextPage}
-        />
-      </div>
+      {!!events?.length && (
+        <div className="flex min-h-[70px] items-center justify-center gap-6">
+          <Button
+            className="w-[150px] py-2"
+            text="previous"
+            onClick={handlePrevious}
+            disabled={!data.data?.events.pageInfo.hasPreviousPage}
+          />
+          <Button
+            className="w-[150px] py-2"
+            text="next"
+            onClick={handleNext}
+            disabled={!data.data?.events.pageInfo.hasNextPage}
+          />
+        </div>
+      )}
     </div>
   );
 };
