@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb';
-import { DateSVG, LocationSVG, SaveSVG } from '../../icons';
+import { DateSVG, LocationSVG, SaveSVG, SavedSVG } from '../../icons';
 import Button from '../Button';
 import { Mutation, Query, useMutation, useQuery } from '../../graphql';
 import { useMemo } from 'react';
@@ -12,9 +12,11 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
   const [data, execute] = useQuery({
     query: Query.Event,
     variables: { id },
+    requestPolicy: 'network-only',
   });
 
   const [, executeAddSavedEvent] = useMutation(Mutation.AddSavedEvent);
+  const [, executeRemoveSavedEvent] = useMutation(Mutation.RemoveSavedEvent);
 
   const event = useMemo(() => {
     const e = data.data?.event;
@@ -35,6 +37,16 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
   if (!event) {
     return null;
   }
+
+  const handleSaveButton = () => {
+    if (event.saved) {
+      executeRemoveSavedEvent({ id: event._id });
+      event.saved = false;
+    } else {
+      executeAddSavedEvent({ id: event._id });
+      event.saved = true;
+    }
+  };
 
   return (
     <>
@@ -69,11 +81,15 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
 
           <button
             className="flex flex-row items-center pt-4 pb-8"
-            onClick={() => executeAddSavedEvent({ id: event._id })}
+            onClick={handleSaveButton}
           >
-            <img src={SaveSVG} alt="save" className="h-[27px]"></img>
-            <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
-              Save for later
+            <img
+              src={event.saved ? SavedSVG : SaveSVG}
+              alt="save"
+              className="h-[27px]"
+            ></img>
+            <p className="pl-4 font-franklin text-[16px] font-extralight uppercase ">
+              {event.saved ? 'Saved' : 'Save for later'}
             </p>
           </button>
         </div>
@@ -164,12 +180,16 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
             </div>
 
             <button
-              className="flex flex-row items-center pt-4 pb-8"
-              onClick={() => executeAddSavedEvent({ id: event._id })}
+              className="flex flex-row items-center pb-8 pt-4"
+              onClick={handleSaveButton}
             >
-              <img src={SaveSVG} alt="save" className="h-[27px]"></img>
-              <p className="pl-4 pt-1 font-franklin text-[16px] font-extralight uppercase ">
-                Save for later
+              <img
+                src={event.saved ? SavedSVG : SaveSVG}
+                alt="save"
+                className="h-[27px]"
+              ></img>
+              <p className="pl-4 font-franklin text-[16px] font-extralight uppercase ">
+                {event.saved ? 'Saved' : 'Save for later'}
               </p>
             </button>
           </div>

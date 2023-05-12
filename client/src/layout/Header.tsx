@@ -35,7 +35,7 @@ const Header: React.FC = () => {
     <>
       {/*    MOBILE     */}
 
-      <div className="relative flex h-[80px] flex-row items-center justify-center border-b border-black lg:hidden">
+      <div className="relative flex min-h-[80px] flex-row items-center justify-center border-b border-black lg:hidden">
         <Logo />
         <Button
           className="absolute right-4 h-[50px] w-[50px] self-center"

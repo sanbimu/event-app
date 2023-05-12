@@ -100,6 +100,7 @@ export type Event = {
   type: EventType;
   status: EventStatus;
   salesCount: Scalars['Int'];
+  saved?: Maybe<Scalars['Boolean']>;
 };
 
 export type EventEdge = {
@@ -208,9 +209,9 @@ export type QueryeventsArgs = {
 };
 
 export type Mutation = {
-  addSavedEvent?: Maybe<User>;
+  addSavedEvent?: Maybe<Scalars['Boolean']>;
   modifyUserInfo?: Maybe<User>;
-  removeSavedEvent?: Maybe<User>;
+  removeSavedEvent?: Maybe<Scalars['Boolean']>;
 };
 
 export type MutationaddSavedEventArgs = {
@@ -319,6 +320,7 @@ export type ResolversTypes = {
   Float: ResolverTypeWrapper<Scalars['Float']>;
   Event: ResolverTypeWrapper<Event>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   EventEdge: ResolverTypeWrapper<EventEdge>;
   EventConnection: ResolverTypeWrapper<EventConnection>;
   Ticket: ResolverTypeWrapper<Ticket>;
@@ -328,7 +330,6 @@ export type ResolversTypes = {
   Info: ResolverTypeWrapper<Info>;
   User: ResolverTypeWrapper<User>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   ContactInfoInput: ContactInfoInput;
   HomeInfoInput: HomeInfoInput;
   BillingInfoInput: BillingInfoInput;
@@ -346,6 +347,7 @@ export type ResolversParentTypes = {
   Float: Scalars['Float'];
   Event: Event;
   Int: Scalars['Int'];
+  Boolean: Scalars['Boolean'];
   EventEdge: EventEdge;
   EventConnection: EventConnection;
   Ticket: Ticket;
@@ -355,7 +357,6 @@ export type ResolversParentTypes = {
   Info: Info;
   User: User;
   PageInfo: PageInfo;
-  Boolean: Scalars['Boolean'];
   ContactInfoInput: ContactInfoInput;
   HomeInfoInput: HomeInfoInput;
   BillingInfoInput: BillingInfoInput;
@@ -404,6 +405,7 @@ export type EventResolvers<
   type?: Resolver<ResolversTypes['EventType'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['EventStatus'], ParentType, ContextType>;
   salesCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  saved?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -526,7 +528,7 @@ export type MutationResolvers<
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
 > = {
   addSavedEvent?: Resolver<
-    Maybe<ResolversTypes['User']>,
+    Maybe<ResolversTypes['Boolean']>,
     ParentType,
     ContextType,
     RequireFields<MutationaddSavedEventArgs, 'id'>
@@ -538,7 +540,7 @@ export type MutationResolvers<
     RequireFields<MutationmodifyUserInfoArgs, 'input'>
   >;
   removeSavedEvent?: Resolver<
-    Maybe<ResolversTypes['User']>,
+    Maybe<ResolversTypes['Boolean']>,
     ParentType,
     ContextType,
     RequireFields<MutationremoveSavedEventArgs, 'id'>
@@ -609,6 +611,7 @@ export interface Loaders<
     type?: LoaderResolver<EventType, Event, {}, TContext>;
     status?: LoaderResolver<EventStatus, Event, {}, TContext>;
     salesCount?: LoaderResolver<Scalars['Int'], Event, {}, TContext>;
+    saved?: LoaderResolver<Maybe<Scalars['Boolean']>, Event, {}, TContext>;
   };
 
   EventEdge?: {

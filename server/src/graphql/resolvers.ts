@@ -1,11 +1,12 @@
 import type { IResolvers } from 'mercurius';
 import type { FilterQuery } from 'mongoose';
+import { ObjectId } from 'mongodb';
+import { GraphQLError } from 'graphql';
 import { Event, User } from '~/database/models';
 import { generateDateFilter } from '~/utils/filters';
 import { ObjectIDScalar } from './scalars';
 import { formatDocumentsPagination, mergeDeep } from './utils';
 import { Order, type Event as IEvent } from './schema';
-import { GraphQLError } from 'graphql';
 
 export const resolvers: IResolvers = {
   ObjectID: ObjectIDScalar,
@@ -19,8 +20,17 @@ export const resolvers: IResolvers = {
         .populate(['savedEvents', 'tickets']);
     },
 
-    event: (_, { id }) => {
-      return Event.findById(id).lean();
+    event: async (_, { id }, { user }) => {
+      const event = await Event.findById(id).lean();
+
+      if (!event) {
+        return null;
+      }
+
+      const events = user.savedEvents.map((e) => e._id.toString());
+      event.saved = events.includes(id.toString());
+
+      return event;
     },
 
     events: async (
@@ -57,13 +67,12 @@ export const resolvers: IResolvers = {
         throw new GraphQLError('EVENT_NOT_FOUND');
       }
 
-      return await User.findOneAndUpdate(
-        { _id: user._id },
+      const doc = await User.findOneAndUpdate(
+        { _id: user._id, savedEvents: { $nin: [event._id] } },
         { $addToSet: { savedEvents: event._id } },
-        { new: true },
-      )
-        .lean()
-        .populate(['savedEvents', 'tickets']);
+      ).lean();
+
+      return !!doc;
     },
 
     modifyUserInfo: async (_, { input }, { user }) => {
@@ -82,13 +91,13 @@ export const resolvers: IResolvers = {
         throw new GraphQLError('EVENT_NOT_FOUND');
       }
 
-      return await User.findOneAndUpdate(
-        { _id: user._id },
+      const doc = await User.findOneAndUpdate(
+        { _id: user._id, savedEvents: { $in: [event._id] } },
         { $pull: { savedEvents: event._id } },
         { new: true },
-      )
-        .lean()
-        .populate(['savedEvents', 'tickets']);
+      ).lean();
+
+      return !!doc;
     },
   },
 };

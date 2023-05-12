@@ -49,6 +49,7 @@ export type Event = {
   picture: Scalars['String'];
   prices: Array<Maybe<Prices>>;
   salesCount: Scalars['Int'];
+  saved?: Maybe<Scalars['Boolean']>;
   status: EventStatus;
   stock: Scalars['Int'];
   title: Scalars['String'];
@@ -131,9 +132,9 @@ export type ModifyUserInfoInput = {
 };
 
 export type Mutation = {
-  addSavedEvent?: Maybe<User>;
+  addSavedEvent?: Maybe<Scalars['Boolean']>;
   modifyUserInfo?: Maybe<User>;
-  removeSavedEvent?: Maybe<User>;
+  removeSavedEvent?: Maybe<Scalars['Boolean']>;
 };
 
 

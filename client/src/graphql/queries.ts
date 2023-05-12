@@ -105,6 +105,7 @@ export const Event = gql`
       type
       status
       salesCount
+      saved
     }
   }
 `;

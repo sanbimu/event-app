@@ -10,8 +10,12 @@ export const ModifyUserInfo = gql`
 
 export const AddSavedEvent = gql`
   mutation AddSavedEvent($id: ObjectID!) {
-    addSavedEvent(id: $id) {
-      _id
-    }
+    addSavedEvent(id: $id)
+  }
+`;
+
+export const RemoveSavedEvent = gql`
+  mutation RemoveSavedEvent($id: ObjectID!) {
+    removeSavedEvent(id: $id)
   }
 `;

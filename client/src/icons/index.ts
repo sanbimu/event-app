@@ -6,3 +6,4 @@ export { default as GoogleSVG } from './google.svg?inline';
 export { default as DateSVG } from './date.svg?inline';
 export { default as LocationSVG } from './location.svg?inline';
 export { default as SaveSVG } from './save.svg?inline';
+export { default as SavedSVG } from './saved.svg?inline';

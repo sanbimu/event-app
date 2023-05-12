@@ -64,6 +64,7 @@ type Event {
   type: EventType!
   status: EventStatus!
   salesCount: Int!
+  saved: Boolean
 }
 
 type EventEdge {
@@ -166,7 +167,7 @@ type Query {
 }
 
 type Mutation {
-  addSavedEvent(id: ObjectID!): User
+  addSavedEvent(id: ObjectID!): Boolean
   modifyUserInfo(input: ModifyUserInfoInput!): User
-  removeSavedEvent(id: ObjectID!): User
+  removeSavedEvent(id: ObjectID!): Boolean
 }
