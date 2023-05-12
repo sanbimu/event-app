@@ -40,13 +40,6 @@ export type ContactInfoInput = {
   phoneNumber?: InputMaybe<Scalars['String']>;
 };
 
-export enum Date {
-  NextWeek = 'NEXT_WEEK',
-  ThisWeekend = 'THIS_WEEKEND',
-  Today = 'TODAY',
-  Tomorrow = 'TOMORROW'
-}
-
 export type Event = {
   _id: Scalars['ObjectID'];
   description: Scalars['String'];
@@ -67,6 +60,13 @@ export type EventConnection = {
   edges: Array<Maybe<EventEdge>>;
   pageInfo: PageInfo;
 };
+
+export enum EventDate {
+  NextWeek = 'NEXT_WEEK',
+  ThisWeekend = 'THIS_WEEKEND',
+  Today = 'TODAY',
+  Tomorrow = 'TOMORROW'
+}
 
 export type EventEdge = {
   cursor: Scalars['String'];
@@ -182,12 +182,13 @@ export type QueryEventArgs = {
 
 export type QueryEventsArgs = {
   after?: InputMaybe<Scalars['ObjectID']>;
-  date?: InputMaybe<Date>;
+  date?: InputMaybe<EventDate>;
   first?: InputMaybe<Scalars['Int']>;
   label?: InputMaybe<Scalars['String']>;
   order?: InputMaybe<Order>;
   query?: InputMaybe<Scalars['String']>;
   saved?: InputMaybe<Scalars['Boolean']>;
+  type?: InputMaybe<Scalars['String']>;
 };
 
 export type Ticket = {

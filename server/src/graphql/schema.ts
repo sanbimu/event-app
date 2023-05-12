@@ -41,7 +41,7 @@ export enum Order {
   DESC = 'DESC',
 }
 
-export enum Date {
+export enum EventDate {
   TODAY = 'TODAY',
   TOMORROW = 'TOMORROW',
   THIS_WEEKEND = 'THIS_WEEKEND',
@@ -201,7 +201,7 @@ export type QueryeventsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   after?: InputMaybe<Scalars['ObjectID']>;
   query?: InputMaybe<Scalars['String']>;
-  date?: InputMaybe<Date>;
+  date?: InputMaybe<EventDate>;
   label?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
   saved?: InputMaybe<Scalars['Boolean']>;
@@ -309,7 +309,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   ObjectID: ResolverTypeWrapper<Scalars['ObjectID']>;
   Order: Order;
-  Date: Date;
+  EventDate: EventDate;
   EventStatus: EventStatus;
   EventLabel: EventLabel;
   EventType: EventType;

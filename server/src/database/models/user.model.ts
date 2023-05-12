@@ -1,8 +1,6 @@
 import type { User as IUser } from '~/graphql/schema';
 import { Schema, model } from 'mongoose';
 import { Provider } from '~/shared/types';
-import { EventSchema } from './event.model';
-import { TicketSchema } from './ticket.model';
 
 const stringDefault = {
   type: String,
@@ -47,8 +45,20 @@ export const UserSchema = new Schema<IUser>(
       type: String,
       required: true,
     },
-    savedEvents: [EventSchema],
-    tickets: [TicketSchema],
+    savedEvents: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Event',
+        default: [],
+      },
+    ],
+    tickets: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Ticket',
+        default: [],
+      },
+    ],
   },
   {
     timestamps: true,
