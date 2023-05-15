@@ -147,8 +147,8 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
           <p className="pb-2 font-fromage text-2xl font-medium">Prices</p>
           {event.prices.map((ticket) => {
             return (
-              <div className="flex flex-row justify-between gap-6 pr-12">
-                <p className="toolong whitespace-nowrap font-franklin text-[15px] font-light">
+              <div className="flex flex-row justify-between gap-6 pr-12 font-franklin">
+                <p className="toolong whitespace-nowrap text-[15px] font-light">
                   {ticket?.label}
                 </p>
                 <p className="whitespace-nowrap">{ticket?.formattedPrice}</p>
@@ -252,12 +252,19 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
             <p className="pb-2 font-fromage text-2xl font-medium">Prices</p>
             {event.prices.map((ticket) => {
               return (
-                <div className="flex flex-row justify-between gap-6 pr-12">
-                  <p className="toolong whitespace-nowrap font-franklin text-[15px] font-light">
+                <div className="flex flex-row justify-between gap-6 pr-12 font-franklin">
+                  <p className="toolong whitespace-nowrap text-[15px] font-light">
                     {ticket?.label}
                   </p>
                   <p className="whitespace-nowrap">{ticket?.formattedPrice}</p>
-                  <select name="tickets" className="border border-black bg-background">
+                  <select
+                    name="tickets"
+                    className="border border-black bg-background"
+                    onChange={(e) => handleSelectTicket(ticket, Number(e.target.value))}
+                  >
+                    <option value="0" selected>
+                      0
+                    </option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -281,6 +288,7 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
                   return price?.price === 0;
                 }) || false
               }
+              onClick={handleAddToCart}
             />
           </div>
 

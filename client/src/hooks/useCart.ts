@@ -1,6 +1,6 @@
 import { useLocalStorage } from './useLocalStorage';
 
-interface Event {
+export interface Event {
   id: string;
   tickets: Ticket[];
 }
@@ -13,6 +13,16 @@ interface Ticket {
 
 export function useCart() {
   const [cartItems, setCartItems] = useLocalStorage<Event[]>('cart', []);
+
+  const getCartTotal = (): number => {
+    return cartItems.reduce((total, event) => {
+      const eventTotal = event.tickets.reduce(
+        (subtotal, ticket) => subtotal + ticket.price * ticket.amount,
+        0,
+      );
+      return total + eventTotal;
+    }, 0);
+  };
 
   const getEventTotal = (eventId: string): number => {
     const event = cartItems.find((cartItem) => cartItem.id === eventId);
@@ -96,6 +106,7 @@ export function useCart() {
     cartItems,
     addTicketToCart,
     removeTicketFromCart,
+    getCartTotal,
     getEventTotal,
     removeAllTickets,
     clearCart,
