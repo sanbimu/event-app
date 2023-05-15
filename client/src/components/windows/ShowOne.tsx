@@ -1,10 +1,12 @@
+import { useMemo, useState } from 'react';
 import { ObjectId } from 'mongodb';
 import { DateSVG, LocationSVG, SaveSVG, SavedSVG } from '../../icons';
 import Button from '../Button';
-import { Mutation, Query, useMutation, useQuery } from '../../graphql';
-import { useMemo } from 'react';
+import { Mutation, Prices, Query, useMutation, useQuery } from '../../graphql';
 import { formatCurrency, formatDates } from '../../utils/format';
 import { filterButtons } from '../../shared/constants';
+import { useCart } from '../../hooks/useCart';
+
 interface ShowOneProps {
   id: ObjectId;
 }
@@ -19,6 +21,9 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
   const [, executeAddSavedEvent] = useMutation(Mutation.AddSavedEvent);
   const [, executeRemoveSavedEvent] = useMutation(Mutation.RemoveSavedEvent);
 
+  const { addTicketToCart } = useCart();
+  const [tickets, setTickets] = useState<any[]>([]);
+
   const event = useMemo(() => {
     const e = data.data?.event;
 
@@ -29,8 +34,8 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
     return {
       ...e,
       date: formatDates(e.fromDate, e.toDate),
-      prices: e.prices.map((price) => {
-        return { label: price?.label, price: formatCurrency(price?.price || 0) };
+      prices: e.prices.map((ticket) => {
+        return { ...ticket!, formattedPrice: formatCurrency(ticket?.price || 0) };
       }),
     };
   }, [data.data]);
@@ -46,6 +51,31 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
     } else {
       executeAddSavedEvent({ id: event._id });
       event.saved = true;
+    }
+  };
+
+  const handleSelectTicket = (ticket: Prices, amount: number) => {
+    const existingTicketIndex = tickets.findIndex((item) => item.label === ticket.label);
+
+    if (existingTicketIndex !== -1) {
+      tickets[existingTicketIndex] = {
+        ...tickets[existingTicketIndex],
+        amount: amount,
+      };
+      setTickets(tickets);
+    } else {
+      const newItem = {
+        label: ticket.label,
+        price: ticket.price,
+        amount: amount,
+      };
+      setTickets((prevTickets) => [...prevTickets, newItem]);
+    }
+  };
+
+  const handleAddToCart = () => {
+    for (const ticket of tickets) {
+      addTicketToCart(event._id.toString(), ticket);
     }
   };
 
@@ -115,17 +145,21 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
 
         <div className="flex h-auto flex-col gap-4 border-b border-black py-6 pl-8">
           <p className="pb-2 font-fromage text-2xl font-medium">Prices</p>
-          {event.prices.map((price) => {
+          {event.prices.map((ticket) => {
             return (
               <div className="flex flex-row justify-between gap-6 pr-12">
                 <p className="toolong whitespace-nowrap font-franklin text-[15px] font-light">
-                  {price?.label}
+                  {ticket?.label}
                 </p>
-                <p className="whitespace-nowrap font-franklin ">{price?.price}</p>
+                <p className="whitespace-nowrap">{ticket?.formattedPrice}</p>
                 <select
                   name="tickets"
-                  className="border border-black bg-background font-franklin"
+                  className="border border-black bg-background"
+                  onChange={(e) => handleSelectTicket(ticket, Number(e.target.value))}
                 >
+                  <option value="0" selected>
+                    0
+                  </option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -149,6 +183,7 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
                 return price?.price === 0;
               }) || false
             }
+            onClick={handleAddToCart}
           />
         </div>
 
@@ -215,18 +250,14 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
 
           <div className="flex h-auto flex-1 flex-col gap-4 border-b border-black py-6 pl-12">
             <p className="pb-2 font-fromage text-2xl font-medium">Prices</p>
-            {event.prices.map((price) => {
+            {event.prices.map((ticket) => {
               return (
                 <div className="flex flex-row justify-between gap-6 pr-12">
                   <p className="toolong whitespace-nowrap font-franklin text-[15px] font-light">
-                    {price?.label}
+                    {ticket?.label}
                   </p>
-                  <p className="whitespace-nowrap">{price?.price}</p>
-                  <select
-                    name="tickets"
-                    id="search"
-                    className="border border-black bg-background"
-                  >
+                  <p className="whitespace-nowrap">{ticket?.formattedPrice}</p>
+                  <select name="tickets" className="border border-black bg-background">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
