@@ -9,7 +9,10 @@ const Window: React.FC = () => {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 top-0 z-[100] flex h-screen w-screen items-center justify-center overflow-hidden bg-dark-grey bg-opacity-50">
-      <div className="relative border border-black bg-background" ref={windowRef}>
+      <div
+        className="animate__animated animate__fadeInUp animate__faster relative border border-black bg-background"
+        ref={windowRef}
+      >
         <div>
           <button
             onClick={closeWindow}

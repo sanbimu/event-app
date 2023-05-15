@@ -10,9 +10,6 @@ export function Cart() {
       <div className="flex flex-col md:px-12 lg:flex-row lg:justify-between lg:px-0">
         <div className="flex flex-col">
           <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
         </div>
 
         <div className="flex h-min flex-col gap-4 border-black pl-6 pb-6 lg:border-b lg:border-l lg:pr-12">

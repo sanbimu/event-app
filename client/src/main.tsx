@@ -9,6 +9,7 @@ import {
   SearchFiltersProvider,
 } from './providers';
 import './index.css';
+import 'animate.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <GraphQLProvider>
