@@ -4,6 +4,7 @@ import { Token } from './pages/Token';
 import { Settings } from './pages/Settings';
 import { Search } from './pages/Search';
 import { MyEvents } from './pages/MyEvents';
+import { Cart } from './pages/Cart';
 import Header from './layout/Header';
 import Window from './layout/Window';
 import NavMobile from './layout/NavMobile';
@@ -30,6 +31,7 @@ export function Router() {
         <Route element={<WithHeader />}>
           <Route path="/" index element={<Index />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/cart" element={<Cart />} />
           <Route element={<Protected />}>
             <Route path="/my-events" element={<MyEvents />} />
             <Route path="/settings" element={<Settings />} />

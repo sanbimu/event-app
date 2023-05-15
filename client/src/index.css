@@ -22,7 +22,7 @@ body {
   }
 
   .shadow-text {
-    @apply shadow-[inset_0_-0.93em_0_rgb(228,188,181)];
+    @apply h-min shadow-[inset_0_-0.93em_0_rgb(228,188,181)];
   }
 
   @screen md {

@@ -121,13 +121,28 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
                 <p className="toolong whitespace-nowrap font-franklin text-[15px] font-light">
                   {price?.label}
                 </p>
-                <p>{price?.price}</p>
+                <p className="whitespace-nowrap font-franklin ">{price?.price}</p>
+                <select
+                  name="tickets"
+                  className="border border-black bg-background font-franklin"
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
               </div>
             );
           })}
 
           <Button
-            text="buy tickets"
+            text="add to cart"
             className="mt-4 w-[180px] p-4 shadow-custom"
             disabled={
               data.data?.event?.prices.some((price) => {
@@ -206,13 +221,29 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
                   <p className="toolong whitespace-nowrap font-franklin text-[15px] font-light">
                     {price?.label}
                   </p>
-                  <p>{price?.price}</p>
+                  <p className="whitespace-nowrap">{price?.price}</p>
+                  <select
+                    name="tickets"
+                    id="search"
+                    className="border border-black bg-background"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
                 </div>
               );
             })}
 
             <Button
-              text="buy tickets"
+              text="add to cart"
               className="mt-4 w-[180px] p-4 shadow-custom "
               disabled={
                 data.data?.event?.prices.some((price) => {

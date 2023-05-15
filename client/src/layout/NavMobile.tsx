@@ -41,6 +41,11 @@ const NavMobile: React.FC = () => {
     setShowNav(false);
   };
 
+  const handleCart = () => {
+    navigate('/cart');
+    setShowNav(false);
+  };
+
   const handlePrivacy = () => {
     openWindow(<PrivacyPolicy />);
   };
@@ -117,6 +122,7 @@ const NavMobile: React.FC = () => {
           <Button
             className="text-md mt-6 w-[190px] p-[0.60rem] font-franklin shadow-custom"
             text="cart"
+            onClick={handleCart}
           />
         </div>
 

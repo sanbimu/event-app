@@ -106,6 +106,7 @@ const Header: React.FC = () => {
           <Button
             className="mt-6 w-[150px] p-[0.60rem] font-franklin text-sm shadow-custom"
             text="cart"
+            onClick={() => navigate('/cart')}
           />
         </div>
         <div className="flex h-[28vh] flex-col justify-center pl-6 font-franklin text-xxs leading-relaxed text-dark-grey">
