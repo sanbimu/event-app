@@ -4,6 +4,7 @@ import Button from '../Button';
 import { Mutation, Query, useMutation, useQuery } from '../../graphql';
 import { useMemo } from 'react';
 import { formatCurrency, formatDates } from '../../utils/format';
+import { filterButtons } from '../../shared/constants';
 interface ShowOneProps {
   id: ObjectId;
 }
@@ -80,7 +81,7 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
           </div>
 
           <button
-            className="flex flex-row items-center pt-4 pb-8"
+            className="flex flex-row items-center pb-8 pt-4"
             onClick={handleSaveButton}
           >
             <img
@@ -139,11 +140,12 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
         {/* TAGS */}
 
         <div className="flex h-auto flex-row flex-wrap gap-4 p-4">
-          {event.labels.map((label) => {
+          {event.labels.map((value) => {
+            const button = filterButtons.find((b) => b.value === value);
             return (
               <Button
                 className="h-[38px] px-3 font-franklin text-[15px] font-light"
-                text={label || ''}
+                text={button?.label || ''}
               />
             );
           })}
@@ -223,11 +225,12 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
           {/* TAGS */}
 
           <div className="flex h-auto flex-row flex-wrap gap-4 p-4 pt-6">
-            {event.labels.map((label) => {
+            {event.labels.map((value) => {
+              const button = filterButtons.find((b) => b.value === value);
               return (
                 <Button
                   className="h-[38px] px-3 font-franklin text-[15px] font-light"
-                  text={label || ''}
+                  text={button?.label || ''}
                 />
               );
             })}
@@ -247,7 +250,7 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
 
           {/* DESCRIPTION */}
 
-          <div className="scrollbar-hide flex min-h-[35%] flex-col items-center overflow-auto px-6 pt-4 pb-6">
+          <div className="scrollbar-hide flex min-h-[35%] flex-col items-center overflow-auto px-6 pb-6 pt-4">
             <p className="font-franklin text-[15px] font-extralight">
               {event.description}
             </p>
