@@ -1,0 +1,45 @@
+{
+  "header": {
+    "settings": "SETTINGS",
+    "logout": "LOGOUT",
+
+    "language": "LANGUAGE",
+    "cart": "CART",
+
+    "cookie-policy": "Cookie Policy",
+    "terms": "Terms & Conditions",
+    "faq": "F.A.Q.",
+    "contact": "Contact Support"
+  },
+  "search": {
+    "text": "search",
+    "TODAY": "TODAY",
+    "TOMORROW": "TOMORROW",
+    "THIS_WEEKEND": "THIS WEEKEND",
+    "NEXT_WEEK": "NEXT WEEK",
+    "FREE": "FREE",
+    "FESTIVAL": "FESTIVAL",
+    "CONCERT": "CONCERT",
+    "PARTY": "PARTY",
+    "JAZZ_BLUES": "JAZZ/BLUES",
+    "CLASSICAL": "CLASSICAL",
+    "ELECTRONIC": "ELECTRONIC",
+    "CULTURAL": "CULTURAL",
+    "HIPHOP_RAP": "HIP-HOP/RAP",
+    "METAL": "METAL",
+    "POP": "POP",
+    "OPERA": "OPERA",
+    "FOLK_ACOUSTIC": "FOLK/ACOUSTIC",
+    "OTHER": "OTHER"
+  },
+  "my-events": {
+    "button": "my events",
+    "bought": "achats",
+    "saved": "enregistrés"
+  },
+  "sign-in": {
+    "button": "SIGN IN/SIGN UP",
+    "welcome": "WELCOME TO",
+    "continue-with": "CONTINUE WITH {{provider}}"
+  }
+}
