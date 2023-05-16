@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
 export interface Event {
@@ -14,7 +15,7 @@ interface Ticket {
 export function useCart() {
   const [cartItems, setCartItems] = useLocalStorage<Event[]>('cart', []);
 
-  const getCartTotal = (): number => {
+  const cartTotal = useMemo(() => {
     return cartItems.reduce((total, event) => {
       const eventTotal = event.tickets.reduce(
         (subtotal, ticket) => subtotal + ticket.price * ticket.amount,
@@ -22,7 +23,7 @@ export function useCart() {
       );
       return total + eventTotal;
     }, 0);
-  };
+  }, [cartItems]);
 
   const getEventTotal = (eventId: string): number => {
     const event = cartItems.find((cartItem) => cartItem.id === eventId);
@@ -62,53 +63,16 @@ export function useCart() {
     setCartItems(cartItems);
   };
 
-  const removeTicketFromCart = (eventId: string, label: string) => {
-    const updatedItems = cartItems.map((cartItem) => {
-      if (cartItem.id === eventId) {
-        const updatedTickets = cartItem.tickets.map((existingTicket) => {
-          if (existingTicket.label === label) {
-            return {
-              ...existingTicket,
-              amount: existingTicket.amount - 1,
-            };
-          }
-          return existingTicket;
-        });
-
-        return {
-          ...cartItem,
-          tickets: updatedTickets.filter((ticket) => ticket.amount > 0),
-        };
-      }
-      return cartItem;
-    });
+  const removeEvent = (eventId: string) => {
+    const updatedItems = cartItems.filter((cartItem) => cartItem.id !== eventId);
     setCartItems(updatedItems);
-  };
-
-  const removeAllTickets = (itemId: string) => {
-    const updatedItems = cartItems.map((cartItem) => {
-      if (cartItem.id === itemId) {
-        return {
-          ...cartItem,
-          tickets: [],
-        };
-      }
-      return cartItem;
-    });
-    setCartItems(updatedItems);
-  };
-
-  const clearCart = () => {
-    setCartItems([]);
   };
 
   return {
     cartItems,
-    addTicketToCart,
-    removeTicketFromCart,
-    getCartTotal,
+    cartTotal,
     getEventTotal,
-    removeAllTickets,
-    clearCart,
+    addTicketToCart,
+    removeEvent,
   };
 }

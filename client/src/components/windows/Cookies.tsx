@@ -1,7 +1,6 @@
 import React from 'react';
 import { useCookieContext, useWindowContext } from '../../hooks';
 import Button from '../Button';
-import Circle from '../shapes/Circle';
 import PrivacyPolicy from './PrivacyPolicy';
 
 const CookieModal: React.FC = () => {
@@ -9,7 +8,7 @@ const CookieModal: React.FC = () => {
   const { closeCookies } = useCookieContext();
 
   const handlePrivacy = () => {
-    openWindow({ content: <PrivacyPolicy /> });
+    openWindow(<PrivacyPolicy />);
   };
 
   return (
@@ -39,12 +38,12 @@ const CookieModal: React.FC = () => {
 
           <div className="flex flex-row items-center justify-center gap-2 md:gap-8 lg:pb-3">
             <Button
-              className="py-2 px-3 md:py-3 md:px-6"
+              className="px-3 py-2 md:px-6 md:py-3"
               text="Privacy Policy"
               onClick={handlePrivacy}
             ></Button>
             <Button
-              className="py-2 px-3 md:py-3 md:px-6"
+              className="px-3 py-2 md:px-6 md:py-3"
               text="OK"
               onClick={closeCookies}
             ></Button>
