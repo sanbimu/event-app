@@ -1,11 +1,14 @@
 import { useHorizontalScroll } from '../hooks';
 import BannerMedium from '../layout/BannerMedium';
 import BannerSmall from '../layout/BannerSmall';
+import { useTranslation } from 'react-i18next';
 import MyEvent from '../layout/MyEvent';
 import { NextSVG } from '../icons';
 import { Query, useQuery } from '../graphql';
 
 export function MyEvents() {
+  const { t } = useTranslation();
+
   const [dataSaved] = useQuery({
     query: Query.Events,
     variables: { saved: true },
@@ -15,7 +18,7 @@ export function MyEvents() {
   const scrollRef = useHorizontalScroll<HTMLDivElement>();
   return (
     <>
-      <BannerMedium title="my events" fontMobile="text-[64px]" />
+      <BannerMedium title={t('my-events.bought')} fontMobile="text-[64px]" />
 
       <div
         id="myevents"

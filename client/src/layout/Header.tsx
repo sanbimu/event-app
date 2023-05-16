@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Logo from '../components/Logo';
 import Button from '../components/Button';
 import { FacebookSVG, InstagramSVG } from '../icons';
@@ -11,13 +12,11 @@ import FAQ from '../components/windows/FAQ';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { openWindow } = useWindowContext();
+  const { t, i18n } = useTranslation();
   const { isAuthorized, user, signOut } = useAuthContext();
-  const { setShowNav } = useNavContext();
 
-  const handleNav = () => {
-    setShowNav(true);
-  };
+  const { openWindow } = useWindowContext();
+  const { setShowNav } = useNavContext();
 
   const handlePrivacy = () => {
     openWindow(<PrivacyPolicy />);
@@ -31,6 +30,16 @@ const Header: React.FC = () => {
     openWindow(<FAQ />);
   };
 
+  const [languagesMenu, setLanguagesMenu] = useState(false);
+
+  const toggleLanguagesMenu = () => {
+    setLanguagesMenu((prev) => !prev);
+  };
+
+  const changeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+  };
+
   return (
     <>
       {/*    MOBILE     */}
@@ -39,7 +48,7 @@ const Header: React.FC = () => {
         <Logo />
         <Button
           className="absolute right-4 h-[50px] w-[50px] self-center"
-          onClick={handleNav}
+          onClick={() => setShowNav(true)}
         >
           <div className="flex flex-col items-center gap-2">
             <div className="h-[2px] w-[30px] bg-brown"></div>
@@ -67,45 +76,60 @@ const Header: React.FC = () => {
 
               <div className="flex flex-col items-start gap-3 pl-6 font-franklin text-sm text-dark-grey">
                 <button
-                  className=" hover:text-dark-pink"
+                  className="uppercase hover:text-dark-pink"
                   onClick={() => navigate('/my-events')}
                 >
-                  - MY EVENTS
+                  - {t('my-events.button')}
                 </button>
                 <button
                   className=" hover:text-dark-pink"
                   onClick={() => navigate('/settings')}
                 >
-                  - SETTINGS
+                  - {t('header.settings')}
                 </button>
                 <button className=" hover:text-dark-pink" onClick={signOut}>
-                  - LOG OUT
+                  - {t('header.logout')}
                 </button>
               </div>
             </>
           ) : (
             <Button
               className="w-[150px] p-[0.60rem] font-franklin text-sm shadow-custom"
-              text="sign in / sign up"
+              text={t('sign-in.button')!}
               onClick={() => openWindow(<ContinueWith />)}
             />
           )}
           <Button
             className="mt-6 w-[150px] p-[0.60rem] font-franklin text-sm shadow-custom"
-            text="search"
+            text={t('search.text')!}
             onClick={() => navigate('/search')}
           />
           <Button
             className="mt-6 w-[150px] p-[0.60rem] font-franklin text-sm shadow-custom"
-            text="language"
+            text={t('header.language')!}
+            onClick={toggleLanguagesMenu}
           />
-          {/* <div className="mt-5 flex flex-col items-start gap-3 pb-0 pl-6 font-franklin text-sm text-dark-grey">
-            <button className=" hover:text-dark-pink">- SAVED EVENTS</button>
-            <button className=" hover:text-dark-pink">- SETTINGS</button>
-          </div> */}
+
+          {languagesMenu && (
+            <div className="mt-5 flex flex-col items-start gap-3 pb-0 pl-6 font-franklin text-sm text-dark-grey">
+              <button
+                className="uppercase hover:text-dark-pink"
+                onClick={() => changeLanguage('en')}
+              >
+                english
+              </button>
+              <button
+                className="uppercase hover:text-dark-pink"
+                onClick={() => changeLanguage('fr')}
+              >
+                français
+              </button>
+            </div>
+          )}
+
           <Button
             className="mt-6 w-[150px] p-[0.60rem] font-franklin text-sm shadow-custom"
-            text="cart"
+            text={t('header.cart')!}
             onClick={() => navigate('/cart')}
           />
         </div>
@@ -115,21 +139,21 @@ const Header: React.FC = () => {
             className="pb-1 pt-[0.10rem] text-left hover:text-dark-pink"
             onClick={handlePrivacy}
           >
-            Cookie Policy
+            {t('header.cookie-policy')}
           </button>
           <button
             className="pb-1 pt-[0.10rem] text-left hover:text-dark-pink"
             onClick={handleTerms}
           >
-            Terms & Conditions
+            {t('header.terms')}
           </button>
           <button
             className="pb-1 pt-[0.10rem] text-left hover:text-dark-pink"
             onClick={handleFAQ}
           >
-            FAQ
+            {t('header.faq')}
           </button>
-          <p className="pb-1">Contact Support</p>
+          <p className="pb-1">{t('header.contact')}</p>
           <div className="flex flex-row gap-2 pt-1">
             <img src={FacebookSVG} alt="facebook" className="h-[20px]"></img>
             <img src={InstagramSVG} alt="instagram" className="h-[20px]"></img>

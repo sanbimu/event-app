@@ -92,7 +92,7 @@ export const filterButtons: SearchFilter[] = [
   },
   {
     label: 'FOLK/ACOUSTIC',
-    value: 'FOLK_ACOUTIC',
+    value: 'FOLK_ACOUSTIC',
     type: 'label',
   },
   {

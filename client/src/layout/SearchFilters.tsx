@@ -1,10 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Searchbar from '../components/Searchbar';
 import Button from '../components/Button';
 import { useSearchFiltersContext } from '../hooks';
 import { SearchFilter, filterButtons } from '../shared/constants';
 
 const SearchFilters: React.FC = () => {
+  const { t } = useTranslation();
   const { searchFilters, setSearchFilters, setSearchQuery } = useSearchFiltersContext();
 
   const handleFilterClick = (filter: SearchFilter) => {
@@ -25,7 +27,7 @@ const SearchFilters: React.FC = () => {
             <Button
               key={filter.value}
               className={`h-[38px] px-3 ${isActive ? 'text-dark-pink' : ''}`}
-              text={filter.label}
+              text={t(`search.${filter.value}`)!}
               onClick={() => handleFilterClick(filter)}
             />
           );

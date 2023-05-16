@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from '../components/Button';
 import Logo from '../components/Logo';
 import {
@@ -13,11 +13,14 @@ import { useNavigate } from 'react-router-dom';
 import PrivacyPolicy from '../components/windows/PrivacyPolicy';
 import TermsConditions from '../components/windows/TermsConditions';
 import FAQ from '../components/windows/FAQ';
+import { useState } from 'react';
 
 const NavMobile: React.FC = () => {
   const navigate = useNavigate();
-  const { openWindow } = useWindowContext();
+  const { t, i18n } = useTranslation();
   const { isAuthorized, user, signOut } = useAuthContext();
+
+  const { openWindow } = useWindowContext();
   const { setShowNav } = useNavContext();
 
   const navRef = useClickOutside(() => setShowNav(false));
@@ -58,6 +61,16 @@ const NavMobile: React.FC = () => {
     openWindow(<FAQ />);
   };
 
+  const [languagesMenu, setLanguagesMenu] = useState(false);
+
+  const toggleLanguagesMenu = () => {
+    setLanguagesMenu((prev) => !prev);
+  };
+
+  const changeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+  };
+
   return (
     <div className="fixed bottom-0 left-0 right-0 top-0 z-[90] flex h-screen w-screen justify-end overflow-hidden bg-black bg-opacity-30 lg:hidden">
       <div
@@ -74,7 +87,7 @@ const NavMobile: React.FC = () => {
           <Logo />
         </div>
 
-        <div className="flex h-[60%] flex-col items-end border-b border-l border-black pr-12 pt-10">
+        <div className="scrollbar-hide flex h-[60%] flex-col items-end overflow-y-scroll border-b border-l border-black py-10 pr-12">
           {isAuthorized ? (
             <div className="flex flex-col gap-1">
               <Button className="text-md mb-4 w-[190px] p-[0.60rem] font-franklin shadow-custom">
@@ -85,43 +98,58 @@ const NavMobile: React.FC = () => {
               </Button>
 
               <div className="text-md flex flex-col items-start  gap-2 pl-8 font-franklin text-dark-grey">
-                <button className=" hover:text-dark-pink" onClick={handleEvents}>
-                  - MY EVENTS
+                <button className="uppercase hover:text-dark-pink" onClick={handleEvents}>
+                  - {t('my-events.button')}
                 </button>
-                <button className=" hover:text-dark-pink" onClick={handleSettings}>
-                  - SETTINGS
+                <button
+                  className="uppercase hover:text-dark-pink"
+                  onClick={handleSettings}
+                >
+                  - {t('header.settings')}
                 </button>
-                <button className=" hover:text-dark-pink" onClick={signOut}>
-                  - LOG OUT
+                <button className="uppercase hover:text-dark-pink" onClick={signOut}>
+                  - {t('header.logout')}
                 </button>
               </div>
             </div>
           ) : (
             <Button
-              className="w-[190px] p-[0.60rem] shadow-custom"
+              className="text-md w-[190px] p-[0.60rem] font-franklin shadow-custom"
+              text={t('sign-in.button')!}
               onClick={() => openWindow(<ContinueWith />)}
-            >
-              <p className="text-md font-franklin">SIGN IN / SIGN UP</p>
-            </Button>
+            />
           )}
           <Button
             className="text-md mt-6 w-[190px] p-[0.60rem] font-franklin shadow-custom"
+            text={t('search.text')!}
             onClick={handleSearch}
-            text="search"
           />
+          <Button
+            className="text-md mt-6 w-[190px] p-[0.60rem] font-franklin shadow-custom"
+            text={t('header.language')!}
+            onClick={toggleLanguagesMenu}
+          />
+
+          {languagesMenu && (
+            <div className="mt-5 flex flex-col items-start gap-3 pb-0 pl-6 font-franklin text-sm text-dark-grey">
+              <button
+                className="uppercase hover:text-dark-pink"
+                onClick={() => changeLanguage('en')}
+              >
+                english
+              </button>
+              <button
+                className="uppercase hover:text-dark-pink"
+                onClick={() => changeLanguage('fr')}
+              >
+                français
+              </button>
+            </div>
+          )}
 
           <Button
             className="text-md mt-6 w-[190px] p-[0.60rem] font-franklin shadow-custom"
-            text="language"
-          />
-          {/* <div className="flex flex-col items-start gap-2 pb-0 pl-6 font-franklin text-sm text-dark-grey">
-            <button className=" hover:text-dark-pink">- SAVED EVENTS</button>
-            <button className=" hover:text-dark-pink">- SETTINGS</button>
-          </div> */}
-
-          <Button
-            className="text-md mt-6 w-[190px] p-[0.60rem] font-franklin shadow-custom"
-            text="cart"
+            text={t('header.cart')!}
             onClick={handleCart}
           />
         </div>
@@ -132,21 +160,23 @@ const NavMobile: React.FC = () => {
             className=" pt-[0.15rem] text-left hover:text-dark-pink"
             onClick={handlePrivacy}
           >
-            Cookie Policy
+            {t('header.cookie-policy')}
           </button>
           <button
             className="pt-[0.15rem] text-left hover:text-dark-pink"
             onClick={handleTerms}
           >
-            Terms & Conditions
+            {t('header.terms')}
           </button>
           <button
             className="pt-[0.15rem] text-left hover:text-dark-pink"
             onClick={handleFAQ}
           >
-            FAQ
+            {t('header.faq')}
           </button>
-          <p className="font-franklin text-[15px] text-dark-grey">Contact Support</p>
+          <p className="font-franklin text-[15px] text-dark-grey">
+            {t('header.contact')}
+          </p>
           <div className="flex flex-row gap-2 pt-2">
             <img src={FacebookSVG} alt="facebook" className="h-[20px]"></img>
             <img src={InstagramSVG} alt="instagram" className="h-[20px]"></img>

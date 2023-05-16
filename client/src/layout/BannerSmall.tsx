@@ -1,14 +1,17 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Triangle from '../components/shapes/Triangle';
 
 const BannerSmall: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       {/* MOBILE*/}
 
       <div className="relative flex min-h-[120px] flex-col overflow-hidden border-b border-black md:hidden">
         <p className="z-40 pl-20 pt-6 font-fromage text-[50px] font-medium">
-          saved events
+          {t('my-events.bought')}
         </p>
 
         <div className="absolute top-0 h-[50px] pl-14">
@@ -24,7 +27,7 @@ const BannerSmall: React.FC = () => {
 
       <div className="relative hidden min-h-[120px] w-auto flex-col overflow-hidden border-b border-black pl-8 leading-none md:flex">
         <p className="z-40 pt-6 font-fromage text-7xl font-medium md:pl-40">
-          saved events
+        {t('my-events.saved')}
         </p>
 
         <div className="absolute top-0 h-[70px] pl-14">

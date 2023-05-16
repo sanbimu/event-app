@@ -1,18 +1,25 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import backend from 'i18next-http-backend';
+import detector from 'i18next-browser-languagedetector';
 
-import translationFrench from './shared/translations/FR.json';
-import translationEnglish from './shared/translations/EN.json';
+import fr from './shared/translations/FR.json';
+import en from './shared/translations/EN.json';
 
-const resources = {
-  en: {
-    app: translationEnglish,
-  },
-  fr: {
-    app: translationFrench,
-  },
-};
-
-i18next.use(initReactI18next).init({ resources, lng: 'en' });
+i18next
+  .use(backend)
+  .use(detector)
+  .use(initReactI18next)
+  .init({
+    fallbackLng: 'en',
+    debug: true,
+    interpolation: {
+      escapeValue: false,
+    },
+    resources: {
+      en: { translation: en },
+      fr: { translation: fr },
+    },
+  });
 
 export default i18next;

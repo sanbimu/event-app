@@ -10,6 +10,7 @@ import {
 } from './providers';
 import './index.css';
 import 'animate.css';
+import './i18n';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <GraphQLProvider>
