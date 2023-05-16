@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext } from 'react';
-import { useLocalStorage } from '../hooks';
+import { useLocalStorage } from 'usehooks-ts';
 
 export const CookieContext = createContext({
   cookies: { show: true },

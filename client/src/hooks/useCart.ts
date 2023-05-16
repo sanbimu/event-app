@@ -1,4 +1,4 @@
-import { useLocalStorage } from './useLocalStorage';
+import { useLocalStorage } from 'usehooks-ts';
 
 export interface Event {
   id: string;

@@ -1,5 +1,5 @@
 import { createContext, PropsWithChildren, useEffect, useState } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useLocalStorage } from 'usehooks-ts';
 import { Query, useQuery } from '../graphql';
 
 const defaultUser = { _id: '', avatar: '', firstName: '', lastName: '' };
