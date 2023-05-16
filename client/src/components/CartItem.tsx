@@ -9,6 +9,7 @@ import { useWindowContext } from '../hooks';
 import ShowOne from './windows/ShowOne';
 import { useTranslation } from 'react-i18next';
 import ConfirmDelete from './windows/ConfirmDelete';
+import CartItemTicket from './CartItemTicket';
 
 const CartItem: React.FC<Event> = ({ id, tickets }) => {
   const { t, i18n } = useTranslation();
@@ -53,39 +54,9 @@ const CartItem: React.FC<Event> = ({ id, tickets }) => {
       </button>
 
       <div className="flex flex-col pl-6">
-        {tickets.map((ticket) => {
-          return (
-            <div key={ticket.label} className="flex flex-row items-center pr-12 pt-4">
-              <div className="flex w-1/2 flex-row items-center justify-start gap-4 pt-2">
-                <p className="font-franklin text-lg font-extralight">{ticket.label}</p>
-                <p className="whitespace-nowrap font-franklin text-base">
-                  {formatCurrency(ticket.price)}
-                </p>
-              </div>
-
-              <div className="flex w-1/2 flex-row justify-end gap-4">
-                <select
-                  name="tickets"
-                  id="search"
-                  className="border border-black bg-background"
-                >
-                  <option value="0">0</option>
-                  {Array.from({ length: 10 }).map((_, i) => {
-                    const value = i + 1;
-                    return (
-                      <option key={i} value={value} selected={ticket.amount === value}>
-                        {value}
-                      </option>
-                    );
-                  })}
-                </select>
-                <button className="border border-black p-1">
-                  <img src={CheckSVG} alt="V" className="h-6 w-6"></img>
-                </button>
-              </div>
-            </div>
-          );
-        })}
+        {tickets.map((ticket) => (
+          <CartItemTicket key={ticket.label} id={id} {...ticket} />
+        ))}
 
         <div className="flex flex-row items-center pr-12 pt-4 text-lg">
           <div className="flex w-1/2 flex-row items-center justify-start gap-4 pt-2 font-franklin">

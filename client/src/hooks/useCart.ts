@@ -36,12 +36,8 @@ export function useCart() {
     return 0;
   };
 
-  const addTicketToCart = (eventId: string, ticket: Ticket) => {
+  const setTicketAmount = (eventId: string, ticket: Ticket) => {
     const eventIndex = cartItems.findIndex((e) => e.id === eventId);
-
-    if (ticket.amount === 0) {
-      return;
-    }
 
     if (eventIndex >= 0) {
       const ticketIndex = cartItems[eventIndex].tickets.findIndex(
@@ -49,7 +45,11 @@ export function useCart() {
       );
 
       if (ticketIndex >= 0) {
-        cartItems[eventIndex].tickets[ticketIndex].amount += ticket.amount;
+        cartItems[eventIndex].tickets[ticketIndex].amount = ticket.amount;
+
+        if (ticket.amount === 0) {
+          cartItems[eventIndex].tickets.splice(ticketIndex, 1);
+        }
       } else {
         cartItems[eventIndex].tickets.push(ticket);
       }
@@ -72,7 +72,7 @@ export function useCart() {
     cartItems,
     cartTotal,
     getEventTotal,
-    addTicketToCart,
+    setTicketAmount,
     removeEvent,
   };
 }

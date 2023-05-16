@@ -24,7 +24,7 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
   const [, executeAddSavedEvent] = useMutation(Mutation.AddSavedEvent);
   const [, executeRemoveSavedEvent] = useMutation(Mutation.RemoveSavedEvent);
 
-  const { addTicketToCart } = useCart();
+  const { setTicketAmount } = useCart();
   const [tickets, setTickets] = useState<any[]>([]);
 
   const event = useMemo(() => {
@@ -78,7 +78,7 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
 
   const handleAddToCart = () => {
     for (const ticket of tickets) {
-      addTicketToCart(event._id.toString(), ticket);
+      setTicketAmount(event._id.toString(), ticket);
     }
   };
 
