@@ -1,11 +1,22 @@
 import React from 'react';
-import { useWindowContext } from '../../hooks';
 import Button from '../Button';
 import { useTranslation } from 'react-i18next';
+import { useCart } from '../../hooks/useCart';
+import { useWindowContext } from '../../hooks';
 
-const ConfirmDelete: React.FC = () => {
-  const { t, i18n } = useTranslation();
-  const { openWindow } = useWindowContext();
+interface Props {
+  id: string;
+}
+
+const ConfirmDelete: React.FC<Props> = ({ id }) => {
+  const { t } = useTranslation();
+  const { removeEvent } = useCart();
+  const { closeWindow } = useWindowContext();
+
+  const handleDeleteEvent = () => {
+    removeEvent(id);
+    closeWindow();
+  };
 
   return (
     <div className="z-[100] flex h-auto w-[80vw] flex-col border border-black bg-background md:w-[60vw] lg:w-[30vw]">
@@ -19,10 +30,12 @@ const ConfirmDelete: React.FC = () => {
             <Button
               className="px-3 py-2 md:px-6 md:py-3"
               text={t('delete.confirm')!}
+              onClick={handleDeleteEvent}
             ></Button>
             <Button
               className="bg-dark-pink-transparent bg-opacity-80 px-3 py-2 text-dark-pink md:px-6 md:py-3"
               text={t('delete.cancel')!}
+              onClick={closeWindow}
             ></Button>
           </div>
         </div>

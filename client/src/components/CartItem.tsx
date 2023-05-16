@@ -13,7 +13,7 @@ import ConfirmDelete from './windows/ConfirmDelete';
 const CartItem: React.FC<Event> = ({ id, tickets }) => {
   const { t, i18n } = useTranslation();
   const { openWindow } = useWindowContext();
-  const { getEventTotal, removeEvent } = useCart();
+  const { getEventTotal } = useCart();
 
   const [data] = useQuery({
     query: Query.Event,
@@ -37,10 +37,6 @@ const CartItem: React.FC<Event> = ({ id, tickets }) => {
       executeAddSavedEvent({ id });
       event.saved = true;
     }
-  };
-
-  const handleDeleteEvent = () => {
-    removeEvent(id);
   };
 
   return (
@@ -103,7 +99,7 @@ const CartItem: React.FC<Event> = ({ id, tickets }) => {
         <div className="flex flex-row items-center justify-between gap-10 pb-6 pr-12 pt-4 md:justify-start">
           <button
             className="flex flex-row items-center gap-4"
-            onClick={() => openWindow(<ConfirmDelete />)}
+            onClick={() => openWindow(<ConfirmDelete id={id} />)}
           >
             <img src={DeleteSVG} alt="delete" className="h-6 w-6"></img>
             <p className="font-franklin text-[14px] font-extralight uppercase ">
