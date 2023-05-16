@@ -97,7 +97,7 @@ const NavMobile: React.FC = () => {
                 </div>
               </Button>
 
-              <div className="text-md flex flex-col items-start  gap-2 pl-8 font-franklin text-dark-grey">
+              <div className="flex flex-col items-start gap-2 pl-8 font-franklin text-dark-grey">
                 <button className="uppercase hover:text-dark-pink" onClick={handleEvents}>
                   - {t('my-events.button')}
                 </button>
@@ -131,18 +131,18 @@ const NavMobile: React.FC = () => {
           />
 
           {languagesMenu && (
-            <div className="mt-5 flex flex-col items-start gap-3 pb-0 pl-6 font-franklin text-sm text-dark-grey">
+            <div className="mt-5 mr-16 flex flex-col gap-2 pb-0 pl-8 font-franklin  text-dark-grey">
               <button
                 className="uppercase hover:text-dark-pink"
                 onClick={() => changeLanguage('en')}
               >
-                english
+                - english
               </button>
               <button
-                className="uppercase hover:text-dark-pink"
+                className="pl-3 uppercase hover:text-dark-pink"
                 onClick={() => changeLanguage('fr')}
               >
-                français
+                - français
               </button>
             </div>
           )}

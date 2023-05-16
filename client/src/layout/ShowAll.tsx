@@ -8,8 +8,10 @@ import { useSearchFiltersContext, useWindowContext } from '../hooks';
 import { Query, useQuery } from '../graphql';
 import { truthyObject } from '../utils/object';
 import { formatDates } from '../utils/format';
+import { useTranslation } from 'react-i18next';
 
 const ShowAll: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const { openWindow } = useWindowContext();
 
   const handleShowOne = (id: ObjectId) => {
@@ -81,13 +83,13 @@ const ShowAll: React.FC = () => {
         <div className="flex min-h-[70px] items-center justify-center gap-6">
           <Button
             className="w-[150px] py-2"
-            text="previous"
+            text={t('show-all.previous')!}
             onClick={handlePrevious}
             disabled={!data.data?.events.pageInfo.hasPreviousPage}
           />
           <Button
             className="w-[150px] py-2"
-            text="next"
+            text={t('show-all.next')!}
             onClick={handleNext}
             disabled={!data.data?.events.pageInfo.hasNextPage}
           />

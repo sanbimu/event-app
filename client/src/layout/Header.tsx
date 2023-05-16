@@ -116,13 +116,13 @@ const Header: React.FC = () => {
                 className="uppercase hover:text-dark-pink"
                 onClick={() => changeLanguage('en')}
               >
-                english
+                - english
               </button>
               <button
                 className="uppercase hover:text-dark-pink"
                 onClick={() => changeLanguage('fr')}
               >
-                français
+                - français
               </button>
             </div>
           )}

@@ -2,8 +2,10 @@ import { FormEvent } from 'react';
 import Button from '../components/Button';
 import { Mutation, Query, useMutation, useQuery } from '../graphql';
 import BannerMedium from '../layout/BannerMedium';
+import { useTranslation } from 'react-i18next';
 
 export function Settings() {
+  const { t, i18n } = useTranslation();
   const [data] = useQuery({
     query: Query.Settings,
   });
@@ -41,14 +43,14 @@ export function Settings() {
 
   return (
     <>
-      <BannerMedium title="settings" fontMobile="text-7xl" />
+      <BannerMedium title={t('settings.header')} fontMobile="text-7xl" />
 
       <form onSubmit={sendForm}>
         <div className="flex flex-col gap-4 pl-8 pt-10 md:pl-12 md:pt-14 lg:pl-10 lg:pt-10">
           <div className="flex pr-32">
             <div className="relative inline-block h-[20px]">
               <p className="relative z-40 font-franklin text-2xl font-light">
-                Contact Information
+                {t('settings.contact-info')}
               </p>
               <div className="absolute bottom-0 left-0 right-0 top-0 z-30 translate-x-[0.65rem] translate-y-[0.80rem] bg-dark-pink-transparent"></div>
             </div>
@@ -56,7 +58,9 @@ export function Settings() {
 
           <div className="mr-6 flex flex-col gap-4 md:flex-row">
             <div className="mt-2 flex">
-              <p className="pr-2 pt-4 font-franklin text-sm font-light">FIRST NAME</p>
+              <p className="pr-2 pt-4 font-franklin text-sm font-light">
+                {t('settings.first-name')}
+              </p>
               <input
                 id="search"
                 name="contact_firstname"
@@ -65,7 +69,9 @@ export function Settings() {
               ></input>
             </div>
             <div className="mt-2 flex">
-              <p className="pr-2 pt-4 font-franklin text-sm font-light">LAST NAME</p>
+              <p className="pr-2 pt-4 font-franklin text-sm font-light">
+                {t('settings.last-name')}
+              </p>
               <input
                 id="search"
                 name="contact_lastname"
@@ -75,7 +81,9 @@ export function Settings() {
             </div>
           </div>
           <div className="flex">
-            <p className="pr-2 pt-4 font-franklin text-sm font-light">PHONE NUMBER</p>
+            <p className="pr-2 pt-4 font-franklin text-sm font-light">
+              {t('settings.phone')}
+            </p>
             <input
               id="search"
               name="contact_phonenumber"
@@ -88,7 +96,7 @@ export function Settings() {
           <div className="flex pr-32 pt-2 md:pt-6 lg:pt-4">
             <div className="relative inline-block h-[20px]">
               <p className="relative z-40 font-franklin text-2xl font-light">
-                Home Address
+                {t('settings.home-address')}
               </p>
               <div className="absolute bottom-0 left-0 right-0 top-0 z-30 translate-x-[0.65rem] translate-y-[0.80rem] bg-dark-pink-transparent"></div>
             </div>
@@ -96,7 +104,9 @@ export function Settings() {
 
           <div className="flex flex-col gap-4 md:flex-row">
             <div className="flex md:mt-2">
-              <p className="pr-2 pt-4 font-franklin text-sm font-light">STREET</p>
+              <p className="pr-2 pt-4 font-franklin text-sm font-light">
+                {t('settings.street')}
+              </p>
               <input
                 id="search"
                 name="home_street"
@@ -105,7 +115,9 @@ export function Settings() {
               ></input>
             </div>
             <div className="flex">
-              <p className="pr-2 pt-6 font-franklin text-sm font-light">POSTAL CODE</p>
+              <p className="pr-2 pt-6 font-franklin text-sm font-light">
+                {t('settings.postal-code')}
+              </p>
               <input
                 id="search"
                 name="home_postalcode"
@@ -116,7 +128,9 @@ export function Settings() {
             </div>
           </div>
           <div className="flex">
-            <p className="pr-2 pt-4 font-franklin text-sm font-light">CITY</p>
+            <p className="pr-2 pt-4 font-franklin text-sm font-light">
+              {t('settings.city')}
+            </p>
             <input
               id="search"
               name="home_city"
@@ -128,7 +142,7 @@ export function Settings() {
           <div className="lg-pt-4 flex pr-32 pt-2 md:pt-6">
             <div className="relative inline-block h-[20px]">
               <p className="relative z-40 font-franklin text-2xl font-light">
-                Billing Information
+                {t('settings.billing-address')}
               </p>
               <div className="absolute bottom-0 left-0 right-0 top-0 z-30 translate-x-[0.65rem] translate-y-[0.80rem] bg-dark-pink-transparent"></div>
             </div>
@@ -136,7 +150,9 @@ export function Settings() {
 
           <div className="flex flex-col gap-4 md:flex-row">
             <div className="flex md:mt-2">
-              <p className="pr-2 pt-4 font-franklin text-sm font-light">NAME</p>
+              <p className="pr-2 pt-4 font-franklin text-sm font-light">
+                {t('settings.name')}
+              </p>
               <input
                 id="search"
                 name="billing_name"
@@ -145,7 +161,9 @@ export function Settings() {
               ></input>
             </div>
             <div className="flex md:mt-2">
-              <p className="pr-2 pt-4 font-franklin text-sm font-light">STREET</p>
+              <p className="pr-2 pt-4 font-franklin text-sm font-light">
+                {t('settings.street')}
+              </p>
               <input
                 id="search"
                 name="billing_street"
@@ -156,7 +174,9 @@ export function Settings() {
           </div>
           <div className="flex flex-col gap-4 md:flex-row">
             <div className="flex md:mt-2">
-              <p className="pr-2 pt-4 font-franklin text-sm font-light">POSTAL CODE</p>
+              <p className="pr-2 pt-4 font-franklin text-sm font-light">
+                {t('settings.postal-code')}
+              </p>
               <input
                 id="search"
                 name="billing_postalcode"
@@ -166,7 +186,9 @@ export function Settings() {
               ></input>
             </div>
             <div className="flex md:mt-2">
-              <p className="pr-2 pt-4 font-franklin text-sm font-light">CITY</p>
+              <p className="pr-2 pt-4 font-franklin text-sm font-light">
+                {t('settings.city')}
+              </p>
               <input
                 id="search"
                 name="billing_city"
@@ -178,13 +200,13 @@ export function Settings() {
 
           <div className="mb-8 mt-6 flex gap-5 font-franklin text-lg md:mt-10 md:gap-10 lg:mt-6">
             <Button
-              text="save"
-              className="w-[120px] py-3 text-dark-pink shadow-custom"
+              text={t('settings.save')!}
+              className="min-w-[120px] py-3 px-2 text-dark-pink shadow-custom"
               type="submit"
             ></Button>
             <Button
-              text="delete account"
-              className="w-[180px] bg-dark-pink-transparent bg-opacity-80 py-3 text-dark-pink shadow-custom"
+              text={t('settings.delete')!}
+              className="min-w-[180px] bg-dark-pink-transparent bg-opacity-80 px-2 py-3 text-dark-pink shadow-custom"
             ></Button>
           </div>
         </div>

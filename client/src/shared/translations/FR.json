@@ -17,7 +17,7 @@
     "TOMORROW": "DEMAIN",
     "THIS_WEEKEND": "CE WEEKEND",
     "NEXT_WEEK": "SEMAINE PROCHAINE",
-    "FREE": "GRATUIT",
+    "0": "GRATUIT",
     "PARTY": "FÊTE",
     "CLASSICAL": "CLASSIQUE",
     "CULTURAL": "CULTUREL",
@@ -30,7 +30,8 @@
     "HIPHOP_RAP": "HIP-HOP/RAP",
     "METAL": "METAL",
     "POP": "POP",
-    "OPERA": "OPERA"
+    "OPERA": "OPERA",
+    "ROCK": "ROCK"
   },
   "my-events": {
     "button": "MES ÉVÉNEMENTS",
@@ -41,5 +42,51 @@
     "button": "SE CONNECTER",
     "welcome": "BIENVENUE SUR",
     "continue-with": "CONTINUER AVEC {{provider}}"
+  },
+  "settings": {
+    "header": "paramètres",
+    "contact-info": "Données Personnelles",
+    "first-name": "PRÉNOM",
+    "last-name": "NOM DE FAMILLE",
+    "phone": "NUMÉRO DE TÉLÉPHONE",
+    "home-address": "Adresse de livraison",
+    "street": "RUE",
+    "postal-code": "CODE POSTAL",
+    "city": "VILLE",
+    "billing-address": "Adresse de facturation",
+    "name": "NOM",
+    "save": "SAUVEGARDER",
+    "delete": "SUPPRIMER COMPTE"
+  },
+  "new-event": {
+    "buy-tickets": "ACHETER DES TICKETS",
+    "new": "nouveau"
+  },
+  "show-one": {
+    "save": "SAUVEGARDER",
+    "saved": "SAUVEGARDÉ",
+    "prices": "Prix",
+    "add": "AJOUTER AU PANIER"
+  },
+  "show-all": {
+    "previous": "PRÉCÉDENT",
+    "next": "SUIVANT"
+  },
+  "cart": {
+    "header": "panier",
+    "buy-all": "TOUT ACHETER",
+    "buy": "ACHETER",
+    "delete": "SUPPRIMER",
+    "save": "SAUVEGARDER",
+    "saved": "SAUVEGARDÉ"
+  },
+  "cookies": {
+    "text": "Ce site web utilise des cookies pour vous garantir une expérience optimale.",
+    "privacy": "À PROPOS"
+  },
+  "delete": {
+    "text": "Vous êtes sur le point de supprimer cet événement de votre panier",
+    "confirm": "CONFIRMER",
+    "cancel": "ANNULER"
   }
 }

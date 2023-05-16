@@ -6,12 +6,15 @@ import { Mutation, Prices, Query, useMutation, useQuery } from '../../graphql';
 import { formatCurrency, formatDates } from '../../utils/format';
 import { filterButtons } from '../../shared/constants';
 import { useCart } from '../../hooks/useCart';
+import { useTranslation } from 'react-i18next';
 
 interface ShowOneProps {
   id: ObjectId;
 }
 
 const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
+  const { t, i18n } = useTranslation();
+
   const [data, execute] = useQuery({
     query: Query.Event,
     variables: { id },
@@ -90,14 +93,12 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
           <p className="toolong shadow-text max-w-full pt-10 font-franklin text-2xl font-light">
             {event.title}
           </p>
-
           <div className="flex flex-row items-center pt-6">
             <img src={DateSVG} alt="date" className="h-[20px] pl-1"></img>
             <p className="pl-5 font-franklin text-[16px] font-extralight uppercase ">
               {event.date}
             </p>
           </div>
-
           <div className="flex flex-row items-center pt-4">
             <img src={LocationSVG} alt="where" className="h-[27px]"></img>
             <div className="flex flex-col">
@@ -109,7 +110,6 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
               </p>
             </div>
           </div>
-
           <button
             className="flex flex-row items-center pb-8 pt-4"
             onClick={handleSaveButton}
@@ -120,7 +120,7 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
               className="h-[27px]"
             ></img>
             <p className="pl-4 font-franklin text-[16px] font-extralight uppercase ">
-              {event.saved ? 'Saved' : 'Save for later'}
+              {event.saved ? t('show-one.saved') : t('show-one.save')}
             </p>
           </button>
         </div>
@@ -144,7 +144,7 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
         {/* PRICES */}
 
         <div className="flex h-auto flex-col gap-4 border-b border-black py-6 pl-8">
-          <p className="pb-2 font-fromage text-2xl font-medium">Prices</p>
+          <p className="pb-2 font-fromage text-2xl font-medium">{t('show-one.prices')}</p>
           {event.prices.map((ticket) => {
             return (
               <div className="flex flex-row justify-between gap-6 pr-12 font-franklin">
@@ -176,8 +176,8 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
           })}
 
           <Button
-            text="add to cart"
-            className="mt-4 w-[180px] p-4 shadow-custom"
+            text={t('show-one.add')!}
+            className="mt-4 w-[180px] py-4 px-2 shadow-custom"
             disabled={
               data.data?.event?.prices.some((price) => {
                 return price?.price === 0;
@@ -241,7 +241,7 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
                 className="h-[27px]"
               ></img>
               <p className="pl-4 font-franklin text-[16px] font-extralight uppercase ">
-                {event.saved ? 'Saved' : 'Save for later'}
+                {event.saved ? t('show-one.saved') : t('show-one.save')}
               </p>
             </button>
           </div>
@@ -249,15 +249,20 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
           {/* PRICES */}
 
           <div className="flex h-auto flex-1 flex-col gap-4 border-b border-black py-6 pl-12">
-            <p className="pb-2 font-fromage text-2xl font-medium">Prices</p>
+            <p className="pb-2 font-fromage text-2xl font-medium">
+              {t('show-one.prices')!}
+            </p>
             {event.prices.map((ticket) => {
               return (
                 <div className="flex flex-row justify-between gap-6 pr-12 font-franklin">
                   <p className="toolong whitespace-nowrap text-[15px] font-light">
                     {ticket?.label}
                   </p>
-                  <p className="whitespace-nowrap">{ticket?.formattedPrice}</p>
+                  <p className="ml-auto mr-6 whitespace-nowrap">
+                    {ticket?.formattedPrice}
+                  </p>
                   <select
+                    id="search"
                     name="tickets"
                     className="border border-black bg-background"
                     onChange={(e) => handleSelectTicket(ticket, Number(e.target.value))}
@@ -281,8 +286,8 @@ const ShowOne: React.FC<ShowOneProps> = ({ id }) => {
             })}
 
             <Button
-              text="add to cart"
-              className="mt-4 w-[180px] p-4 shadow-custom "
+              text={t('show-one.add')!}
+              className="mt-4 w-[180px] py-4 px-2 shadow-custom "
               disabled={
                 data.data?.event?.prices.some((price) => {
                   return price?.price === 0;

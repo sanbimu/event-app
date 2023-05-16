@@ -8,7 +8,7 @@
 
     "cookie-policy": "Cookie Policy",
     "terms": "Terms & Conditions",
-    "faq": "F.A.Q.",
+    "faq": "FAQ",
     "contact": "Contact Support"
   },
   "search": {
@@ -17,7 +17,7 @@
     "TOMORROW": "TOMORROW",
     "THIS_WEEKEND": "THIS WEEKEND",
     "NEXT_WEEK": "NEXT WEEK",
-    "FREE": "FREE",
+    "0": "FREE",
     "FESTIVAL": "FESTIVAL",
     "CONCERT": "CONCERT",
     "PARTY": "PARTY",
@@ -30,7 +30,8 @@
     "POP": "POP",
     "OPERA": "OPERA",
     "FOLK_ACOUSTIC": "FOLK/ACOUSTIC",
-    "OTHER": "OTHER"
+    "OTHER": "OTHER",
+    "ROCK": "ROCK"
   },
   "my-events": {
     "button": "my events",
@@ -41,5 +42,51 @@
     "button": "SIGN IN/SIGN UP",
     "welcome": "WELCOME TO",
     "continue-with": "CONTINUE WITH {{provider}}"
+  },
+  "settings": {
+    "header": "settings",
+    "contact-info": "Contact Information",
+    "first-name": "FIRST NAME",
+    "last-name": "LAST NAME",
+    "phone": "PHONE NUMBER",
+    "home-address": "Home Address",
+    "street": "STREET",
+    "postal-code": "POSTAL CODE",
+    "city": "CITY",
+    "billing-address": "Billing Address",
+    "name": "NAME",
+    "save": "SAVE",
+    "delete": "DELETE ACCOUNT"
+  },
+  "new-event": {
+    "buy-tickets": "BUY TICKETS",
+    "new": "new"
+  },
+  "show-one": {
+    "save": "SAVE FOR LATER",
+    "saved": "SAVED",
+    "prices": "Prices",
+    "add": "ADD TO CART"
+  },
+  "show-all": {
+    "previous": "PREVIOUS",
+    "next": "NEXT"
+  },
+  "cart": {
+    "header": "cart",
+    "buy-all": "BUY ALL EVENTS",
+    "buy": "BUY",
+    "delete": "DELETE",
+    "save": "SAVE FOR LATER",
+    "saved": "SAVED"
+  },
+  "cookies": {
+    "text": "This website uses cookies to ensure you get the best experience on our website.",
+    "privacy": "PRIVACY POLICY"
+  },
+  "delete": {
+    "text": "You are about to delete this event from your cart",
+    "confirm": "CONFIRM",
+    "cancel": "CANCEL"
   }
 }

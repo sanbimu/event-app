@@ -7,9 +7,11 @@ import { useWindowContext } from '../hooks';
 import { Query, useQuery } from '../graphql';
 import { truthyObject } from '../utils/object';
 import { formatDates } from '../utils/format';
+import { useTranslation } from 'react-i18next';
 
 const NewEvents: React.FC = () => {
   const { openWindow } = useWindowContext();
+  const { t, i18n } = useTranslation();
 
   const [cursor, setCursor] = useState('');
 
@@ -57,8 +59,8 @@ const NewEvents: React.FC = () => {
           </p>
 
           <Button
-            className="w-[155px] py-3 font-franklin font-medium shadow-custom lg:w-[190px] lg:py-4"
-            text="buy tickets"
+            className="min-w-[155px] py-3 px-2 font-franklin font-medium shadow-custom lg:min-w-[190px] lg:py-4"
+            text={t('new-event.buy-tickets')!}
             onClick={() => openWindow(<ShowOne id={event._id} />)}
           />
 
@@ -70,9 +72,9 @@ const NewEvents: React.FC = () => {
           ></img>
 
           <div>
-            <Square className="bottom-[40px] right-[22px] z-30 h-[24px] w-[24px] rotate-[20deg] bg-dark-pink-transparent md:right-[64px] lg:h-[40px] lg:w-[40px]"></Square>
-            <p className="absolute bottom-10 right-4 z-40 -rotate-[25deg] font-franklin text-lg font-semibold md:right-[60px] lg:bottom-12 lg:right-[65px] lg:text-xl ">
-              new
+            <Square className="bottom-24 right-[24px] z-30 h-[24px] w-[24px] rotate-[20deg] bg-dark-pink-transparent md:right-[64px] lg:bottom-10 lg:h-[40px] lg:w-[40px]"></Square>
+            <p className="absolute bottom-24 right-4 z-40 -rotate-[25deg] font-franklin text-lg font-semibold md:right-[60px] lg:bottom-12 lg:right-[65px] lg:text-xl ">
+              {t('new-event.new')!}
             </p>
           </div>
         </div>
