@@ -68,11 +68,16 @@ export function useCart() {
     setCartItems(updatedItems);
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   return {
     cartItems,
     cartTotal,
     getEventTotal,
     setTicketAmount,
     removeEvent,
+    clearCart,
   };
 }

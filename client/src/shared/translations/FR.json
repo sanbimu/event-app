@@ -78,7 +78,8 @@
     "buy": "ACHETER",
     "delete": "SUPPRIMER",
     "save": "SAUVEGARDER",
-    "saved": "SAUVEGARDÉ"
+    "saved": "SAUVEGARDÉ",
+    "success": "Votre commande a été effectuée avec succès !"
   },
   "cookies": {
     "text": "Ce site web utilise des cookies pour vous garantir une expérience optimale.",

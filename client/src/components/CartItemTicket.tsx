@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CheckSVG } from '../icons';
 import { formatCurrency } from '../utils/format';
-import { useCart } from '../hooks/useCart';
+import { useCart } from '../hooks';
 
 interface Props {
   id: string;
@@ -11,14 +11,14 @@ interface Props {
 }
 
 const CartItemTicket: React.FC<Props> = ({ id, label, price, amount }) => {
-  const { setTicketAmount, getEventTotal, removeEvent } = useCart();
+  const { setTicketAmount, removeEvent } = useCart();
 
   const [selectedAmount, setSelectedAmount] = useState(amount);
 
   const handleApplyAmount = () => {
     setTicketAmount(id, { label, price, amount: selectedAmount });
 
-    if (getEventTotal(id) === 0) {
+    if (selectedAmount === 0) {
       removeEvent(id);
     }
   };

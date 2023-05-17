@@ -24,7 +24,7 @@ export const stripeRouter: FastifyPluginCallback = (app, _, next) => {
         line_items: lineItems.flatMap((event) => formatEventToPayment(event)),
         mode: 'payment',
         success_url: `${import.meta.env.VITE_CLIENT_HOST}/cart?success=true`,
-        cancel_url: `${import.meta.env.VITE_CLIENT_HOST}/cart?canceled=true`,
+        cancel_url: `${import.meta.env.VITE_CLIENT_HOST}/cart`,
       });
 
       res.redirect(303, session.url);

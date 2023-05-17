@@ -1,15 +1,13 @@
 import React, { useMemo } from 'react';
-import Button from './Button';
-import { CheckSVG, DeleteSVG, SaveSVG, SavedSVG } from '../icons';
-import { Event } from '../hooks/useCart';
-import { Mutation, Query, useMutation, useQuery } from '../graphql';
-import { formatCurrency } from '../utils/format';
-import { useCart } from '../hooks/useCart';
-import { useWindowContext } from '../hooks';
-import ShowOne from './windows/ShowOne';
 import { useTranslation } from 'react-i18next';
+import { Mutation, Query, useMutation, useQuery } from '../graphql';
+import { Event, useCart, useWindowContext } from '../hooks';
+import { DeleteSVG, SaveSVG, SavedSVG } from '../icons';
+import { formatCurrency } from '../utils/format';
+import ShowOne from './windows/ShowOne';
 import ConfirmDelete from './windows/ConfirmDelete';
 import CartItemTicket from './CartItemTicket';
+import Button from './Button';
 
 const CartItem: React.FC<Event> = ({ id, tickets }) => {
   const { t, i18n } = useTranslation();
@@ -63,9 +61,22 @@ const CartItem: React.FC<Event> = ({ id, tickets }) => {
             <p className="text-lg font-extralight">Total</p>
             <p className="text-base">{formatCurrency(getEventTotal(id))}</p>
           </div>
-          <div className="flex w-1/2 flex-row justify-end">
-            <Button text={t('cart.buy')!} className="w-[150px] py-2 shadow-custom" />
-          </div>
+          <form
+            action={`${import.meta.env.VITE_SERVER_HOST}/stripe/payment`}
+            method="POST"
+          >
+            <input
+              type="hidden"
+              name="cartItems"
+              value={JSON.stringify([{ id, tickets }])}
+            />
+
+            <Button
+              type="submit"
+              text={t('cart.buy')!}
+              className="w-[150px] py-2 shadow-custom"
+            />
+          </form>
         </div>
         <div className="flex flex-row items-center justify-between gap-10 pb-6 pr-12 pt-4 md:justify-start">
           <button

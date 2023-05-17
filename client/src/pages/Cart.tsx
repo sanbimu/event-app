@@ -1,13 +1,26 @@
-import Button from '../components/Button';
-import { useCart } from '../hooks/useCart';
-import BannerMedium from '../layout/BannerMedium';
-import CartItem from '../components/CartItem';
-import { formatCurrency } from '../utils/format';
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import BannerMedium from '../layout/BannerMedium';
+import Button from '../components/Button';
+import CartItem from '../components/CartItem';
+import CartSuccess from '../components/windows/CartSuccess';
+import { formatCurrency } from '../utils/format';
+import { useCart, useWindowContext } from '../hooks';
 
 export function Cart() {
-  const { cartItems, cartTotal } = useCart();
-  const { t, i18n } = useTranslation();
+  const [searchParams] = useSearchParams();
+  const { cartItems, cartTotal, clearCart } = useCart();
+  const { t } = useTranslation();
+  const { openWindow } = useWindowContext();
+
+  useEffect(() => {
+    const success = searchParams.get('success');
+    if (success === 'true') {
+      clearCart();
+      openWindow(<CartSuccess />);
+    }
+  }, [searchParams]);
 
   return (
     <>
@@ -28,10 +41,20 @@ export function Cart() {
             <p className="text-lg">TOTAL</p>
             <p className="">{formatCurrency(cartTotal)}</p>
           </div>
-          <Button
-            text={t('cart.buy')!}
-            className="w-[170px] py-3 text-lg shadow-custom lg:ml-6"
-          />
+
+          <form
+            action={`${import.meta.env.VITE_SERVER_HOST}/stripe/payment`}
+            method="POST"
+          >
+            <input type="hidden" name="cartItems" value={JSON.stringify(cartItems)} />
+
+            <Button
+              type="submit"
+              text={t('cart.buy')!}
+              className="w-[170px] py-3 text-lg shadow-custom lg:ml-6"
+              disabled={cartItems.length === 0}
+            />
+          </form>
         </div>
       </div>
     </>

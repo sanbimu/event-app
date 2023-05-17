@@ -15,7 +15,6 @@ import {
   useAuthContext,
 } from './hooks';
 import CookieModal from './components/windows/Cookies';
-import ConfirmDelete from './components/windows/ConfirmDelete';
 
 export function Router() {
   const { showWindow } = useWindowContext();

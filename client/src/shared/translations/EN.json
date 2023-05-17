@@ -78,7 +78,8 @@
     "buy": "BUY",
     "delete": "DELETE",
     "save": "SAVE FOR LATER",
-    "saved": "SAVED"
+    "saved": "SAVED",
+    "success": "Your order has been successfully placed!"
   },
   "cookies": {
     "text": "This website uses cookies to ensure you get the best experience on our website.",
