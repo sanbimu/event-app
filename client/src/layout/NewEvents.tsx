@@ -71,9 +71,9 @@ const NewEvents: React.FC = () => {
             onClick={execute}
           ></img>
 
-          <div>
-            <Square className="bottom-24 right-[24px] z-30 h-[24px] w-[24px] rotate-[20deg] bg-dark-pink-transparent md:right-[64px] lg:bottom-10 lg:h-[40px] lg:w-[40px]"></Square>
-            <p className="absolute bottom-24 right-4 z-40 -rotate-[25deg] font-franklin text-lg font-semibold md:right-[60px] lg:bottom-12 lg:right-[65px] lg:text-xl ">
+          <div className="absolute bottom-24 right-4 flex items-center justify-center md:right-[60px] lg:bottom-12 lg:right-[65px]">
+            <Square className="z-30 h-[24px] w-[24px] rotate-[20deg] bg-dark-pink-transparent lg:h-[40px] lg:w-[40px]"></Square>
+            <p className="z-40 -rotate-[25deg] font-franklin text-lg font-semibold  lg:text-xl ">
               {t('new-event.new')!}
             </p>
           </div>
