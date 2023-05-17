@@ -1,16 +1,20 @@
 import type { FastifyServerOptions } from 'fastify';
 import fastify from 'fastify';
+import formbody from '@fastify/formbody';
 import mercurius from 'mercurius';
 import jwt from '@fastify/jwt';
 import cors from '@fastify/cors';
+import { stripe } from '~/plugins/stripe.plugin';
 import { context } from '~/graphql/context';
 import { resolvers } from '~/graphql/resolvers';
 import { schemaLoader } from '~/graphql/loader';
-import { oauth2ProvidersRouter } from '~/routes';
 import { createDatabaseConnection } from '~/database';
+import { oauth2Router, stripeRouter } from '~/routes';
 
 const initServer = async (opts?: FastifyServerOptions) => {
   const app = fastify(opts);
+
+  app.register(formbody);
 
   app.register(cors, {
     origin: '*',
@@ -18,6 +22,10 @@ const initServer = async (opts?: FastifyServerOptions) => {
 
   app.register(jwt, {
     secret: import.meta.env.VITE_JWT_SECRET,
+  });
+
+  app.register(stripe, {
+    secret: import.meta.env.VITE_STRIPE_SECRET_KEY,
   });
 
   app.register(mercurius, {
@@ -28,7 +36,9 @@ const initServer = async (opts?: FastifyServerOptions) => {
     path: '/graphql',
   });
 
-  app.register(oauth2ProvidersRouter);
+  app.register(stripeRouter);
+  app.register(oauth2Router);
+
   await createDatabaseConnection();
 
   if (import.meta.env.PROD) {

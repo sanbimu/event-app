@@ -32,7 +32,7 @@ const googleConfig: FastifyOAuth2Options = {
   callbackUri: `${import.meta.env.VITE_SERVER_HOST}/oauth2/google/callback`,
 };
 
-export const oauth2ProvidersRouter: FastifyPluginCallback = (app, _, next) => {
+export const oauth2Router: FastifyPluginCallback = (app, _, next) => {
   app.register(oauth2, facebookConfig);
   app.register(oauth2, googleConfig);
 

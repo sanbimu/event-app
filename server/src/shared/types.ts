@@ -14,3 +14,14 @@ export interface TokenUser {
   providerId: string;
   provider: Provider;
 }
+
+export interface Event {
+  id: string;
+  tickets: Ticket[];
+}
+
+export interface Ticket {
+  price: number;
+  label: string;
+  amount: number;
+}
