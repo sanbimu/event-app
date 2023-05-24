@@ -3,13 +3,14 @@ import Button from '../components/Button';
 import Square from '../components/shapes/Square';
 import { NextSVG } from '../icons';
 import ShowOne from '../components/windows/ShowOne';
-import { useWindowContext } from '../hooks';
+import { useAuthContext, useWindowContext } from '../hooks';
 import { Query, useQuery } from '../graphql';
 import { truthyObject } from '../utils/object';
 import { formatDates } from '../utils/format';
 import { useTranslation } from 'react-i18next';
 
 const NewEvents: React.FC = () => {
+  const { isAuthorized } = useAuthContext();
   const { openWindow } = useWindowContext();
   const { t, i18n } = useTranslation();
 
@@ -29,7 +30,7 @@ const NewEvents: React.FC = () => {
 
   useEffect(() => {
     execute();
-  }, []);
+  }, [isAuthorized]);
 
   useEffect(() => {
     setCursor(data.data?.events.edges[0]?.node._id.toString() || '');
