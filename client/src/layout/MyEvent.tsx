@@ -1,6 +1,5 @@
 import React from 'react';
 import EventCard from '../components/EventCard';
-import { events } from '../shared/constants';
 import ShowOne from '../components/windows/ShowOne';
 import { useWindowContext } from '../hooks';
 import { ObjectId } from 'mongodb';

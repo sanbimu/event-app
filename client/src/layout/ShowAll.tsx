@@ -4,14 +4,15 @@ import seedrandom from 'seedrandom';
 import Button from '../components/Button';
 import EventCard from '../components/EventCard';
 import ShowOne from '../components/windows/ShowOne';
-import { useSearchFiltersContext, useWindowContext } from '../hooks';
+import { useAuthContext, useSearchFiltersContext, useWindowContext } from '../hooks';
 import { Query, useQuery } from '../graphql';
 import { truthyObject } from '../utils/object';
 import { formatDates } from '../utils/format';
 import { useTranslation } from 'react-i18next';
 
 const ShowAll: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { isAuthorized } = useAuthContext();
+  const { t } = useTranslation();
   const { openWindow } = useWindowContext();
 
   const handleShowOne = (id: ObjectId) => {
@@ -38,7 +39,7 @@ const ShowAll: React.FC = () => {
     setCursor({ after: '', order: 'ASC' });
   }, [searchFilters, searchQuery]);
 
-  useEffect(execute, [searchFilters, searchQuery, cursor]);
+  useEffect(execute, [searchFilters, searchQuery, cursor, isAuthorized]);
 
   const events = useMemo(() => {
     return data.data?.events.edges;
