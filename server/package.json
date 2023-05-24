@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "main": "dist/server.mjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --ssr src/server.ts",
+    "start": "node dist/server.mjs"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.2.1",
+    "@fastify/formbody": "^7.4.0",
+    "@fastify/jwt": "^6.7.1",
+    "@fastify/oauth2": "^7.0.1",
+    "fastify": "^4.15.0",
+    "graphql": "^16.6.0",
+    "mercurius": "^12.2.0",
+    "mongodb": "^4.16.0",
+    "mongoose": "^6.10.5",
+    "stripe": "^12.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "fluent-json-schema": "^4.1.0",
+    "mercurius-codegen": "^5.0.2",
+    "prettier": "^2.8.7",
+    "vite": "^4.2.2",
+    "vite-plugin-node": "^3.0.2",
+    "vite-tsconfig-paths": "^4.2.0"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "header": {
+    "settings": "SETTINGS",
+    "logout": "LOGOUT",
+
+    "language": "LANGUAGE",
+    "cart": "CART",
+
+    "cookie-policy": "Cookie Policy",
+    "terms": "Terms & Conditions",
+    "faq": "FAQ",
+    "contact": "Contact Support"
+  },
+  "search": {
+    "text": "search",
+    "TODAY": "TODAY",
+    "TOMORROW": "TOMORROW",
+    "THIS_WEEKEND": "THIS WEEKEND",
+    "NEXT_WEEK": "NEXT WEEK",
+    "0": "FREE",
+    "FESTIVAL": "FESTIVAL",
+    "CONCERT": "CONCERT",
+    "PARTY": "PARTY",
+    "JAZZ_BLUES": "JAZZ/BLUES",
+    "CLASSICAL": "CLASSICAL",
+    "ELECTRONIC": "ELECTRONIC",
+    "CULTURAL": "CULTURAL",
+    "HIPHOP_RAP": "HIP-HOP/RAP",
+    "METAL": "METAL",
+    "POP": "POP",
+    "OPERA": "OPERA",
+    "FOLK_ACOUSTIC": "FOLK/ACOUSTIC",
+    "OTHER": "OTHER",
+    "ROCK": "ROCK"
+  },
+  "my-events": {
+    "button": "my events",
+    "bought": "achats",
+    "saved": "enregistrés"
+  },
+  "sign-in": {
+    "button": "SIGN IN/SIGN UP",
+    "welcome": "WELCOME TO",
+    "continue-with": "CONTINUE WITH {{provider}}"
+  },
+  "settings": {
+    "header": "settings",
+    "contact-info": "Contact Information",
+    "first-name": "FIRST NAME",
+    "last-name": "LAST NAME",
+    "phone": "PHONE NUMBER",
+    "home-address": "Home Address",
+    "street": "STREET",
+    "postal-code": "POSTAL CODE",
+    "city": "CITY",
+    "billing-address": "Billing Address",
+    "name": "NAME",
+    "save": "SAVE",
+    "delete": "DELETE ACCOUNT"
+  },
+  "new-event": {
+    "buy-tickets": "BUY TICKETS",
+    "new": "new"
+  },
+  "show-one": {
+    "save": "SAVE FOR LATER",
+    "saved": "SAVED",
+    "prices": "Prices",
+    "add": "ADD TO CART"
+  },
+  "show-all": {
+    "previous": "PREVIOUS",
+    "next": "NEXT"
+  },
+  "cart": {
+    "header": "cart",
+    "buy-all": "BUY ALL EVENTS",
+    "buy": "BUY",
+    "delete": "DELETE",
+    "save": "SAVE FOR LATER",
+    "saved": "SAVED",
+    "success": "Your order has been successfully placed!"
+  },
+  "cookies": {
+    "text": "This website uses cookies to ensure you get the best experience on our website.",
+    "privacy": "PRIVACY POLICY"
+  },
+  "delete": {
+    "text": "You are about to delete this event from your cart",
+    "confirm": "CONFIRM",
+    "cancel": "CANCEL"
+  }
+}

@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
+/// <reference types="vite-plugin-fast-react-svg/types" />
 
 interface ImportMetaEnv {
-  readonly VITE_GRAPHQL_URL: string;
-  readonly VITE_SERVER_URL: string;
+  readonly VITE_SERVER_HOST: string;
 }
 
 interface ImportMeta {

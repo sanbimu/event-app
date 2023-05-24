@@ -1,0 +1,173 @@
+scalar ObjectID
+
+enum Order {
+  ASC
+  DESC
+}
+
+enum EventDate {
+  TODAY
+  TOMORROW
+  THIS_WEEKEND
+  NEXT_WEEK
+}
+
+enum EventStatus {
+  NEW
+  ONGOING
+  FINISHED
+  CANCELED
+  SOLD_OUT
+}
+
+enum EventLabel {
+  ROCK
+  POP
+  METAL
+  JAZZ_BLUES
+  CLASSICAL
+  ELECTRONIC
+  HIPHOP_RAP
+  FOLK_ACOUSTIC
+  CULTURAL
+  OPERA
+  OTHER
+}
+
+enum EventType {
+  CONCERT
+  FESTIVAL
+  PARTY
+}
+
+type Location {
+  label: String!
+  address: String!
+}
+
+type Prices {
+  label: String!
+  price: Float!
+}
+
+type Event {
+  _id: ObjectID!
+  location: Location!
+  fromDate: String!
+  toDate: String!
+  title: String!
+  description: String!
+  stock: Int!
+  prices: [Prices]!
+  picture: String!
+  labels: [EventLabel]!
+  type: EventType!
+  status: EventStatus!
+  salesCount: Int!
+  saved: Boolean
+}
+
+type EventEdge {
+  cursor: String!
+  node: Event!
+}
+
+type EventConnection {
+  edges: [EventEdge]!
+  pageInfo: PageInfo!
+}
+
+type Ticket {
+  _id: ObjectID!
+  event: Event!
+  user: User!
+}
+
+type ContactInfo {
+  firstName: String
+  lastName: String
+  phoneNumber: String
+}
+
+type HomeInfo {
+  address: String
+  postalCode: String
+  city: String
+}
+
+type BillingInfo {
+  name: String
+  address: String
+  postalCode: String
+  city: String
+}
+
+type Info {
+  contact: ContactInfo!
+  home: HomeInfo!
+  billing: BillingInfo!
+}
+
+type User {
+  _id: ObjectID!
+  provider: String!
+  providerId: String
+  info: Info!
+  email: String!
+  avatar: String!
+  savedEvents: [Event]!
+  tickets: [Ticket]!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+input ContactInfoInput {
+  firstName: String
+  lastName: String
+  phoneNumber: String
+}
+
+input HomeInfoInput {
+  address: String
+  postalCode: String
+  city: String
+}
+
+input BillingInfoInput {
+  name: String
+  address: String
+  postalCode: String
+  city: String
+}
+
+input ModifyUserInfoInput {
+  contact: ContactInfoInput
+  home: HomeInfoInput
+  billing: BillingInfoInput
+}
+
+type Query {
+  me: User
+  event(id: ObjectID!): Event
+  events(
+    order: Order = ASC
+    first: Int = 25
+    after: ObjectID
+    query: String
+    date: EventDate
+    label: String
+    type: String
+    saved: Boolean
+  ): EventConnection!
+}
+
+type Mutation {
+  addSavedEvent(id: ObjectID!): Boolean
+  modifyUserInfo(input: ModifyUserInfoInput!): User
+  removeSavedEvent(id: ObjectID!): Boolean
+}

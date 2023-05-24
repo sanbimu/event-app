@@ -1,3 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  overscroll-behavior: none;
+  background-color: #f3ece8;
+}
+
+#search {
+  outline: none;
+}
+
+@layer components {
+  .masonry-grid {
+    column-gap: 0;
+    column-count: var(--columns);
+  }
+
+  .toolong {
+    @apply overflow-hidden text-ellipsis whitespace-nowrap;
+  }
+
+  .shadow-text {
+    @apply h-min shadow-[inset_0_-0.93em_0_rgb(228,188,181)];
+  }
+
+  @screen md {
+    .masonry-grid {
+      --columns: 2;
+    }
+  }
+
+  @screen xl {
+    .masonry-grid {
+      --columns: 3;
+    }
+  }
+
+  @screen 2xl {
+    .masonry-grid {
+      --columns: 4;
+    }
+  }
+
+  .border-overlap-tl {
+    margin: -1px 0 0 -1px;
+  }
+
+  .border-overlap-br {
+    margin: 0 -1px -1px 0;
+  }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
