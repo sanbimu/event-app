@@ -11,7 +11,7 @@ Welcome to **tickettribe**
 
 ## See it live
 
-You can click [here](https://tickettribe.sanbimu.me) to see it live!
+You can click [here](https://tickettribe.sanbimu.com) to see it live!
 
 ### Mobile
 
